@@ -2,51 +2,61 @@
     "profiles": [
         {
             "name": "Default Profile",
+            "icon": "fas fa-briefcase",
             "criteria": [
                 {
                     "metric": "Investor Interest",
                     "description": "Evaluates the investor's enthusiasm and commitment to your project.",
-                    "weight": 20
+                    "weight": 20,
+                    "icon": "fas fa-handshake"
                 },
                 {
                     "metric": "Prior Investment History",
                     "description": "Considers the investor's track record with similar investments or industries.",
-                    "weight": 15
+                    "weight": 15,
+                    "icon": "fas fa-history"
                 },
                 {
                     "metric": "Market Conditions",
                     "description": "Assesses current economic trends and industry dynamics affecting investment potential.",
-                    "weight": 15
+                    "weight": 15,
+                    "icon": "fas fa-chart-line"
                 },
                 {
                     "metric": "Team Alignment",
                     "description": "Measures alignment of investor interests with the team's vision and values.",
-                    "weight": 10
+                    "weight": 10,
+                    "icon": "fas fa-users"
                 },
                 {
                     "metric": "Financial Capacity",
                     "description": "Evaluates the investor's ability to meet the funding requirement and previous investments.",
-                    "weight": 10
+                    "weight": 10,
+                    "icon": "fas fa-dollar-sign"
                 },
                 {
                     "metric": "Competition Knowledge",
                     "description": "Determines the investor's understanding of the competitive landscape and your position.",
-                    "weight": 10
+                    "weight": 10,
+                    "icon": "fas fa-chess"
                 },
                 {
                     "metric": "Engagement Level",
                     "description": "Gauges how actively the investor has engaged with the project (e.g., meetings, questions).",
-                    "weight": 10
+                    "weight": 10,
+                    "icon": "fas fa-comments"
                 },
                 {
                     "metric": "Exit Strategy Fit",
                     "description": "Assesses whether the investor's preferred exit strategies align with your plans.",
-                    "weight": 5
+                    "weight": 5,
+                    "icon": "fas fa-door-open"
                 },
                 {
                     "metric": "Warm Introduction",
                     "description": "Considers the strength of personal connections that can influence trust and credibility.",
-                    "weight": 5
+                    "weight": 5,
+                    "icon": "fas fa-user-friends"
                 }
             ]
         }
