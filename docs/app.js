@@ -1,7 +1,7 @@
 /**
  * Filename: app.js
  * Purpose: Provides functionality for the Investment Likelihood Calculator with investor management and copy to clipboard.
- * Description: This script allows users to create investors, save and load their inputs locally, and copy results to clipboard.
+ * Description: This script allows users to create investors, save and load their inputs locally, and copy results to clipboard. It includes features such as profile selection via cards and investor image upload through a modal.
  * Author: Troy Kelly
  * Contact: troy@aperim.com
  * Code history:
@@ -9,6 +9,7 @@
  * - Bootstrap integration: 18 September 2024
  * - Added local storage and copy functionality: 18 September 2024
  * - Added fixes and improvements: 18 September 2024
+ * - User experience enhancements: 18 September 2024
  */
 
 'use strict';
@@ -25,8 +26,8 @@ class InvestmentLikelihoodCalculator {
     constructor() {
         /** @type {!Array<!Object>} */
         this.profiles = [];
-        /** @type {?HTMLSelectElement} */
-        this.profileSelect = /** @type {?HTMLSelectElement} */ (document.getElementById('profileSelect'));
+        /** @type {?HTMLDivElement} */
+        this.profileCardsContainer = document.getElementById('profileCards');
         /** @type {?HTMLElement} */
         this.criteriaTableBody = document.querySelector('#criteriaTable tbody');
         /** @type {?HTMLElement} */
@@ -34,32 +35,35 @@ class InvestmentLikelihoodCalculator {
         /** @type {?HTMLElement} */
         this.percentageLikelihoodElement = document.getElementById('percentageLikelihood');
         /** @type {?HTMLButtonElement} */
-        this.calculateButton = /** @type {?HTMLButtonElement} */ (document.getElementById('calculateButton'));
+        this.calculateButton = document.getElementById('calculateButton');
         /** @type {?HTMLButtonElement} */
-        this.copyButton = /** @type {?HTMLButtonElement} */ (document.getElementById('copyButton'));
+        this.copyButton = document.getElementById('copyButton');
         /** @type {?HTMLSelectElement} */
-        this.investorSelect = /** @type {?HTMLSelectElement} */ (document.getElementById('investorSelect'));
+        this.investorSelect = document.getElementById('investorSelect');
         /** @type {?HTMLButtonElement} */
-        this.newInvestorButton = /** @type {?HTMLButtonElement} */ (document.getElementById('newInvestorButton'));
+        this.newInvestorButton = document.getElementById('newInvestorButton');
         /** @type {?HTMLButtonElement} */
-        this.deleteInvestorButton = /** @type {?HTMLButtonElement} */ (document.getElementById('deleteInvestorButton'));
+        this.deleteInvestorButton = document.getElementById('deleteInvestorButton');
         /** @type {?HTMLElement} */
         this.investorListElement = document.getElementById('investorList');
-        /** @type {?HTMLInputElement} */
-        this.investorImageInput = /** @type {?HTMLInputElement} */ (document.getElementById('investorImageInput'));
         /** @type {?HTMLImageElement} */
-        this.investorImage = /** @type {?HTMLImageElement} */ (document.getElementById('investorImage'));
-        /** @type {?HTMLSpanElement} */
-        this.profileIconElement = /** @type {?HTMLSpanElement} */ (document.getElementById('profileIcon'));
+        this.investorImage = document.getElementById('investorImage');
+        /** @type {number} */
+        this.selectedProfileIndex = 0;
 
-        // Bind event handlers
-        this.handleProfileChange = this.handleProfileChange.bind(this);
-        this.handleCalculate = this.handleCalculate.bind(this);
-        this.handleCopy = this.handleCopy.bind(this);
-        this.handleNewInvestor = this.handleNewInvestor.bind(this);
-        this.handleInvestorChange = this.handleInvestorChange.bind(this);
-        this.handleDeleteInvestor = this.handleDeleteInvestor.bind(this);
-        this.handleInvestorImageUpload = this.handleInvestorImageUpload.bind(this);
+        // Modal elements
+        /** @type {?HTMLElement} */
+        this.investorEditModal = document.getElementById('investorEditModal');
+        /** @type {?HTMLInputElement} */
+        this.modalInvestorImageInput = document.getElementById('modalInvestorImageInput');
+        /** @type {?HTMLImageElement} */
+        this.modalInvestorImagePreview = document.getElementById('modalInvestorImagePreview');
+        /** @type {?HTMLFormElement} */
+        this.investorEditForm = document.getElementById('investorEditForm');
+        /** @type {?bootstrap.Modal} */
+        this.investorEditModalInstance = null;
+        /** @type {string} */
+        this.currentEditingInvestorName = '';
 
         // Initialize the app
         this.init();
@@ -71,22 +75,28 @@ class InvestmentLikelihoodCalculator {
     init() {
         this.loadProfiles()
             .then(() => {
-                this.populateProfileSelect();
-                this.profileSelect.addEventListener('change', this.handleProfileChange);
-                this.calculateButton.addEventListener('click', this.handleCalculate);
-                this.copyButton.addEventListener('click', this.handleCopy);
-                this.newInvestorButton.addEventListener('click', this.handleNewInvestor);
-                this.investorSelect.addEventListener('change', this.handleInvestorChange);
-                this.deleteInvestorButton.addEventListener('click', this.handleDeleteInvestor);
-                this.investorImageInput.addEventListener('change', this.handleInvestorImageUpload);
+                this.displayProfileCards();
+                this.calculateButton.addEventListener('click', () => this.handleCalculate());
+                this.copyButton.addEventListener('click', () => this.handleCopy());
+                this.newInvestorButton.addEventListener('click', () => this.handleNewInvestor());
+                this.investorSelect.addEventListener('change', () => this.handleInvestorChange());
+                this.deleteInvestorButton.addEventListener('click', () => this.handleDeleteInvestor());
+
+                // Modal event listeners
+                this.modalInvestorImageInput.addEventListener('change', (event) => this.handleModalInvestorImageUpload(event));
+                this.investorEditForm.addEventListener('submit', (event) => this.handleInvestorEditFormSubmit(event));
+
+                // Initialize Bootstrap Modal
+                this.investorEditModalInstance = new bootstrap.Modal(this.investorEditModal);
+
                 // Load investors from local storage
                 this.loadInvestors();
                 // Load the first profile by default
                 this.displayCriteria(this.profiles[0]);
             })
             .catch((error) => {
-                console.error('Error initialising the application:', error);
-                alert('Failed to initialise the application. Please try again later.');
+                console.error('Error initializing the application:', error);
+                alert('Failed to initialize the application. Please try again later.');
             });
     }
 
@@ -110,31 +120,64 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Populate the profile select dropdown with loaded profiles.
+     * Display profile cards for selection.
      */
-    populateProfileSelect() {
+    displayProfileCards() {
         this.profiles.forEach((profile, index) => {
-            const option = document.createElement('option');
-            option.value = index.toString();
-            option.textContent = profile.name;
-            this.profileSelect.appendChild(option);
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col';
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card profile-card h-100';
+            cardDiv.dataset.index = index.toString();
+
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body text-center';
+
+            // Icon
+            if (profile.icon) {
+                const iconElement = document.createElement('i');
+                profile.icon.split(' ').forEach((cls) => iconElement.classList.add(cls));
+                iconElement.classList.add('fa-2x');
+                cardBody.appendChild(iconElement);
+            }
+
+            // Profile Name
+            const cardTitle = document.createElement('h5');
+            cardTitle.className = 'card-title mt-2';
+            cardTitle.textContent = profile.name;
+            cardBody.appendChild(cardTitle);
+
+            cardDiv.appendChild(cardBody);
+            colDiv.appendChild(cardDiv);
+            this.profileCardsContainer.appendChild(colDiv);
+
+            // Add event listener for selection
+            cardDiv.addEventListener('click', () => this.handleProfileCardClick(index));
         });
+
+        // Highlight the first profile by default
+        const firstCard = this.profileCardsContainer.querySelector('.card');
+        if (firstCard) {
+            firstCard.classList.add('selected-profile');
+        }
     }
 
     /**
-     * Handle profile selection change event.
+     * Handle profile card click event.
+     * @param {number} index Index of the selected profile.
      */
-    handleProfileChange() {
-        const selectedIndex = parseInt(this.profileSelect.value, 10);
-        const selectedProfile = this.profiles[selectedIndex];
-        this.displayCriteria(selectedProfile);
-
-        // Display profile icon
-        this.profileIconElement.className = 'input-group-text'; // Reset class
-        if (selectedProfile.icon) {
-            selectedProfile.icon.split(' ').forEach(cls => this.profileIconElement.classList.add(cls));
+    handleProfileCardClick(index) {
+        const previousSelected = this.profileCardsContainer.querySelector('.selected-profile');
+        if (previousSelected) {
+            previousSelected.classList.remove('selected-profile');
         }
-
+        const selectedCard = this.profileCardsContainer.querySelector(`[data-index="${index}"]`);
+        if (selectedCard) {
+            selectedCard.classList.add('selected-profile');
+        }
+        this.selectedProfileIndex = index;
+        const selectedProfile = this.profiles[this.selectedProfileIndex];
+        this.displayCriteria(selectedProfile);
         // Load saved inputs if available
         this.loadSavedInputs();
     }
@@ -157,7 +200,7 @@ class InvestmentLikelihoodCalculator {
             const metricCell = document.createElement('td');
             if (criterion.icon) {
                 const iconElement = document.createElement('i');
-                criterion.icon.split(' ').forEach(cls => iconElement.classList.add(cls));
+                criterion.icon.split(' ').forEach((cls) => iconElement.classList.add(cls));
                 metricCell.appendChild(iconElement);
                 metricCell.appendChild(document.createTextNode(' ' + criterion.metric));
             } else {
@@ -228,9 +271,7 @@ class InvestmentLikelihoodCalculator {
      * @return {!Array<!Object>}
      */
     getScores() {
-        /** @type {!NodeListOf<!HTMLSelectElement>} */
-        const scoreSelects = /** @type {!NodeListOf<!HTMLSelectElement>} */ (
-            this.criteriaTableBody.querySelectorAll('select'));
+        const scoreSelects = this.criteriaTableBody.querySelectorAll('select');
         const scores = [];
         scoreSelects.forEach((select) => {
             const score = parseInt(select.value, 10);
@@ -270,8 +311,8 @@ class InvestmentLikelihoodCalculator {
      */
     handleCopy() {
         try {
-            const tableHtml = this.generateResultsTableHtml();
-            this.copyToClipboard(tableHtml);
+            const tableText = this.generateResultsTableText();
+            this.copyTextToClipboard(tableText);
             alert('Results copied to clipboard.');
         } catch (error) {
             console.error('Error copying results:', error);
@@ -280,78 +321,37 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Generate HTML for the results table.
+     * Generate text for the results table to copy.
      * @return {string}
      */
-    generateResultsTableHtml() {
-        const table = document.createElement('table');
-        table.border = '1';
-        const thead = document.createElement('thead');
-        const tbody = document.createElement('tbody');
-        table.appendChild(thead);
-        table.appendChild(tbody);
+    generateResultsTableText() {
+        const investorName = this.investorSelect.value;
+        const profileName = this.profiles[this.selectedProfileIndex].name;
+        let text = `Investor Name: ${investorName}\n`;
+        text += `Profile: ${profileName}\n\n`;
+        text += `Criteria:\n`;
 
-        // Header row
-        const headerRow = document.createElement('tr');
-        ['Metric', 'Weight (%)', 'Score'].forEach((text) => {
-            const th = document.createElement('th');
-            th.textContent = text;
-            headerRow.appendChild(th);
-        });
-        thead.appendChild(headerRow);
-
-        // Data rows
-        /** @type {!NodeListOf<!HTMLTableRowElement>} */
-        const rows = /** @type {!NodeListOf<!HTMLTableRowElement>} */ (
-            this.criteriaTableBody.querySelectorAll('tr'));
+        const rows = this.criteriaTableBody.querySelectorAll('tr');
         rows.forEach((row) => {
-            const dataRow = document.createElement('tr');
-            const metricCell = row.cells[0].cloneNode(true);
-            const weightCell = row.cells[2].cloneNode(true);
-            const scoreCell = document.createElement('td');
-            const selectElement = /** @type {!HTMLSelectElement} */ (
-                row.cells[3].querySelector('select'));
-            scoreCell.textContent = selectElement.value;
-
-            dataRow.appendChild(metricCell);
-            dataRow.appendChild(weightCell);
-            dataRow.appendChild(scoreCell);
-
-            tbody.appendChild(dataRow);
+            const metricCell = row.cells[0].textContent || '';
+            const weightCell = row.cells[2].textContent || '';
+            const selectElement = row.cells[3].querySelector('select');
+            const scoreValue = selectElement.value;
+            text += `- ${metricCell.trim()} (Weight: ${weightCell}%) - Score: ${scoreValue}\n`;
         });
 
-        // Results row
-        const resultsRow = document.createElement('tr');
-        const totalCell = document.createElement('td');
-        totalCell.colSpan = 2;
-        totalCell.textContent = 'Total Score';
-        const totalValueCell = document.createElement('td');
-        totalValueCell.textContent = this.totalScoreElement.textContent;
-        resultsRow.appendChild(totalCell);
-        resultsRow.appendChild(totalValueCell);
-        tbody.appendChild(resultsRow);
+        text += `\nTotal Score: ${this.totalScoreElement.textContent}\n`;
+        text += `Percentage Likelihood: ${this.percentageLikelihoodElement.textContent}\n`;
 
-        const percentageRow = document.createElement('tr');
-        const percentageCell = document.createElement('td');
-        percentageCell.colSpan = 2;
-        percentageCell.textContent = 'Percentage Likelihood';
-        const percentageValueCell = document.createElement('td');
-        percentageValueCell.textContent = this.percentageLikelihoodElement.textContent;
-        percentageRow.appendChild(percentageCell);
-        percentageRow.appendChild(percentageValueCell);
-        tbody.appendChild(percentageRow);
-
-        return table.outerHTML;
+        return text;
     }
 
     /**
-     * Copy given HTML content to clipboard.
-     * @param {string} html The HTML content to copy.
+     * Copy given text content to clipboard.
+     * @param {string} text The text content to copy.
      */
-    copyToClipboard(html) {
-        const blob = new Blob([html], { type: 'text/html' });
-        const data = [new ClipboardItem({ 'text/html': blob })];
-        navigator.clipboard.write(data).catch((error) => {
+    copyTextToClipboard(text) {
+        navigator.clipboard.writeText(text).catch((error) => {
             console.error('Copy failed:', error);
         });
     }
@@ -450,11 +450,10 @@ class InvestmentLikelihoodCalculator {
         if (!investorName) {
             return;
         }
-        const selectedProfileIndex = parseInt(this.profileSelect.value, 10);
-        const profileName = this.profiles[selectedProfileIndex].name;
+        const profileName = this.profiles[this.selectedProfileIndex].name;
         const scores = this.getScores();
-        const totalScore = this.totalScoreElement.textContent;
-        const percentageLikelihood = this.percentageLikelihoodElement.textContent;
+        const totalScore = this.totalScoreElement.textContent || '0';
+        const percentageLikelihood = this.percentageLikelihoodElement.textContent || '0%';
 
         const investors = this.getInvestorsFromLocalStorage();
         if (!investors[investorName]) {
@@ -477,26 +476,22 @@ class InvestmentLikelihoodCalculator {
         if (!investorName) {
             return;
         }
-        const selectedProfileIndex = parseInt(this.profileSelect.value, 10);
-        const profileName = this.profiles[selectedProfileIndex].name;
+        const profileName = this.profiles[this.selectedProfileIndex].name;
 
         const investors = this.getInvestorsFromLocalStorage();
         const investorData = investors[investorName];
         if (investorData && investorData[profileName]) {
-            const savedScores = investorData[profileName].scores;
-            /** @type {!NodeListOf<!HTMLSelectElement>} */
-            const scoreSelects = /** @type {!NodeListOf<!HTMLSelectElement>} */ (
-                this.criteriaTableBody.querySelectorAll('select'));
+            const savedData = investorData[profileName];
+            const savedScores = savedData.scores;
+            const scoreSelects = this.criteriaTableBody.querySelectorAll('select');
             scoreSelects.forEach((select, index) => {
                 select.value = savedScores[index].score.toString();
             });
-            this.totalScoreElement.textContent = investorData[profileName].totalScore;
-            this.percentageLikelihoodElement.textContent = investorData[profileName].percentageLikelihood;
+            this.totalScoreElement.textContent = savedData.totalScore;
+            this.percentageLikelihoodElement.textContent = savedData.percentageLikelihood;
         } else {
             // Reset inputs and results
-            /** @type {!NodeListOf<!HTMLSelectElement>} */
-            const scoreSelects = /** @type {!NodeListOf<!HTMLSelectElement>} */ (
-                this.criteriaTableBody.querySelectorAll('select'));
+            const scoreSelects = this.criteriaTableBody.querySelectorAll('select');
             scoreSelects.forEach((select) => {
                 select.value = '1';
             });
@@ -527,10 +522,11 @@ class InvestmentLikelihoodCalculator {
             const investorData = investors[investorName];
             const listItem = document.createElement('li');
             listItem.classList.add('list-group-item', 'd-flex', 'align-items-center');
+            listItem.dataset.name = investorName;
 
             // Investor Image
             const investorProfiles = investorData;
-            const profilesCount = Object.keys(investorProfiles).filter(key => key !== 'image').length;
+            const profilesCount = Object.keys(investorProfiles).filter((key) => key !== 'image').length;
             const imageSrc = investorData.image || '';
 
             if (imageSrc) {
@@ -549,6 +545,9 @@ class InvestmentLikelihoodCalculator {
             listItem.appendChild(textContent);
 
             this.investorListElement.appendChild(listItem);
+
+            // Add click event to open modal
+            listItem.addEventListener('click', () => this.handleInvestorListItemClick(investorName));
         });
     }
 
@@ -568,39 +567,83 @@ class InvestmentLikelihoodCalculator {
             this.populateInvestorSelect();
             this.loadInvestorList();
             // Reset inputs and results
-            this.displayCriteria(this.profiles[parseInt(this.profileSelect.value, 10)]);
+            this.displayCriteria(this.profiles[this.selectedProfileIndex]);
             this.investorImage.src = '';
             this.investorImage.style.display = 'none';
         }
     }
 
     /**
-     * Handle investor image upload.
+     * Handle investor list item click event to open modal.
+     * @param {string} investorName The name of the investor to edit.
+     */
+    handleInvestorListItemClick(investorName) {
+        this.currentEditingInvestorName = investorName;
+        const investors = this.getInvestorsFromLocalStorage();
+        const investorData = investors[investorName];
+
+        // Load existing image
+        if (investorData && investorData.image) {
+            this.modalInvestorImagePreview.src = investorData.image;
+            this.modalInvestorImagePreview.style.display = 'block';
+        } else {
+            this.modalInvestorImagePreview.src = '';
+            this.modalInvestorImagePreview.style.display = 'none';
+        }
+
+        // Reset the image input
+        this.modalInvestorImageInput.value = '';
+
+        // Show modal
+        this.investorEditModalInstance.show();
+    }
+
+    /**
+     * Handle modal investor image upload.
      * @param {!Event} event The change event.
      */
-    handleInvestorImageUpload(event) {
-        const fileInput = /** @type {!HTMLInputElement} */ (event.target);
+    handleModalInvestorImageUpload(event) {
+        const fileInput = event.target;
         if (fileInput.files && fileInput.files[0]) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                const dataURL = /** @type {string} */ (e.target.result);
-                this.investorImage.src = dataURL;
-                this.investorImage.style.display = 'block';
-
-                // Save image to local storage
-                const investorName = this.investorSelect.value;
-                if (investorName) {
-                    const investors = this.getInvestorsFromLocalStorage();
-                    if (!investors[investorName]) {
-                        investors[investorName] = {};
-                    }
-                    investors[investorName].image = dataURL;
-                    this.saveInvestorsToLocalStorage(investors);
-                    this.loadInvestorList();
-                }
+                const dataURL = e.target.result;
+                this.modalInvestorImagePreview.src = dataURL;
+                this.modalInvestorImagePreview.style.display = 'block';
             };
             reader.readAsDataURL(fileInput.files[0]);
         }
+    }
+
+    /**
+     * Handle investor edit form submission.
+     * @param {!Event} event The submit event.
+     */
+    handleInvestorEditFormSubmit(event) {
+        event.preventDefault();
+
+        const investors = this.getInvestorsFromLocalStorage();
+        const investorData = investors[this.currentEditingInvestorName];
+
+        // Save image if available
+        if (this.modalInvestorImagePreview.src) {
+            if (!investorData) {
+                investors[this.currentEditingInvestorName] = {};
+            }
+            investors[this.currentEditingInvestorName].image = this.modalInvestorImagePreview.src;
+        }
+
+        this.saveInvestorsToLocalStorage(investors);
+        this.loadInvestorList();
+
+        // Update image if the current investor is selected
+        if (this.investorSelect.value === this.currentEditingInvestorName) {
+            this.investorImage.src = this.modalInvestorImagePreview.src;
+            this.investorImage.style.display = 'block';
+        }
+
+        // Close modal
+        this.investorEditModalInstance.hide();
     }
 }
 
