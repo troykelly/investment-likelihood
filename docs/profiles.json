@@ -1,0 +1,55 @@
+{
+    "profiles": [
+        {
+            "name": "Default Profile",
+            "criteria": [
+                {
+                    "metric": "Investor Interest",
+                    "description": "Evaluates the investor's enthusiasm and commitment to your project.",
+                    "weight": 20
+                },
+                {
+                    "metric": "Prior Investment History",
+                    "description": "Considers the investor's track record with similar investments or industries.",
+                    "weight": 15
+                },
+                {
+                    "metric": "Market Conditions",
+                    "description": "Assesses current economic trends and industry dynamics affecting investment potential.",
+                    "weight": 15
+                },
+                {
+                    "metric": "Team Alignment",
+                    "description": "Measures alignment of investor interests with the team's vision and values.",
+                    "weight": 10
+                },
+                {
+                    "metric": "Financial Capacity",
+                    "description": "Evaluates the investor's ability to meet the funding requirement and previous investments.",
+                    "weight": 10
+                },
+                {
+                    "metric": "Competition Knowledge",
+                    "description": "Determines the investor's understanding of the competitive landscape and your position.",
+                    "weight": 10
+                },
+                {
+                    "metric": "Engagement Level",
+                    "description": "Gauges how actively the investor has engaged with the project (e.g., meetings, questions).",
+                    "weight": 10
+                },
+                {
+                    "metric": "Exit Strategy Fit",
+                    "description": "Assesses whether the investor's preferred exit strategies align with your plans.",
+                    "weight": 5
+                },
+                {
+                    "metric": "Warm Introduction",
+                    "description": "Considers the strength of personal connections that can influence trust and credibility.",
+                    "weight": 5
+                }
+            ]
+        }
+        // Additional profiles can be added here
+    ]
+}
