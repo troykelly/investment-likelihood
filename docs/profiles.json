@@ -1,512 +1,632 @@
 {
     "profiles": [
         {
-            "name": "Default Profile",
-            "icon": "fas fa-briefcase",
+            "name": "General Investor Engagement",
+            "icon": "fas fa-handshake",
             "criteria": [
                 {
-                    "metric": "Investor Interest",
-                    "description": "Evaluates the investor's enthusiasm and commitment to your project.",
-                    "weight": 20,
-                    "icon": "fas fa-handshake"
-                },
-                {
-                    "metric": "Prior Investment History",
-                    "description": "Considers the investor's track record with similar investments or industries.",
+                    "metric": "Responsiveness",
+                    "description": "Measures how promptly the investor responds to communications.",
                     "weight": 15,
-                    "icon": "fas fa-history"
+                    "icon": "fas fa-reply"
                 },
                 {
-                    "metric": "Market Conditions",
-                    "description": "Assesses current economic trends and industry dynamics affecting investment potential.",
+                    "metric": "Interest Level",
+                    "description": "Evaluates the investor's expressed enthusiasm and proactive engagement.",
                     "weight": 15,
-                    "icon": "fas fa-chart-line"
+                    "icon": "fas fa-star"
                 },
                 {
-                    "metric": "Team Alignment",
-                    "description": "Measures alignment of investor interests with the team's vision and values.",
+                    "metric": "Meeting Frequency",
+                    "description": "Counts the number of meetings or calls held with the investor.",
                     "weight": 10,
-                    "icon": "fas fa-users"
+                    "icon": "fas fa-calendar-alt"
                 },
                 {
-                    "metric": "Financial Capacity",
-                    "description": "Evaluates the investor's ability to meet the funding requirement and previous investments.",
+                    "metric": "Introductions Made",
+                    "description": "Assesses whether the investor has introduced you to other potential investors or partners.",
                     "weight": 10,
-                    "icon": "fas fa-dollar-sign"
+                    "icon": "fas fa-user-friends"
                 },
                 {
-                    "metric": "Competition Knowledge",
-                    "description": "Determines the investor's understanding of the competitive landscape and your position.",
-                    "weight": 10,
-                    "icon": "fas fa-chess"
-                },
-                {
-                    "metric": "Engagement Level",
-                    "description": "Gauges how actively the investor has engaged with the project (e.g., meetings, questions).",
+                    "metric": "Feedback Quality",
+                    "description": "Evaluates the constructiveness and usefulness of the feedback provided.",
                     "weight": 10,
                     "icon": "fas fa-comments"
                 },
                 {
-                    "metric": "Exit Strategy Fit",
-                    "description": "Assesses whether the investor's preferred exit strategies align with your plans.",
-                    "weight": 5,
-                    "icon": "fas fa-door-open"
-                },
-                {
-                    "metric": "Warm Introduction",
-                    "description": "Considers the strength of personal connections that can influence trust and credibility.",
-                    "weight": 5,
-                    "icon": "fas fa-user-friends"
-                }
-            ]
-        },
-        {
-            "name": "Early-Stage Tech Startups",
-            "icon": "fas fa-laptop-code",
-            "criteria": [
-                {
-                    "metric": "Team Expertise",
-                    "description": "Assesses the founding team's technical skills and industry experience.",
-                    "weight": 25,
-                    "icon": "fas fa-users-cog"
-                },
-                {
-                    "metric": "Product Innovation",
-                    "description": "Evaluates the uniqueness and technological innovation of the product or service.",
-                    "weight": 20,
-                    "icon": "fas fa-lightbulb"
-                },
-                {
-                    "metric": "Market Potential",
-                    "description": "Measures the size and growth potential of the target market.",
-                    "weight": 15,
-                    "icon": "fas fa-chart-area"
-                },
-                {
-                    "metric": "Go-to-Market Strategy",
-                    "description": "Evaluates the feasibility and effectiveness of the proposed marketing and sales strategy.",
-                    "weight": 15,
-                    "icon": "fas fa-route"
-                },
-                {
-                    "metric": "Traction",
-                    "description": "Assesses current user adoption, revenue, or growth indicators.",
+                    "metric": "Alignment with Vision",
+                    "description": "Measures how well the investor understands and supports your startup's mission and goals.",
                     "weight": 10,
-                    "icon": "fas fa-rocket"
+                    "icon": "fas fa-bullseye"
                 },
                 {
-                    "metric": "Competitive Advantage",
-                    "description": "Determines the sustainability of the startup's competitive edge over rivals.",
-                    "weight": 10,
-                    "icon": "fas fa-shield-alt"
-                },
-                {
-                    "metric": "Financial Projections",
-                    "description": "Evaluates the reasonableness and potential of financial forecasts.",
-                    "weight": 5,
-                    "icon": "fas fa-calculator"
-                }
-            ]
-        },
-        {
-            "name": "Biotech Startups",
-            "icon": "fas fa-dna",
-            "criteria": [
-                {
-                    "metric": "Scientific Validation",
-                    "description": "Assesses the scientific rigor and validation behind the biotech innovation.",
-                    "weight": 25,
-                    "icon": "fas fa-microscope"
-                },
-                {
-                    "metric": "Regulatory Pathway",
-                    "description": "Evaluates the clarity and feasibility of navigating regulatory approvals.",
-                    "weight": 20,
-                    "icon": "fas fa-gavel"
-                },
-                {
-                    "metric": "Intellectual Property",
-                    "description": "Considers the strength and protection of patents and proprietary technology.",
-                    "weight": 20,
-                    "icon": "fas fa-file-contract"
-                },
-                {
-                    "metric": "Market Need",
-                    "description": "Measures the demand and necessity for the biotech solution.",
-                    "weight": 15,
-                    "icon": "fas fa-heartbeat"
-                },
-                {
-                    "metric": "Clinical Trial Plan",
-                    "description": "Assesses the strategy and preparedness for clinical trials.",
-                    "weight": 10,
-                    "icon": "fas fa-notes-medical"
-                },
-                {
-                    "metric": "Team Expertise",
-                    "description": "Evaluates the team's experience in biotech and pharmaceuticals.",
-                    "weight": 10,
-                    "icon": "fas fa-user-md"
-                }
-            ]
-        },
-        {
-            "name": "Social Impact Ventures",
-            "icon": "fas fa-hand-holding-heart",
-            "criteria": [
-                {
-                    "metric": "Social Impact",
-                    "description": "Measures the potential positive social or environmental change.",
-                    "weight": 30,
-                    "icon": "fas fa-globe"
-                },
-                {
-                    "metric": "Sustainability",
-                    "description": "Evaluates the long-term viability and sustainability of the venture.",
-                    "weight": 20,
-                    "icon": "fas fa-leaf"
-                },
-                {
-                    "metric": "Scalability",
-                    "description": "Assesses the ability to scale the impact and operations.",
-                    "weight": 15,
-                    "icon": "fas fa-expand-arrows-alt"
-                },
-                {
-                    "metric": "Community Engagement",
-                    "description": "Considers the level of involvement and support from the community served.",
-                    "weight": 15,
-                    "icon": "fas fa-users"
-                },
-                {
-                    "metric": "Financial Return",
-                    "description": "Evaluates the potential financial return alongside social impact.",
-                    "weight": 10,
-                    "icon": "fas fa-coins"
-                },
-                {
-                    "metric": "Team Commitment",
-                    "description": "Measures the team's dedication to the social mission.",
-                    "weight": 10,
-                    "icon": "fas fa-heart"
-                }
-            ]
-        },
-        {
-            "name": "Clean Energy Projects",
-            "icon": "fas fa-solar-panel",
-            "criteria": [
-                {
-                    "metric": "Environmental Benefit",
-                    "description": "Assesses the reduction in carbon footprint and other environmental benefits.",
-                    "weight": 25,
-                    "icon": "fas fa-tree"
-                },
-                {
-                    "metric": "Technological Innovation",
-                    "description": "Evaluates the novelty and effectiveness of the clean energy technology.",
-                    "weight": 20,
-                    "icon": "fas fa-bolt"
-                },
-                {
-                    "metric": "Market Demand",
-                    "description": "Measures the need and market size for the clean energy solution.",
-                    "weight": 15,
-                    "icon": "fas fa-chart-bar"
-                },
-                {
-                    "metric": "Policy and Incentives",
-                    "description": "Considers governmental policies and incentives that support the project.",
-                    "weight": 15,
-                    "icon": "fas fa-balance-scale"
-                },
-                {
-                    "metric": "Team Expertise",
-                    "description": "Assesses the team's experience in the energy sector.",
-                    "weight": 15,
-                    "icon": "fas fa-user-ninja"
-                },
-                {
-                    "metric": "Financial Viability",
-                    "description": "Evaluates the project's economic feasibility and potential ROI.",
+                    "metric": "Investment Fit",
+                    "description": "Assesses the suitability of the investor's focus area, stage, and cheque size for your startup.",
                     "weight": 10,
                     "icon": "fas fa-hand-holding-usd"
-                }
-            ]
-        },
-        {
-            "name": "Y Combinator (YC)",
-            "icon": "fas fa-rocket",
-            "criteria": [
-                {
-                    "metric": "Team Excellence",
-                    "description": "Evaluates the founders' abilities, dedication, and capacity to execute.",
-                    "weight": 30,
-                    "icon": "fas fa-user-friends"
                 },
                 {
-                    "metric": "Product-Market Fit",
-                    "description": "Assesses how well the product or service meets market needs.",
-                    "weight": 20,
-                    "icon": "fas fa-handshake"
-                },
-                {
-                    "metric": "Growth Potential",
-                    "description": "Measures scalability and potential for rapid growth.",
-                    "weight": 20,
-                    "icon": "fas fa-chart-line"
-                },
-                {
-                    "metric": "Innovation",
-                    "description": "Evaluates how innovative and disruptive the idea is.",
-                    "weight": 15,
-                    "icon": "fas fa-lightbulb"
-                },
-                {
-                    "metric": "Traction",
-                    "description": "Assesses evidence of demand through user engagement or revenue.",
+                    "metric": "Decision-Making Process",
+                    "description": "Evaluates the transparency and efficiency of the investor's decision-making process.",
                     "weight": 10,
-                    "icon": "fas fa-chart-pie"
-                },
-                {
-                    "metric": "Market Size",
-                    "description": "Considers the total addressable market size.",
-                    "weight": 5,
-                    "icon": "fas fa-globe"
-                }
-            ]
-        },
-        {
-            "name": "500 Startups",
-            "icon": "fas fa-globe-americas",
-            "criteria": [
-                {
-                    "metric": "Global Scalability",
-                    "description": "Assesses the startup's potential to scale internationally.",
-                    "weight": 25,
-                    "icon": "fas fa-globe"
-                },
-                {
-                    "metric": "Team Diversity",
-                    "description": "Evaluates the team's diverse backgrounds and perspectives.",
-                    "weight": 20,
-                    "icon": "fas fa-users"
-                },
-                {
-                    "metric": "Market Traction",
-                    "description": "Measures existing customer base and growth trends.",
-                    "weight": 20,
-                    "icon": "fas fa-chart-line"
-                },
-                {
-                    "metric": "Revenue Model",
-                    "description": "Assesses the clarity and viability of the revenue model.",
-                    "weight": 15,
-                    "icon": "fas fa-dollar-sign"
-                },
-                {
-                    "metric": "Mentorship Fit",
-                    "description": "Considers how well the startup aligns with available mentorship.",
-                    "weight": 10,
-                    "icon": "fas fa-chalkboard-teacher"
-                },
-                {
-                    "metric": "Product Innovation",
-                    "description": "Evaluates uniqueness and innovation of the product.",
-                    "weight": 10,
-                    "icon": "fas fa-lightbulb"
-                }
-            ]
-        },
-        {
-            "name": "Sequoia Capital",
-            "icon": "fas fa-seedling",
-            "criteria": [
-                {
-                    "metric": "Visionary Leadership",
-                    "description": "Assesses founder's vision and leadership capabilities.",
-                    "weight": 25,
-                    "icon": "fas fa-user-tie"
-                },
-                {
-                    "metric": "Market Size and Potential",
-                    "description": "Evaluates the total addressable market and growth potential.",
-                    "weight": 25,
-                    "icon": "fas fa-chart-area"
-                },
-                {
-                    "metric": "Competitive Moat",
-                    "description": "Measures sustainable competitive advantages.",
-                    "weight": 15,
-                    "icon": "fas fa-shield-alt"
-                },
-                {
-                    "metric": "Business Model",
-                    "description": "Assesses the robustness and profitability of the business model.",
-                    "weight": 15,
-                    "icon": "fas fa-business-time"
-                },
-                {
-                    "metric": "Company Culture",
-                    "description": "Considers the strength and alignment of company values and culture.",
-                    "weight": 10,
-                    "icon": "fas fa-users-cog"
-                },
-                {
-                    "metric": "Financial Performance",
-                    "description": "Evaluates existing financial metrics and unit economics.",
-                    "weight": 10,
-                    "icon": "fas fa-balance-scale"
-                }
-            ]
-        },
-        {
-            "name": "Angel Investor",
-            "icon": "fas fa-user-astronaut",
-            "criteria": [
-                {
-                    "metric": "Personal Connection",
-                    "description": "Measures the personal rapport and trust with the investor.",
-                    "weight": 30,
-                    "icon": "fas fa-handshake"
-                },
-                {
-                    "metric": "Investment Amount Fit",
-                    "description": "Assesses alignment between funding needs and investor's capacity.",
-                    "weight": 25,
-                    "icon": "fas fa-wallet"
-                },
-                {
-                    "metric": "Passion for Industry",
-                    "description": "Evaluates the investor's interest in the specific industry or sector.",
-                    "weight": 20,
-                    "icon": "fas fa-heart"
-                },
-                {
-                    "metric": "Risk Appetite",
-                    "description": "Considers the investor's willingness to take on early-stage risk.",
-                    "weight": 15,
-                    "icon": "fas fa-dice"
-                },
-                {
-                    "metric": "Value-Add Potential",
-                    "description": "Measures the investor's ability to contribute expertise or networks.",
-                    "weight": 10,
-                    "icon": "fas fa-user-plus"
-                }
-            ]
-        },
-        {
-            "name": "Corporate Venture Capital",
-            "icon": "fas fa-building",
-            "criteria": [
-                {
-                    "metric": "Strategic Alignment",
-                    "description": "Assesses how well the startup's goals align with the corporation's strategy.",
-                    "weight": 30,
-                    "icon": "fas fa-sync-alt"
-                },
-                {
-                    "metric": "Technology Synergy",
-                    "description": "Evaluates potential technological collaborations or integrations.",
-                    "weight": 25,
                     "icon": "fas fa-cogs"
                 },
                 {
-                    "metric": "Market Expansion",
-                    "description": "Considers opportunities for entering new markets together.",
-                    "weight": 20,
-                    "icon": "fas fa-map-marked-alt"
+                    "metric": "Trustworthiness",
+                    "description": "Measures your confidence in the investor's integrity and reliability.",
+                    "weight": 5,
+                    "icon": "fas fa-shield-alt"
                 },
                 {
-                    "metric": "Intellectual Property",
-                    "description": "Assesses the value and relevance of the startup's IP to the corporation.",
+                    "metric": "Reputation",
+                    "description": "Considers the investor’s standing in the industry and among other founders.",
+                    "weight": 5,
+                    "icon": "fas fa-thumbs-up"
+                }
+            ]
+        },
+        {
+            "name": "Angel Investors",
+            "icon": "fas fa-user-astronaut",
+            "criteria": [
+                {
+                    "metric": "Personal Rapport",
+                    "description": "Assesses the personal connection and chemistry with the investor.",
+                    "weight": 20,
+                    "icon": "fas fa-smile"
+                },
+                {
+                    "metric": "Speed of Commitment",
+                    "description": "Measures how quickly the investor moves from interest to commitment.",
                     "weight": 15,
-                    "icon": "fas fa-file-alt"
+                    "icon": "fas fa-tachometer-alt"
+                },
+                {
+                    "metric": "Value-Add Services",
+                    "description": "Evaluates the additional support provided, such as mentorship or industry contacts.",
+                    "weight": 15,
+                    "icon": "fas fa-user-plus"
+                },
+                {
+                    "metric": "Investment Capacity",
+                    "description": "Assesses the investor's ability to meet your funding needs.",
+                    "weight": 15,
+                    "icon": "fas fa-wallet"
+                },
+                {
+                    "metric": "Experience with Startups",
+                    "description": "Measures the investor's background in investing in early-stage startups.",
+                    "weight": 15,
+                    "icon": "fas fa-lightbulb"
+                },
+                {
+                    "metric": "Interest Alignment",
+                    "description": "Evaluates how well the investor's interests align with your industry and objectives.",
+                    "weight": 10,
+                    "icon": "fas fa-heart"
+                },
+                {
+                    "metric": "Transparency",
+                    "description": "Assesses openness in communication regarding expectations and terms.",
+                    "weight": 10,
+                    "icon": "fas fa-eye"
+                }
+            ]
+        },
+        {
+            "name": "Venture Capital Firms",
+            "icon": "fas fa-building",
+            "criteria": [
+                {
+                    "metric": "Reputation and Brand",
+                    "description": "Measures the prestige and recognition of the VC firm in the industry.",
+                    "weight": 15,
+                    "icon": "fas fa-award"
+                },
+                {
+                    "metric": "Partner Engagement",
+                    "description": "Evaluates the involvement and interest level of senior partners.",
+                    "weight": 15,
+                    "icon": "fas fa-user-tie"
+                },
+                {
+                    "metric": "Term Sheet Favourability",
+                    "description": "Assesses the fairness and attractiveness of the proposed investment terms.",
+                    "weight": 15,
+                    "icon": "fas fa-file-contract"
+                },
+                {
+                    "metric": "Decision Timeline",
+                    "description": "Measures the length of time the firm takes to make an investment decision.",
+                    "weight": 10,
+                    "icon": "fas fa-stopwatch"
+                },
+                {
+                    "metric": "Portfolio Synergy",
+                    "description": "Evaluates the potential for collaboration with other portfolio companies.",
+                    "weight": 10,
+                    "icon": "fas fa-sitemap"
+                },
+                {
+                    "metric": "Industry Expertise",
+                    "description": "Assesses the firm's knowledge and experience in your startup's industry.",
+                    "weight": 10,
+                    "icon": "fas fa-industry"
+                },
+                {
+                    "metric": "Post-Investment Support",
+                    "description": "Measures the resources and support the firm offers after investment.",
+                    "weight": 10,
+                    "icon": "fas fa-hands-helping"
                 },
                 {
                     "metric": "Cultural Fit",
-                    "description": "Measures compatibility with corporate culture and values.",
+                    "description": "Considers how well the firm's culture aligns with your company values.",
+                    "weight": 10,
+                    "icon": "fas fa-users-cog"
+                },
+                {
+                    "metric": "Investor Network",
+                    "description": "Evaluates the firm's connections with other investors for future funding rounds.",
+                    "weight": 5,
+                    "icon": "fas fa-network-wired"
+                }
+            ]
+        },
+        {
+            "name": "Corporate Investors",
+            "icon": "fas fa-city",
+            "criteria": [
+                {
+                    "metric": "Strategic Alignment",
+                    "description": "Measures how closely the corporation's goals align with your startup's objectives.",
+                    "weight": 20,
+                    "icon": "fas fa-sync-alt"
+                },
+                {
+                    "metric": "Integration Potential",
+                    "description": "Assesses the opportunities for partnerships or integrations.",
+                    "weight": 15,
+                    "icon": "fas fa-project-diagram"
+                },
+                {
+                    "metric": "Control Terms",
+                    "description": "Evaluates any restrictions or controls the investor wants to impose.",
+                    "weight": 15,
+                    "icon": "fas fa-handcuffs"
+                },
+                {
+                    "metric": "Reputation in Industry",
+                    "description": "Measures the corporation's standing and influence in your market.",
+                    "weight": 15,
+                    "icon": "fas fa-star-half-alt"
+                },
+                {
+                    "metric": "Conflict of Interest Risks",
+                    "description": "Assesses potential conflicts that may arise from the investment.",
+                    "weight": 10,
+                    "icon": "fas fa-exclamation-triangle"
+                },
+                {
+                    "metric": "Decision Hierarchy",
+                    "description": "Evaluates the complexity of the corporation's decision-making process.",
+                    "weight": 10,
+                    "icon": "fas fa-layer-group"
+                },
+                {
+                    "metric": "Confidentiality Assurance",
+                    "description": "Measures the safeguards in place to protect your proprietary information.",
+                    "weight": 10,
+                    "icon": "fas fa-shield-virus"
+                },
+                {
+                    "metric": "Future Acquisition Interest",
+                    "description": "Assesses the likelihood that the corporation may aim to acquire your startup.",
+                    "weight": 5,
+                    "icon": "fas fa-handshake-alt-slash"
+                }
+            ]
+        },
+        {
+            "name": "Incubators and Accelerators",
+            "icon": "fas fa-rocket",
+            "criteria": [
+                {
+                    "metric": "Program Benefits",
+                    "description": "Evaluates the value provided in terms of mentorship, resources, and networking.",
+                    "weight": 25,
+                    "icon": "fas fa-gem"
+                },
+                {
+                    "metric": "Equity Taken",
+                    "description": "Measures the amount of equity the program requires for participation.",
+                    "weight": 20,
+                    "icon": "fas fa-percentage"
+                },
+                {
+                    "metric": "Alumni Success",
+                    "description": "Assesses the track record of the program's graduates.",
+                    "weight": 15,
+                    "icon": "fas fa-graduation-cap"
+                },
+                {
+                    "metric": "Cohort Fit",
+                    "description": "Evaluates how well your startup aligns with the focus of the cohort.",
+                    "weight": 15,
+                    "icon": "fas fa-users"
+                },
+                {
+                    "metric": "Program Duration and Intensity",
+                    "description": "Considers the time commitment and workload required.",
+                    "weight": 10,
+                    "icon": "fas fa-hourglass-half"
+                },
+                {
+                    "metric": "Location and Logistics",
+                    "description": "Measures the impact of the program's location on your operations.",
+                    "weight": 10,
+                    "icon": "fas fa-map-marker-alt"
+                },
+                {
+                    "metric": "Post-Program Support",
+                    "description": "Assesses the level of ongoing assistance after program completion.",
+                    "weight": 5,
+                    "icon": "fas fa-heart"
+                }
+            ]
+        },
+        {
+            "name": "Crowdfunding Platforms",
+            "icon": "fas fa-users",
+            "criteria": [
+                {
+                    "metric": "Platform Reputation",
+                    "description": "Measures the credibility and popularity of the crowdfunding platform.",
+                    "weight": 20,
+                    "icon": "fas fa-chess-queen"
+                },
+                {
+                    "metric": "Funding Success Rate",
+                    "description": "Assesses the likelihood of reaching your funding goal on the platform.",
+                    "weight": 20,
+                    "icon": "fas fa-bullseye-arrow"
+                },
+                {
+                    "metric": "Fees and Costs",
+                    "description": "Evaluates the financial cost of using the platform.",
+                    "weight": 15,
+                    "icon": "fas fa-coins"
+                },
+                {
+                    "metric": "Audience Match",
+                    "description": "Measures how well the platform's user base matches your target audience.",
+                    "weight": 15,
+                    "icon": "fas fa-users-crown"
+                },
+                {
+                    "metric": "Campaign Support Tools",
+                    "description": "Assesses the availability of promotional and analytical tools.",
+                    "weight": 10,
+                    "icon": "fas fa-toolbox"
+                },
+                {
+                    "metric": "Legal and Compliance",
+                    "description": "Considers the regulatory requirements and protections.",
+                    "weight": 10,
+                    "icon": "fas fa-shield-alt"
+                },
+                {
+                    "metric": "Community Engagement",
+                    "description": "Evaluates the level of interaction and support from the platform community.",
                     "weight": 10,
                     "icon": "fas fa-hands-helping"
                 }
             ]
         },
         {
-            "name": "Accelerator Program",
-            "icon": "fas fa-tachometer-alt",
+            "name": "Government Grants and Funds",
+            "icon": "fas fa-university",
             "criteria": [
                 {
-                    "metric": "Program Fit",
-                    "description": "Assesses how well the startup matches the accelerator’s focus areas.",
+                    "metric": "Eligibility",
+                    "description": "Assesses how well your startup meets the criteria for the grant or fund.",
                     "weight": 25,
-                    "icon": "fas fa-check-circle"
+                    "icon": "fas fa-check-double"
                 },
                 {
-                    "metric": "Team Coachability",
-                    "description": "Evaluates the team's openness to mentorship and learning.",
+                    "metric": "Application Complexity",
+                    "description": "Evaluates the effort required to complete the application process.",
                     "weight": 20,
-                    "icon": "fas fa-chalkboard-teacher"
+                    "icon": "fas fa-file-alt"
                 },
                 {
-                    "metric": "Product Stage",
-                    "description": "Measures the readiness of the product for acceleration.",
-                    "weight": 20,
-                    "icon": "fas fa-tasks"
-                },
-                {
-                    "metric": "Growth Potential",
-                    "description": "Considers the potential for rapid growth during the program.",
+                    "metric": "Funding Amount",
+                    "description": "Measures the potential financial benefit.",
                     "weight": 15,
-                    "icon": "fas fa-chart-line"
+                    "icon": "fas fa-hand-holding-usd"
                 },
                 {
-                    "metric": "Commitment Level",
-                    "description": "Assesses the team's dedication to fully engage in the program.",
-                    "weight": 10,
-                    "icon": "fas fa-hourglass-start"
+                    "metric": "Restrictions and Obligations",
+                    "description": "Assesses any limitations or requirements tied to the funding.",
+                    "weight": 15,
+                    "icon": "fas fa-exclamation-circle"
                 },
                 {
-                    "metric": "Diversity and Inclusion",
-                    "description": "Evaluates the team's contribution to diversity and inclusion goals.",
+                    "metric": "Disbursement Timeline",
+                    "description": "Considers how quickly funds will be available.",
                     "weight": 10,
-                    "icon": "fas fa-universal-access"
+                    "icon": "fas fa-calendar-check"
+                },
+                {
+                    "metric": "Impact on Equity",
+                    "description": "Evaluates whether the funding affects ownership structure.",
+                    "weight": 10,
+                    "icon": "fas fa-chart-pie"
+                },
+                {
+                    "metric": "Reputation and Credibility",
+                    "description": "Measures the prestige associated with receiving the grant or fund.",
+                    "weight": 5,
+                    "icon": "fas fa-medal"
                 }
             ]
         },
         {
-            "name": "Seed Stage Investors",
-            "icon": "fas fa-seedling",
+            "name": "Family and Friends",
+            "icon": "fas fa-user-friends",
             "criteria": [
                 {
-                    "metric": "Idea Validation",
-                    "description": "Assesses the feasibility and potential of the business idea.",
-                    "weight": 30,
-                    "icon": "fas fa-lightbulb"
-                },
-                {
-                    "metric": "Founder Commitment",
-                    "description": "Evaluates the dedication and resilience of the founders.",
+                    "metric": "Trust Level",
+                    "description": "Measures the level of trust and support from the individual.",
                     "weight": 25,
-                    "icon": "fas fa-user-check"
+                    "icon": "fas fa-handshake"
                 },
                 {
-                    "metric": "Prototype Development",
-                    "description": "Measures progress in developing minimum viable products.",
+                    "metric": "Financial Capacity",
+                    "description": "Assesses their ability to provide the required funds without hardship.",
                     "weight": 20,
-                    "icon": "fas fa-code"
+                    "icon": "fas fa-piggy-bank"
                 },
                 {
-                    "metric": "Market Research",
-                    "description": "Considers the depth and quality of market analysis performed.",
+                    "metric": "Relationship Impact",
+                    "description": "Considers the potential effect on personal relationships.",
+                    "weight": 20,
+                    "icon": "fas fa-heart-broken"
+                },
+                {
+                    "metric": "Involvement Level",
+                    "description": "Evaluates their expectation for involvement in the business.",
                     "weight": 15,
-                    "icon": "fas fa-search"
+                    "icon": "fas fa-user-tag"
                 },
                 {
-                    "metric": "Use of Funds",
-                    "description": "Assesses the clarity and justification for the funding requested.",
+                    "metric": "Repayment Flexibility",
+                    "description": "Measures the leniency in repayment terms or expectations.",
                     "weight": 10,
-                    "icon": "fas fa-money-check-alt"
+                    "icon": "fas fa-sliders-h"
+                },
+                {
+                    "metric": "Communication Clarity",
+                    "description": "Assesses how openly terms and expectations are discussed.",
+                    "weight": 10,
+                    "icon": "fas fa-comments"
+                }
+            ]
+        },
+        {
+            "name": "Y Combinator Engagement",
+            "icon": "fas fa-lightbulb",
+            "criteria": [
+                {
+                    "metric": "Application Progress",
+                    "description": "Assesses how far you've progressed in the YC application process.",
+                    "weight": 20,
+                    "icon": "fas fa-clipboard-check"
+                },
+                {
+                    "metric": "Interaction Quality",
+                    "description": "Evaluates the quality of interactions with YC partners or representatives.",
+                    "weight": 15,
+                    "icon": "fas fa-user-shield"
+                },
+                {
+                    "metric": "Fit with YC Thesis",
+                    "description": "Measures alignment with YC's areas of interest and investment patterns.",
+                    "weight": 15,
+                    "icon": "fas fa-thumbs-up"
+                },
+                {
+                    "metric": "Feedback Received",
+                    "description": "Assesses the usefulness of any feedback or advice provided.",
+                    "weight": 15,
+                    "icon": "fas fa-comment-dots"
+                },
+                {
+                    "metric": "Referral Strength",
+                    "description": "Evaluates the influence of any referrals or recommendations you have.",
+                    "weight": 10,
+                    "icon": "fas fa-user-friends"
+                },
+                {
+                    "metric": "Network Engagement",
+                    "description": "Measures how actively you are engaging with the YC community.",
+                    "weight": 10,
+                    "icon": "fas fa-network-wired"
+                },
+                {
+                    "metric": "Timing and Season",
+                    "description": "Considers the timing of your application relative to YC's funding cycles.",
+                    "weight": 10,
+                    "icon": "fas fa-calendar-alt"
+                },
+                {
+                    "metric": "Previous Applications",
+                    "description": "Assesses any improvements since previous applications to YC.",
+                    "weight": 5,
+                    "icon": "fas fa-sync"
+                }
+            ]
+        },
+        {
+            "name": "500 Startups Engagement",
+            "icon": "fas fa-globe",
+            "criteria": [
+                {
+                    "metric": "Geographic Focus Match",
+                    "description": "Evaluates alignment with 500 Startups' regional programs.",
+                    "weight": 20,
+                    "icon": "fas fa-map"
+                },
+                {
+                    "metric": "Program Relevance",
+                    "description": "Measures how well your startup fits with specific 500 Startups programs.",
+                    "weight": 15,
+                    "icon": "fas fa-rocket"
+                },
+                {
+                    "metric": "Staff Engagement",
+                    "description": "Assesses the level of interest shown by 500 Startups staff.",
+                    "weight": 15,
+                    "icon": "fas fa-user-astronaut"
+                },
+                {
+                    "metric": "Mentorship Opportunities",
+                    "description": "Evaluates the potential for valuable mentorship.",
+                    "weight": 15,
+                    "icon": "fas fa-chalkboard-teacher"
+                },
+                {
+                    "metric": "Alumni Network Access",
+                    "description": "Measures the benefits of connecting with the alumni network.",
+                    "weight": 10,
+                    "icon": "fas fa-users"
+                },
+                {
+                    "metric": "Cultural Fit",
+                    "description": "Assesses how well your company culture aligns with 500 Startups.",
+                    "weight": 10,
+                    "icon": "fas fa-heart"
+                },
+                {
+                    "metric": "Follow-on Funding Potential",
+                    "description": "Considers the likelihood of additional investment post-program.",
+                    "weight": 10,
+                    "icon": "fas fa-arrow-circle-up"
+                },
+                {
+                    "metric": "Initial Feedback",
+                    "description": "Evaluates the constructiveness of any initial feedback received.",
+                    "weight": 5,
+                    "icon": "fas fa-comment-alt"
+                }
+            ]
+        },
+        {
+            "name": "Strategic Investors",
+            "icon": "fas fa-chess",
+            "criteria": [
+                {
+                    "metric": "Long-Term Alignment",
+                    "description": "Measures the investor's commitment to a long-term partnership.",
+                    "weight": 20,
+                    "icon": "fas fa-infinity"
+                },
+                {
+                    "metric": "Complementary Strengths",
+                    "description": "Assesses how the investor's strengths complement your weaknesses.",
+                    "weight": 15,
+                    "icon": "fas fa-puzzle-piece"
+                },
+                {
+                    "metric": "Market Access",
+                    "description": "Evaluates the investor's ability to open new markets for your startup.",
+                    "weight": 15,
+                    "icon": "fas fa-globe-asia"
+                },
+                {
+                    "metric": "Resource Availability",
+                    "description": "Measures the resources the investor is willing to provide beyond capital.",
+                    "weight": 15,
+                    "icon": "fas fa-hands-helping"
+                },
+                {
+                    "metric": "Exit Strategy Impact",
+                    "description": "Assesses how the partnership affects your potential exit strategies.",
+                    "weight": 10,
+                    "icon": "fas fa-door-open"
+                },
+                {
+                    "metric": "Negotiation Flexibility",
+                    "description": "Evaluates the investor's willingness to negotiate terms.",
+                    "weight": 10,
+                    "icon": "fas fa-exchange-alt"
+                },
+                {
+                    "metric": "Cultural Fit",
+                    "description": "Measures alignment in company culture and values.",
+                    "weight": 10,
+                    "icon": "fas fa-handshake"
+                },
+                {
+                    "metric": "Due Diligence Process",
+                    "description": "Assesses the thoroughness and reasonableness of their due diligence.",
+                    "weight": 5,
+                    "icon": "fas fa-search"
+                }
+            ]
+        },
+        {
+            "name": "Private Equity Firms",
+            "icon": "fas fa-chart-line",
+            "criteria": [
+                {
+                    "metric": "Investment Size Compatibility",
+                    "description": "Measures how well your funding needs match the firm's investment ranges.",
+                    "weight": 20,
+                    "icon": "fas fa-money-bill-wave"
+                },
+                {
+                    "metric": "Control Preferences",
+                    "description": "Assesses the level of control the firm wants over your company.",
+                    "weight": 15,
+                    "icon": "fas fa-sliders-h"
+                },
+                {
+                    "metric": "Exit Timeline",
+                    "description": "Evaluates the firm's expected timeframe for return on investment.",
+                    "weight": 15,
+                    "icon": "fas fa-hourglass-end"
+                },
+                {
+                    "metric": "Operational Involvement",
+                    "description": "Measures how much the firm wants to be involved in day-to-day operations.",
+                    "weight": 15,
+                    "icon": "fas fa-briefcase"
+                },
+                {
+                    "metric": "Track Record",
+                    "description": "Assesses the firm's history of successful investments.",
+                    "weight": 10,
+                    "icon": "fas fa-trophy"
+                },
+                {
+                    "metric": "Industry Focus",
+                    "description": "Evaluates the firm's expertise in your industry.",
+                    "weight": 10,
+                    "icon": "fas fa-industry"
+                },
+                {
+                    "metric": "Portfolio Synergies",
+                    "description": "Considers potential synergies with other companies in their portfolio.",
+                    "weight": 10,
+                    "icon": "fas fa-project-diagram"
+                },
+                {
+                    "metric": "Financial Engineering",
+                    "description": "Assesses the complexity of the financial structures proposed.",
+                    "weight": 5,
+                    "icon": "fas fa-calculator"
                 }
             ]
         }
