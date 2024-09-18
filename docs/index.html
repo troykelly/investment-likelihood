@@ -8,6 +8,7 @@ Code history:
 - Initial creation: 18 September 2024
 - Bootstrap integration: 18 September 2024
 - Added local storage and copy functionality: 18 September 2024
+- Added fixes and improvements: 18 September 2024
 -->
 
 <!DOCTYPE html>
@@ -19,8 +20,13 @@ Code history:
     <!-- Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Bootstrap CSS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
-        integrity="sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+        integrity="sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=" crossorigin="anonymous">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" />
     <style>
         /* Custom styles */
         body {
@@ -30,7 +36,7 @@ Code history:
         h1 {
             color: #2c3e50;
             margin-top: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 20px;
         }
 
         label {
@@ -57,6 +63,15 @@ Code history:
 <body>
     <div class="container">
         <h1 class="text-center">Investment Likelihood Calculator</h1>
+
+        <!-- Scoring Guide Button -->
+        <div class="text-center mb-4">
+            <button id="scoringGuideButton" class="btn btn-info btn-lg" data-bs-toggle="modal"
+                data-bs-target="#scoringGuideModal">
+                <i class="fas fa-info-circle"></i> Scoring Guide
+            </button>
+        </div>
+
         <div id="app">
             <!-- Warning message -->
             <div class="alert alert-warning" role="alert">
@@ -66,17 +81,30 @@ Code history:
             <!-- Investor management -->
             <div class="mb-4">
                 <label for="investorSelect" class="form-label">Select Investor:</label>
-                <div class="input-group">
+                <div class="input-group mb-2">
                     <select id="investorSelect" class="form-select"></select>
                     <button id="newInvestorButton" class="btn btn-outline-secondary" type="button">New Investor</button>
                     <button id="deleteInvestorButton" class="btn btn-outline-danger" type="button">Delete
                         Investor</button>
                 </div>
+                <!-- Image preview -->
+                <div id="investorImageContainer" class="mb-2">
+                    <img id="investorImage" src="" alt="Investor Image" class="img-thumbnail"
+                        style="max-width: 200px; display: none;" />
+                </div>
+                <!-- Image upload -->
+                <div class="mb-2">
+                    <label for="investorImageInput" class="form-label">Upload Investor Image:</label>
+                    <input type="file" id="investorImageInput" accept="image/*" class="form-control">
+                </div>
             </div>
             <!-- Calculation profile selection -->
             <div class="mb-4">
                 <label for="profileSelect" class="form-label">Select Calculation Profile:</label>
-                <select id="profileSelect" class="form-select"></select>
+                <div class="input-group">
+                    <span id="profileIcon" class="input-group-text"></span>
+                    <select id="profileSelect" class="form-select"></select>
+                </div>
             </div>
             <!-- Criteria table -->
             <div class="table-responsive">
@@ -113,9 +141,35 @@ Code history:
             </div>
         </div>
     </div>
+
+    <!-- Scoring Guide Modal -->
+    <div class="modal fade" id="scoringGuideModal" tabindex="-1" aria-labelledby="scoringGuideModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Scoring Guide</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Please score each criterion based on the following scale:</p>
+                    <ul>
+                        <li><strong>1 - Poor:</strong> Fails to meet expectations in this area.</li>
+                        <li><strong>2 - Fair:</strong> Below average performance; improvements needed.</li>
+                        <li><strong>3 - Good:</strong> Meets basic expectations; satisfactory performance.</li>
+                        <li><strong>4 - Very Good:</strong> Exceeds expectations; strong performance.</li>
+                        <li><strong>5 - Excellent:</strong> Far exceeds expectations; outstanding performance.</li>
+                    </ul>
+                    <p>Use this guide to objectively assess each criterion for the investment likelihood calculation.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Bootstrap Bundle JS (includes Popper) -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-        integrity="sha256-PI8n5gCcz9cQqQXm3PEtDuPG8qx9oFsFctPg0S5zb8g=" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.min.js"
+        integrity="sha256-3gQJhtmj7YnV1fmtbVcnAV6eI4ws0Tr48bVZCThtCGQ=" crossorigin="anonymous"></script>
     <!-- Custom JavaScript -->
     <script src="app.js"></script>
 </body>

@@ -8,6 +8,7 @@
  * - Initial creation: 18 September 2024
  * - Bootstrap integration: 18 September 2024
  * - Added local storage and copy functionality: 18 September 2024
+ * - Added fixes and improvements: 18 September 2024
  */
 
 'use strict';
@@ -44,6 +45,12 @@ class InvestmentLikelihoodCalculator {
         this.deleteInvestorButton = /** @type {?HTMLButtonElement} */ (document.getElementById('deleteInvestorButton'));
         /** @type {?HTMLElement} */
         this.investorListElement = document.getElementById('investorList');
+        /** @type {?HTMLInputElement} */
+        this.investorImageInput = /** @type {?HTMLInputElement} */ (document.getElementById('investorImageInput'));
+        /** @type {?HTMLImageElement} */
+        this.investorImage = /** @type {?HTMLImageElement} */ (document.getElementById('investorImage'));
+        /** @type {?HTMLSpanElement} */
+        this.profileIconElement = /** @type {?HTMLSpanElement} */ (document.getElementById('profileIcon'));
 
         // Bind event handlers
         this.handleProfileChange = this.handleProfileChange.bind(this);
@@ -52,6 +59,7 @@ class InvestmentLikelihoodCalculator {
         this.handleNewInvestor = this.handleNewInvestor.bind(this);
         this.handleInvestorChange = this.handleInvestorChange.bind(this);
         this.handleDeleteInvestor = this.handleDeleteInvestor.bind(this);
+        this.handleInvestorImageUpload = this.handleInvestorImageUpload.bind(this);
 
         // Initialize the app
         this.init();
@@ -70,6 +78,7 @@ class InvestmentLikelihoodCalculator {
                 this.newInvestorButton.addEventListener('click', this.handleNewInvestor);
                 this.investorSelect.addEventListener('change', this.handleInvestorChange);
                 this.deleteInvestorButton.addEventListener('click', this.handleDeleteInvestor);
+                this.investorImageInput.addEventListener('change', this.handleInvestorImageUpload);
                 // Load investors from local storage
                 this.loadInvestors();
                 // Load the first profile by default
@@ -119,6 +128,13 @@ class InvestmentLikelihoodCalculator {
         const selectedIndex = parseInt(this.profileSelect.value, 10);
         const selectedProfile = this.profiles[selectedIndex];
         this.displayCriteria(selectedProfile);
+
+        // Display profile icon
+        this.profileIconElement.className = 'input-group-text'; // Reset class
+        if (selectedProfile.icon) {
+            selectedProfile.icon.split(' ').forEach(cls => this.profileIconElement.classList.add(cls));
+        }
+
         // Load saved inputs if available
         this.loadSavedInputs();
     }
@@ -137,23 +153,22 @@ class InvestmentLikelihoodCalculator {
         profile.criteria.forEach((criterion, index) => {
             const row = document.createElement('tr');
 
-            // Metric
+            // Metric with icon
             const metricCell = document.createElement('td');
-            metricCell.textContent = criterion.metric;
+            if (criterion.icon) {
+                const iconElement = document.createElement('i');
+                criterion.icon.split(' ').forEach(cls => iconElement.classList.add(cls));
+                metricCell.appendChild(iconElement);
+                metricCell.appendChild(document.createTextNode(' ' + criterion.metric));
+            } else {
+                metricCell.textContent = criterion.metric;
+            }
             row.appendChild(metricCell);
 
-            // Description with tooltip
+            // Description
             const descriptionCell = document.createElement('td');
-            const descriptionLink = document.createElement('a');
-            descriptionLink.href = '#';
-            descriptionLink.setAttribute('data-bs-toggle', 'tooltip');
-            descriptionLink.setAttribute('title', criterion.description);
-            descriptionLink.textContent = criterion.metric;
-            descriptionCell.appendChild(descriptionLink);
+            descriptionCell.textContent = criterion.description;
             row.appendChild(descriptionCell);
-
-            // Initialise Bootstrap tooltip
-            const tooltip = new bootstrap.Tooltip(descriptionLink);
 
             // Weight
             const weightCell = document.createElement('td');
@@ -413,6 +428,18 @@ class InvestmentLikelihoodCalculator {
     handleInvestorChange() {
         // Load saved inputs if available
         this.loadSavedInputs();
+
+        // Load investor image
+        const investorName = this.investorSelect.value;
+        const investors = this.getInvestorsFromLocalStorage();
+        const investorData = investors[investorName];
+        if (investorData && investorData.image) {
+            this.investorImage.src = investorData.image;
+            this.investorImage.style.display = 'block';
+        } else {
+            this.investorImage.src = '';
+            this.investorImage.style.display = 'none';
+        }
     }
 
     /**
@@ -476,6 +503,15 @@ class InvestmentLikelihoodCalculator {
             this.totalScoreElement.textContent = '0';
             this.percentageLikelihoodElement.textContent = '0%';
         }
+
+        // Load investor image
+        if (investorData && investorData.image) {
+            this.investorImage.src = investorData.image;
+            this.investorImage.style.display = 'block';
+        } else {
+            this.investorImage.src = '';
+            this.investorImage.style.display = 'none';
+        }
     }
 
     /**
@@ -488,11 +524,30 @@ class InvestmentLikelihoodCalculator {
         }
         const investors = this.getInvestorsFromLocalStorage();
         Object.keys(investors).forEach((investorName) => {
+            const investorData = investors[investorName];
             const listItem = document.createElement('li');
-            listItem.classList.add('list-group-item');
-            const investorProfiles = investors[investorName];
-            const profilesCount = Object.keys(investorProfiles).length;
-            listItem.textContent = `${investorName} - ${profilesCount} profile(s) saved`;
+            listItem.classList.add('list-group-item', 'd-flex', 'align-items-center');
+
+            // Investor Image
+            const investorProfiles = investorData;
+            const profilesCount = Object.keys(investorProfiles).filter(key => key !== 'image').length;
+            const imageSrc = investorData.image || '';
+
+            if (imageSrc) {
+                const imgElement = document.createElement('img');
+                imgElement.src = imageSrc;
+                imgElement.alt = 'Investor Image';
+                imgElement.classList.add('img-thumbnail', 'me-2');
+                imgElement.style.width = '50px';
+                imgElement.style.height = '50px';
+                listItem.appendChild(imgElement);
+            }
+
+            // Investor Name and Profile Count
+            const textContent = document.createElement('div');
+            textContent.textContent = `${investorName} - ${profilesCount} profile(s) saved`;
+            listItem.appendChild(textContent);
+
             this.investorListElement.appendChild(listItem);
         });
     }
@@ -514,6 +569,37 @@ class InvestmentLikelihoodCalculator {
             this.loadInvestorList();
             // Reset inputs and results
             this.displayCriteria(this.profiles[parseInt(this.profileSelect.value, 10)]);
+            this.investorImage.src = '';
+            this.investorImage.style.display = 'none';
+        }
+    }
+
+    /**
+     * Handle investor image upload.
+     * @param {!Event} event The change event.
+     */
+    handleInvestorImageUpload(event) {
+        const fileInput = /** @type {!HTMLInputElement} */ (event.target);
+        if (fileInput.files && fileInput.files[0]) {
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const dataURL = /** @type {string} */ (e.target.result);
+                this.investorImage.src = dataURL;
+                this.investorImage.style.display = 'block';
+
+                // Save image to local storage
+                const investorName = this.investorSelect.value;
+                if (investorName) {
+                    const investors = this.getInvestorsFromLocalStorage();
+                    if (!investors[investorName]) {
+                        investors[investorName] = {};
+                    }
+                    investors[investorName].image = dataURL;
+                    this.saveInvestorsToLocalStorage(investors);
+                    this.loadInvestorList();
+                }
+            };
+            reader.readAsDataURL(fileInput.files[0]);
         }
     }
 }
