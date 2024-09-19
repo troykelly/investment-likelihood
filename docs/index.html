@@ -17,12 +17,79 @@ Code history:
 
 <head>
     <meta charset="UTF-8" />
+
+    <!-- Standard Meta Tags -->
+    <title>Likelihood Calculator</title>
+    <meta name="description"
+        content="Assess and enhance your prospects across Investment, Health, Fitness, Travel, the Arts, and more with the Likelihood Calculator." />
+    <meta name="keywords"
+        content="Likelihood Calculator, Investment, Health, Fitness, Travel, Arts, Probability Assessment, Decision Making" />
+    <meta name="author" content="Troy Kelly" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <link rel="shortcut icon" href="/favicon.ico?v=964" />
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://likelihood.tools/" id="canonical-link" />
+
+    <!-- Dublin Core Metadata -->
+    <meta name="dcterms.title" content="Likelihood Calculator" />
+    <meta name="dcterms.creator" content="Troy Kelly" />
+    <meta name="dcterms.subject"
+        content="Assess probabilities in Investment, Health, Fitness, Travel, the Arts, and more." />
+    <meta name="dcterms.description"
+        content="A comprehensive tool to calculate and understand likelihoods across various domains." />
+    <meta name="dcterms.publisher" content="Likelihood.Tools" />
+    <meta name="dcterms.contributor" content="Troy Kelly" />
+    <meta name="dcterms.type" content="Text" />
+    <meta name="dcterms.format" content="text/html" />
+    <meta name="dcterms.identifier" content="https://likelihood.tools/" />
+    <meta name="dcterms.language" content="en-AU" />
+    <meta name="dcterms.coverage" content="Worldwide" />
+    <meta name="dcterms.rights" content="© 2024 Troy Kelly" />
+
+    <!-- Open Graph Protocol -->
+    <meta property="og:title" content="Likelihood Calculator" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://likelihood.tools/" id="og-url" />
+    <meta property="og:image" content="https://likelihood.tools/og-image.png" />
+    <meta property="og:description"
+        content="Assess and enhance your prospects across Investment, Health, Fitness, Travel, the Arts, and more with the Likelihood Calculator." />
+    <meta property="og:site_name" content="Likelihood Calculator" />
+    <meta property="og:locale" content="en_AU" />
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Likelihood Calculator" />
+    <meta name="twitter:description"
+        content="Assess and enhance your prospects across Investment, Health, Fitness, Travel, the Arts, and more with the Likelihood Calculator." />
+    <meta name="twitter:image" content="https://likelihood.tools/twitter-image.png" />
+    <meta name="twitter:url" content="https://likelihood.tools/" />
+    <meta name="twitter:creator" content="@troykelly" />
+
+    <!-- Schema.org Structured Data -->
+    <script type="application/ld+json">
+        {
+            "@context": "http://schema.org",
+            "@type": "WebSite",
+            "name": "Likelihood Calculator",
+            "url": "https://likelihood.tools/",
+            "author": {
+                "@type": "Person",
+                "name": "Troy Kelly",
+                "url": "https://troykelly.com/"
+            },
+            "description": "Assess and enhance your prospects across Investment, Health, Fitness, Travel, the Arts, and more with the Likelihood Calculator.",
+            "publisher": {
+                "@type": "Organization",
+                "name": "Aperim",
+                "url": "https://aperim.com/"
+            }
+        }
+        </script>
+
     <title>Likelihood Calculator</title>
     <!-- Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <!-- SEO Meta Tags -->
-    <meta name="description"
-        content="Likelihood Calculator - Assess and enhance your prospects using this comprehensive tool designed for integration with CRMs like Odoo and Pipedrive." />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
@@ -120,6 +187,30 @@ Code history:
     <meta name="msapplication-TileColor" content="#553921">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png?v=964">
     <meta name="theme-color" content="#ffffff">
+    <!-- Canonical URL Handling Script -->
+    <script>
+        // Update canonical URL and Open Graph URL dynamically on route change
+        function updateCanonicalURL() {
+            var canonicalLink = document.getElementById('canonical-link');
+            var ogURL = document.getElementById('og-url');
+            var twitterURL = document.querySelector('meta[name="twitter:url"]');
+            var currentURL = window.location.href;
+
+            canonicalLink.setAttribute('href', currentURL);
+            ogURL.setAttribute('content', currentURL);
+            twitterURL.setAttribute('content', currentURL);
+        }
+
+        // Update canonical URL on initial load
+        updateCanonicalURL();
+
+        // Assuming your SPA has a function to listen to route changes
+        // You may need to adjust this based on your routing implementation
+        window.addEventListener('popstate', function () {
+            updateCanonicalURL();
+        });
+    </script>
+
     <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9661115126226816"
         crossorigin="anonymous"></script>
 </head>
@@ -223,9 +314,6 @@ Code history:
                             and Wangal peoples of
                             the Eora nation, it's designed to empower users everywhere.
                         </p>
-                        <p>Find us on <a href="https://github.com/troykelly/investment-likelihood"
-                                target="_blank">GitHub</a> to contribute,
-                            report issues, or even fork the project to create your own customised calculators!</p>
 
                         <h3>Get Started Now!</h3>
                         <p>Ready to explore the possibilities? Navigate through our categories and unlock insights
