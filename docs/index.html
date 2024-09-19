@@ -11,7 +11,7 @@ Code history:
 - Added fixes and improvements: 18 September 2024
 - User experience enhancements: 18 September 2024
 - UI changes: 19 September 2024
-- Added collapsible explainer: 19 September 2024
+- Added pie chart and UI enhancements: 19 September 2024
 -->
 
 <!DOCTYPE html>
@@ -39,6 +39,7 @@ Code history:
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
         crossorigin="anonymous" referrerpolicy="no-referrer"
         integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" />
+    <!-- Chart.js CSS (Optional if needed for styling) -->
     <style>
         /* Custom styles */
         body {
@@ -180,7 +181,6 @@ Code history:
                         <tr>
                             <th scope="col">Metric</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Weight (%)</th>
                             <th scope="col">Score (1-5)</th>
                             <th scope="col">Descriptor</th>
                         </tr>
@@ -190,13 +190,36 @@ Code history:
                     </tbody>
                 </table>
             </div>
+            <!-- Dismissable Warning Message -->
+            <div id="weightWarning" class="alert alert-warning alert-dismissible fade show mt-3" role="alert"
+                style="display: none;">
+                <strong>Warning:</strong> The total weights for the selected profile do not add up to 100%.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <!-- Pie Chart Options -->
+            <div class="mb-3">
+                <label class="form-label">Pie Chart Display Options:</label><br />
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="pieChartOption" id="pieChartOption100"
+                        value="100" checked>
+                    <label class="form-check-label" for="pieChartOption100">Show Full 100%</label>
+                </div>
+                <div class="form-check form-check-inline">
+                    <input class="form-check-input" type="radio" name="pieChartOption" id="pieChartOptionLikelihood"
+                        value="likelihood">
+                    <label class="form-check-label" for="pieChartOptionLikelihood">Show Percentage Likelihood</label>
+                </div>
+            </div>
+            <!-- Pie Chart Section -->
+            <div class="mb-5">
+                <canvas id="likelihoodChart" width="400" height="400"></canvas>
+            </div>
             <!-- Copy Button -->
             <div class="d-grid gap-2 mb-4">
                 <button id="copyButton" class="btn btn-primary btn-lg">Copy Results to Clipboard</button>
             </div>
             <!-- Results -->
             <div id="results" class="mb-5">
-                <p>Total: <span id="totalScore">0</span></p>
                 <p>Percentage Likelihood: <span id="percentageLikelihood">0%</span></p>
             </div>
             <!-- Investors List -->
@@ -245,6 +268,8 @@ Code history:
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
         integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <!-- Custom JavaScript -->
     <script src="app.js"></script>
 </body>

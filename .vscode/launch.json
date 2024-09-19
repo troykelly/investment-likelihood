@@ -1,0 +1,14 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Launch Investment Likelihood Calculator",
+            "type": "chrome",
+            "request": "launch",
+            "url": "http://localhost:5500/index.html",
+            "webRoot": "${workspaceFolder}/docs",
+            "preLaunchTask": "Start Live Server",
+            "postDebugTask": "Terminate Live Server"
+        }
+    ]
+}

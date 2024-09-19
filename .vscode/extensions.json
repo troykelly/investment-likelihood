@@ -1,0 +1,7 @@
+{
+    "recommendations": [
+        "ritwickdey.LiveServer", // Live Server for development
+        "dbaeumer.vscode-eslint", // ESLint for linting JavaScript
+        "esbenp.prettier-vscode" // Prettier for code formatting
+    ]
+}
