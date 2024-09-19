@@ -1,0 +1,344 @@
+<!--
+Filename: index.html
+Purpose: A single-page application that allows users to calculate likelihood based on specified criteria. Includes category and profile selection via URL slugs, a navigation bar for category change, and handles random selection.
+Description: This app displays categories of calculation profiles, allows users to select a category and profile via URL slugs (e.g., /investment/general-investor-engagement), incorporates a navigation bar for category selection, and includes a random selection feature via /random.
+Author: Troy Kelly
+Contact: troy@aperim.com
+Code history:
+- Initial creation: 18 September 2024
+- Bootstrap integration: 18 September 2024
+- Converted to SPA with category selection: 19 September 2024
+- URL slug and navigation updates: 19 September 2024
+- Updated savename handling and dynamic labels: 19 September 2024
+-->
+
+<!DOCTYPE html>
+<html lang="en-AU">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>Likelihood Calculator</title>
+    <!-- Responsive Meta Tag -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Likelihood Calculator - Assess and enhance your prospects using this comprehensive tool designed for integration with CRMs like Odoo and Pipedrive." />
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom Styles -->
+    <style>
+        /* Custom styles */
+        body {
+            background-color: #f8f9fa;
+        }
+
+        h1 {
+            color: #2c3e50;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        #results {
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        .tooltip-inner {
+            max-width: 300px;
+            text-align: left;
+        }
+
+        .warning-text {
+            font-size: 0.9rem;
+            color: #dc3545;
+        }
+
+        .profile-card,
+        .category-card {
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+
+        .profile-card:hover,
+        .category-card:hover {
+            transform: scale(1.05);
+        }
+
+        .selected-profile,
+        .selected-category {
+            border: 2px solid #007bff;
+        }
+
+        .score-descriptor {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .form-range {
+            width: 100%;
+        }
+
+        /* Adjust the size of the pie chart */
+        #likelihoodChart {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Center the category selection */
+        #categorySelection {
+            margin-top: 50px;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            color: #007bff;
+        }
+    </style>
+    <!-- Favicons and manifest files -->
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=964">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=964">
+    <link rel="icon" type="image/png" sizes="194x194" href="/favicon-194x194.png?v=964">
+    <link rel="icon" type="image/png" sizes="192x192" href="/android-chrome-192x192.png?v=964">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=964">
+    <link rel="manifest" href="/site.webmanifest?v=964">
+    <link rel="mask-icon" href="/safari-pinned-tab.svg?v=964" color="#5bbad5">
+    <link rel="shortcut icon" href="/favicon.ico?v=964">
+    <meta name="apple-mobile-web-app-title" content="Likelihood Calc">
+    <meta name="application-name" content="Likelihood Calc">
+    <meta name="msapplication-TileColor" content="#553921">
+    <meta name="msapplication-TileImage" content="/mstile-144x144.png?v=964">
+    <meta name="theme-color" content="#ffffff">
+</head>
+
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Likelihood Calculator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCategories"
+                aria-controls="navbarCategories" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCategories">
+                <ul id="categoryMenu" class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Category menu items will be populated here -->
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/random">Random</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <!-- Explainer Section -->
+        <div id="explainer" class="mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                        data-bs-target="#explainerContent" aria-expanded="true" aria-controls="explainerContent">
+                        <h2 class="mb-0">About This Calculator</h2>
+                    </button>
+                </div>
+                <div id="explainerContent" class="collapse show">
+                    <div class="card-body">
+                        <p>Welcome to the Likelihood Calculator, a comprehensive tool designed to help you assess and
+                            enhance your prospects. By
+                            evaluating various metrics, you can understand where you stand and identify areas for
+                            improvement.</p>
+                        <p>This calculator is ideal for use with Customer Relationship Management (CRM) systems like
+                            <strong>Odoo</strong> and <strong>Pipedrive</strong>. After assessing an entity, you can
+                            easily <strong>copy</strong> the report and paste it into your CRM for broader visibility
+                            among your team members, ensuring everyone is informed and aligned.
+                        </p>
+                        <p>To share the report, simply click the "Copy Results to Clipboard" button after completing
+                            your assessment, and paste the content into your CRM notes or communication channels.</p>
+                        <p>This tool was created by <a href="https://troykelly.com/" target="_blank">Troy Kelly</a> on
+                            the land of the Gadigal and Wangal peoples of the
+                            Eora nation.</p>
+                        <p>Contribute changes or make your own likelihood calculator - <a
+                                href="https://github.com/troykelly/investment-likelihood" target="_blank">source
+                                code</a>.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category Selection -->
+        <div id="categorySelection" class="mb-5" style="display: none;">
+            <h2 class="text-center">Select a Category</h2>
+            <div id="categoryCards" class="row row-cols-1 row-cols-md-3 g-3">
+                <!-- Category cards will be populated here -->
+            </div>
+        </div>
+
+        <!-- Main App Content -->
+        <div id="app" style="display: none;">
+            <!-- Warning message -->
+            <div class="alert alert-warning" role="alert">
+                <strong>Note:</strong> All data is stored locally in your browser. This data is not portable and is not
+                seen by our servers.
+            </div>
+            <!-- Entity management -->
+            <div class="mb-4">
+                <label for="investorSelect" class="form-label">Select <span id="savenameLabel">Entity</span>:</label>
+                <div class="input-group mb-2">
+                    <select id="investorSelect" class="form-select"></select>
+                    <button id="newInvestorButton" class="btn btn-outline-secondary" type="button">New <span
+                            id="savenameLabelNew">Entity</span></button>
+                    <button id="deleteInvestorButton" class="btn btn-outline-danger" type="button">Delete <span
+                            id="savenameLabelDelete">Entity</span></button>
+                </div>
+                <!-- Image preview -->
+                <div id="investorImageContainer" class="mb-2">
+                    <img id="investorImage" src="" alt="" class="img-thumbnail"
+                        style="max-width: 200px; display: none;" />
+                </div>
+            </div>
+            <!-- Profile Selection -->
+            <div class="mb-4">
+                <label class="form-label">Select Calculation Profile:</label>
+                <div id="profileCards" class="row row-cols-1 row-cols-md-2 g-3">
+                    <!-- Profile cards will be populated here -->
+                </div>
+            </div>
+            <!-- Criteria table -->
+            <div class="table-responsive">
+                <table id="criteriaTable" class="table table-striped table-bordered">
+                    <thead class="table-light">
+                        <tr>
+                            <th scope="col">Metric</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Score (1-5)</th>
+                            <th scope="col">Descriptor</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Criteria will be populated here -->
+                    </tbody>
+                </table>
+            </div>
+            <!-- Dismissable Warning Message -->
+            <div id="weightWarning" class="alert alert-warning alert-dismissible fade show mt-3" role="alert"
+                style="display: none;">
+                <strong>Warning:</strong> The total weights for the selected profile do not add up to 100%.
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+            <!-- Pie Chart and Report Section -->
+            <div class="row mb-5">
+                <!-- Pie Chart Column -->
+                <div class="col-md-8">
+                    <!-- Pie Chart Options -->
+                    <div class="mb-3">
+                        <label class="form-label">Pie Chart Display Options:</label><br />
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="pieChartOption" id="pieChartOption100"
+                                value="100" checked>
+                            <label class="form-check-label" for="pieChartOption100">Show Full 100%</label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <input class="form-check-input" type="radio" name="pieChartOption"
+                                id="pieChartOptionLikelihood" value="likelihood">
+                            <label class="form-check-label" for="pieChartOptionLikelihood">Show Percentage
+                                Likelihood</label>
+                        </div>
+                    </div>
+                    <!-- Pie Chart -->
+                    <div class="mb-3">
+                        <canvas id="likelihoodChart"></canvas>
+                    </div>
+                </div>
+                <!-- Report Column -->
+                <div class="col-md-4">
+                    <div id="resultsReport">
+                        <!-- Percentage Likelihood Heading -->
+                        <h3>Percentage Likelihood</h3>
+                        <h1 id="percentageLikelihood">0%</h1>
+                        <!-- Breakdown Table -->
+                        <table id="breakdownTable" class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Metric</th>
+                                    <th>Score</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Breakdown items will be populated here -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Copy Button -->
+            <div class="d-grid gap-2 mb-4">
+                <button id="copyButton" class="btn btn-primary btn-lg">Copy Results to Clipboard</button>
+            </div>
+            <!-- Entities List -->
+            <div class="mb-5">
+                <label class="form-label">Stored <span id="savenameLabelStored">Entities</span>:</label>
+                <ul id="investorList" class="list-group">
+                    <!-- Entity items will be populated here -->
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <!-- Entity Edit Modal -->
+    <div class="modal fade" id="investorEditModal" tabindex="-1" aria-labelledby="investorEditModalLabel"
+        aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 id="investorEditModalLabel" class="modal-title">Edit <span
+                            id="savenameLabelEditModal">Entity</span></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="investorEditForm">
+                    <div class="modal-body">
+                        <!-- Entity Image Upload -->
+                        <div class="mb-3">
+                            <label for="modalInvestorImageInput" class="form-label">Upload <span
+                                    id="savenameLabelUpload">Entity</span> Image:</label>
+                            <input type="file" id="modalInvestorImageInput" accept="image/*" class="form-control">
+                        </div>
+                        <!-- Image Preview -->
+                        <div class="mb-3">
+                            <img id="modalInvestorImagePreview" src="" alt="" class="img-thumbnail"
+                                style="max-width: 200px; display: none;" />
+                        </div>
+                        <!-- Additional entity editing fields can be added here -->
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap Bundle JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+        integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Custom JavaScript -->
+    <script src="/app.js"></script>
+</body>
+
+</html>
