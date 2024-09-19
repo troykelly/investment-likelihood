@@ -2147,6 +2147,1429 @@
                     ]
                 }
             ]
+        },
+        {
+            "name": "Arts Theatre",
+            "slug": "arts-theatre",
+            "description": "Assess your likelihood of successfully financing and executing theatrical arts projects.",
+            "icon": "fas fa-theater-masks",
+            "weight": 5,
+            "savename": "Project",
+            "profiles": [
+                {
+                    "name": "Government Grants",
+                    "icon": "fas fa-university",
+                    "criteria": [
+                        {
+                            "metric": "Eligibility",
+                            "description": "Measures how well your project meets the grant's eligibility criteria.",
+                            "weight": 20,
+                            "icon": "fas fa-check-double",
+                            "scoreDescriptors": {
+                                "1": "Not eligible",
+                                "2": "Slightly eligible",
+                                "3": "Moderately eligible",
+                                "4": "Highly eligible",
+                                "5": "Completely eligible"
+                            }
+                        },
+                        {
+                            "metric": "Grant Writing Skills",
+                            "description": "Assesses the quality and persuasiveness of your grant proposal.",
+                            "weight": 20,
+                            "icon": "fas fa-pen",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Budget Planning",
+                            "description": "Evaluates the thoroughness and realism of your budget plans.",
+                            "weight": 20,
+                            "icon": "fas fa-calculator",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Timeline and Milestones",
+                            "description": "Measures how well-defined your project timeline and milestones are.",
+                            "weight": 15,
+                            "icon": "fas fa-calendar-alt",
+                            "scoreDescriptors": {
+                                "1": "No timeline",
+                                "2": "Vague timeline",
+                                "3": "Moderately defined",
+                                "4": "Well-defined",
+                                "5": "Very detailed and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Partnerships and Collaborations",
+                            "description": "Assesses the strength and relevance of your partnerships and collaborations.",
+                            "weight": 10,
+                            "icon": "fas fa-handshake",
+                            "scoreDescriptors": {
+                                "1": "No partnerships",
+                                "2": "Weak partnerships",
+                                "3": "Moderate partnerships",
+                                "4": "Strong partnerships",
+                                "5": "Highly strategic and strong"
+                            }
+                        },
+                        {
+                            "metric": "Reputation and Past Success",
+                            "description": "Evaluates your track record and past successes in similar projects.",
+                            "weight": 10,
+                            "icon": "fas fa-medal",
+                            "scoreDescriptors": {
+                                "1": "No success",
+                                "2": "Minimal success",
+                                "3": "Moderate success",
+                                "4": "Significant success",
+                                "5": "Highly acclaimed successes"
+                            }
+                        },
+                        {
+                            "metric": "Community Impact",
+                            "description": "Measures the potential impact of your project on the community.",
+                            "weight": 5,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "No impact",
+                                "2": "Minimal impact",
+                                "3": "Moderate impact",
+                                "4": "High impact",
+                                "5": "Extremely high impact"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Private Investors",
+                    "icon": "fas fa-business-time",
+                    "criteria": [
+                        {
+                            "metric": "Project Appeal",
+                            "description": "Measures how appealing your theatrical project is to private investors.",
+                            "weight": 20,
+                            "icon": "fas fa-star",
+                            "scoreDescriptors": {
+                                "1": "No appeal",
+                                "2": "Slight appeal",
+                                "3": "Moderate appeal",
+                                "4": "High appeal",
+                                "5": "Very high appeal"
+                            }
+                        },
+                        {
+                            "metric": "Business Plan",
+                            "description": "Assesses the comprehensiveness and viability of your business plan.",
+                            "weight": 20,
+                            "icon": "fas fa-chart-line",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Return on Investment (ROI)",
+                            "description": "Evaluates the potential ROI for investors in your project.",
+                            "weight": 20,
+                            "icon": "fas fa-coins",
+                            "scoreDescriptors": {
+                                "1": "No ROI",
+                                "2": "Low ROI",
+                                "3": "Moderate ROI",
+                                "4": "High ROI",
+                                "5": "Very high ROI"
+                            }
+                        },
+                        {
+                            "metric": "Risk Management",
+                            "description": "Measures how well you have identified and mitigated potential risks.",
+                            "weight": 15,
+                            "icon": "fas fa-exclamation-triangle",
+                            "scoreDescriptors": {
+                                "1": "No risk management",
+                                "2": "Poor risk management",
+                                "3": "Moderate risk management",
+                                "4": "Good risk management",
+                                "5": "Excellent risk management"
+                            }
+                        },
+                        {
+                            "metric": "Investor Relations",
+                            "description": "Assesses your ability to maintain and manage relationships with investors.",
+                            "weight": 10,
+                            "icon": "fas fa-handshake",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Marketing Strategy",
+                            "description": "Evaluates the effectiveness of your marketing strategy to attract audiences.",
+                            "weight": 10,
+                            "icon": "fas fa-bullhorn",
+                            "scoreDescriptors": {
+                                "1": "No strategy",
+                                "2": "Poor strategy",
+                                "3": "Moderate strategy",
+                                "4": "Good strategy",
+                                "5": "Excellent strategy"
+                            }
+                        },
+                        {
+                            "metric": "Project Innovativeness",
+                            "description": "Assesses how innovative and unique your theatrical project is.",
+                            "weight": 5,
+                            "icon": "fas fa-lightbulb",
+                            "scoreDescriptors": {
+                                "1": "Not innovative",
+                                "2": "Slightly innovative",
+                                "3": "Moderately innovative",
+                                "4": "Highly innovative",
+                                "5": "Extremely unique and innovative"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Crowdfunding",
+                    "icon": "fas fa-users",
+                    "criteria": [
+                        {
+                            "metric": "Campaign Preparation",
+                            "description": "Measures how well-prepared you are for launching a crowdfunding campaign.",
+                            "weight": 20,
+                            "icon": "fas fa-clipboard-list",
+                            "scoreDescriptors": {
+                                "1": "No preparation",
+                                "2": "Poor preparation",
+                                "3": "Moderate preparation",
+                                "4": "Good preparation",
+                                "5": "Excellent preparation"
+                            }
+                        },
+                        {
+                            "metric": "Project Story",
+                            "description": "Assesses the strength and emotional appeal of your project's story.",
+                            "weight": 20,
+                            "icon": "fas fa-book",
+                            "scoreDescriptors": {
+                                "1": "No story",
+                                "2": "Weak story",
+                                "3": "Moderate story",
+                                "4": "Strong story",
+                                "5": "Extremely compelling story"
+                            }
+                        },
+                        {
+                            "metric": "Rewards and Incentives",
+                            "description": "Evaluates the attractiveness and variety of rewards offered to backers.",
+                            "weight": 15,
+                            "icon": "fas fa-gift",
+                            "scoreDescriptors": {
+                                "1": "No rewards",
+                                "2": "Minimal rewards",
+                                "3": "Moderate rewards",
+                                "4": "Good rewards",
+                                "5": "Excellent and varied rewards"
+                            }
+                        },
+                        {
+                            "metric": "Social Media Presence",
+                            "description": "Measures your existing social media presence and ability to promote your campaign.",
+                            "weight": 15,
+                            "icon": "fas fa-share-alt",
+                            "scoreDescriptors": {
+                                "1": "No presence",
+                                "2": "Minimal presence",
+                                "3": "Moderate presence",
+                                "4": "Good presence",
+                                "5": "Excellent presence"
+                            }
+                        },
+                        {
+                            "metric": "Funding Goal Realism",
+                            "description": "Assesses how realistic and achievable your funding goal is.",
+                            "weight": 15,
+                            "icon": "fas fa-bullseye",
+                            "scoreDescriptors": {
+                                "1": "Unrealistic",
+                                "2": "Slightly unrealistic",
+                                "3": "Moderately realistic",
+                                "4": "Realistic",
+                                "5": "Highly achievable"
+                            }
+                        },
+                        {
+                            "metric": "Community Engagement",
+                            "description": "Evaluates your ability to engage with and rally support from the community.",
+                            "weight": 10,
+                            "icon": "fas fa-comments",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Minimal engagement",
+                                "3": "Moderate engagement",
+                                "4": "Good engagement",
+                                "5": "Excellent engagement"
+                            }
+                        },
+                        {
+                            "metric": "Campaign Longevity",
+                            "description": "Measures the sustainability and long-term viability of your crowdfunding campaign.",
+                            "weight": 5,
+                            "icon": "fas fa-hourglass-half",
+                            "scoreDescriptors": {
+                                "1": "Very short-lived",
+                                "2": "Short-lived",
+                                "3": "Moderate duration",
+                                "4": "Long-lasting",
+                                "5": "Extremely sustainable and viable"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Ticket Sales and Revenue",
+                    "icon": "fas fa-ticket-alt",
+                    "criteria": [
+                        {
+                            "metric": "Audience Research",
+                            "description": "Measures how well you understand your target audience.",
+                            "weight": 20,
+                            "icon": "fas fa-search",
+                            "scoreDescriptors": {
+                                "1": "No research",
+                                "2": "Minimal research",
+                                "3": "Moderate research",
+                                "4": "Good research",
+                                "5": "Extensive and detailed research"
+                            }
+                        },
+                        {
+                            "metric": "Pricing Strategy",
+                            "description": "Assesses the effectiveness of your ticket pricing strategy.",
+                            "weight": 20,
+                            "icon": "fas fa-dollar-sign",
+                            "scoreDescriptors": {
+                                "1": "No strategy",
+                                "2": "Poor strategy",
+                                "3": "Moderate strategy",
+                                "4": "Good strategy",
+                                "5": "Excellent and well-researched strategy"
+                            }
+                        },
+                        {
+                            "metric": "Marketing and Promotions",
+                            "description": "Evaluates the strength and reach of your marketing and promotional efforts.",
+                            "weight": 20,
+                            "icon": "fas fa-bullhorn",
+                            "scoreDescriptors": {
+                                "1": "No marketing",
+                                "2": "Poor marketing",
+                                "3": "Moderate marketing",
+                                "4": "Good marketing",
+                                "5": "Extremely effective marketing"
+                            }
+                        },
+                        {
+                            "metric": "Sales Channels",
+                            "description": "Measures the variety and effectiveness of your ticket sales channels.",
+                            "weight": 15,
+                            "icon": "fas fa-store",
+                            "scoreDescriptors": {
+                                "1": "No sales channels",
+                                "2": "Minimal channels",
+                                "3": "Moderate channels",
+                                "4": "Good channels",
+                                "5": "Comprehensive and effective channels"
+                            }
+                        },
+                        {
+                            "metric": "Customer Experience",
+                            "description": "Assesses the overall customer experience from ticket purchase to post-show follow-up.",
+                            "weight": 15,
+                            "icon": "fas fa-smile",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Revenue Management",
+                            "description": "Evaluates how effectively you manage, allocate, and maximise revenue from ticket sales.",
+                            "weight": 10,
+                            "icon": "fas fa-coins",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Arts Television",
+            "slug": "arts-television",
+            "description": "Assess your likelihood of successfully financing and executing television projects.",
+            "icon": "fas fa-tv",
+            "weight": 6,
+            "savename": "Project",
+            "profiles": [
+                {
+                    "name": "Network Funding",
+                    "icon": "fas fa-broadcast-tower",
+                    "criteria": [
+                        {
+                            "metric": "Pitch Quality",
+                            "description": "Measures the effectiveness and clarity of your pitch to television networks.",
+                            "weight": 20,
+                            "icon": "fas fa-microphone",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Project Concept",
+                            "description": "Assesses the originality and appeal of your television project concept.",
+                            "weight": 20,
+                            "icon": "fas fa-lightbulb",
+                            "scoreDescriptors": {
+                                "1": "Not original",
+                                "2": "Slightly original",
+                                "3": "Moderately original",
+                                "4": "Highly original",
+                                "5": "Exceptionally original and appealing"
+                            }
+                        },
+                        {
+                            "metric": "Market Research",
+                            "description": "Evaluates the depth and relevance of your market research and target audience analysis.",
+                            "weight": 20,
+                            "icon": "fas fa-search-dollar",
+                            "scoreDescriptors": {
+                                "1": "No research",
+                                "2": "Minimal research",
+                                "3": "Moderate research",
+                                "4": "Good research",
+                                "5": "Extensive and thorough research"
+                            }
+                        },
+                        {
+                            "metric": "Network Fit",
+                            "description": "Measures how well your project aligns with the network’s brand and programming.",
+                            "weight": 15,
+                            "icon": "fas fa-network-wired",
+                            "scoreDescriptors": {
+                                "1": "Not fit at all",
+                                "2": "Slightly fit",
+                                "3": "Moderately fit",
+                                "4": "Highly fit",
+                                "5": "Perfectly fit"
+                            }
+                        },
+                        {
+                            "metric": "Budget Feasibility",
+                            "description": "Assesses the realism and feasibility of your budget for the television project.",
+                            "weight": 15,
+                            "icon": "fas fa-calculator",
+                            "scoreDescriptors": {
+                                "1": "Not feasible",
+                                "2": "Slightly feasible",
+                                "3": "Moderately feasible",
+                                "4": "Highly feasible",
+                                "5": "Extremely feasible and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Production Timeline",
+                            "description": "Evaluates the thoroughness and realism of your production timeline.",
+                            "weight": 10,
+                            "icon": "fas fa-clock",
+                            "scoreDescriptors": {
+                                "1": "No timeline",
+                                "2": "Vague timeline",
+                                "3": "Moderately defined",
+                                "4": "Well-defined",
+                                "5": "Very detailed and realistic"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Streaming Services",
+                    "icon": "fas fa-laptop",
+                    "criteria": [
+                        {
+                            "metric": "Project Uniqueness",
+                            "description": "Measures how unique and appealing your television project is to streaming services.",
+                            "weight": 20,
+                            "icon": "fas fa-star",
+                            "scoreDescriptors": {
+                                "1": "Not unique",
+                                "2": "Slightly unique",
+                                "3": "Moderately unique",
+                                "4": "Highly unique",
+                                "5": "Exceptionally unique"
+                            }
+                        },
+                        {
+                            "metric": "Audience Engagement",
+                            "description": "Assesses the potential for viewer engagement and retention.",
+                            "weight": 20,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "Very low",
+                                "2": "Low",
+                                "3": "Moderate",
+                                "4": "High",
+                                "5": "Very high"
+                            }
+                        },
+                        {
+                            "metric": "Content Viability",
+                            "description": "Evaluates the viability and quality of your content for a streaming audience.",
+                            "weight": 20,
+                            "icon": "fas fa-film",
+                            "scoreDescriptors": {
+                                "1": "Not viable",
+                                "2": "Slightly viable",
+                                "3": "Moderately viable",
+                                "4": "Highly viable",
+                                "5": "Exceptionally viable"
+                            }
+                        },
+                        {
+                            "metric": "Data-Driven Approach",
+                            "description": "Measures the extent to which data and analytics inform your project decisions.",
+                            "weight": 15,
+                            "icon": "fas fa-chart-bar",
+                            "scoreDescriptors": {
+                                "1": "No data",
+                                "2": "Minimal data",
+                                "3": "Moderate data",
+                                "4": "Good data usage",
+                                "5": "Extensive and effective data usage"
+                            }
+                        },
+                        {
+                            "metric": "Pitch Presentation",
+                            "description": "Assesses the quality and professionalism of your pitch presentation to streaming services.",
+                            "weight": 15,
+                            "icon": "fas fa-podcast",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Cost Efficiency",
+                            "description": "Evaluates the cost efficiency and potential return on investment for your project.",
+                            "weight": 10,
+                            "icon": "fas fa-dollar-sign",
+                            "scoreDescriptors": {
+                                "1": "Not efficient",
+                                "2": "Slightly efficient",
+                                "3": "Moderately efficient",
+                                "4": "Highly efficient",
+                                "5": "Exceptionally efficient"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Crowdfunding",
+                    "icon": "fas fa-hand-holding-usd",
+                    "criteria": [
+                        {
+                            "metric": "Campaign Strategy",
+                            "description": "Measures how well-planned and strategic your crowdfunding campaign is.",
+                            "weight": 20,
+                            "icon": "fas fa-bullseye",
+                            "scoreDescriptors": {
+                                "1": "No strategy",
+                                "2": "Poor strategy",
+                                "3": "Moderate strategy",
+                                "4": "Good strategy",
+                                "5": "Excellent strategy"
+                            }
+                        },
+                        {
+                            "metric": "Engagement and Communication",
+                            "description": "Assesses your ability to engage with potential backers and communicate effectively.",
+                            "weight": 20,
+                            "icon": "fas fa-comments",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Backer Rewards",
+                            "description": "Evaluates the attractiveness and variety of rewards offered to backers.",
+                            "weight": 15,
+                            "icon": "fas fa-gift",
+                            "scoreDescriptors": {
+                                "1": "No rewards",
+                                "2": "Minimal rewards",
+                                "3": "Moderate rewards",
+                                "4": "Good rewards",
+                                "5": "Excellent and varied rewards"
+                            }
+                        },
+                        {
+                            "metric": "Video Campaign Quality",
+                            "description": "Measures the quality and impact of your crowdfunding campaign video.",
+                            "weight": 15,
+                            "icon": "fas fa-video",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Social Media Outreach",
+                            "description": "Assesses the effectiveness of your social media strategy to promote the campaign.",
+                            "weight": 15,
+                            "icon": "fas fa-share-alt",
+                            "scoreDescriptors": {
+                                "1": "No outreach",
+                                "2": "Minimal outreach",
+                                "3": "Moderate outreach",
+                                "4": "Good outreach",
+                                "5": "Extensive and effective outreach"
+                            }
+                        },
+                        {
+                            "metric": "Funding Goal Realism",
+                            "description": "Evaluates how realistic and achievable your crowdfunding goal is.",
+                            "weight": 15,
+                            "icon": "fas fa-check-circle",
+                            "scoreDescriptors": {
+                                "1": "Unrealistic",
+                                "2": "Slightly unrealistic",
+                                "3": "Moderately realistic",
+                                "4": "Realistic",
+                                "5": "Highly achievable"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Corporate Sponsorships",
+                    "icon": "fas fa-handshake",
+                    "criteria": [
+                        {
+                            "metric": "Sponsor Alignment",
+                            "description": "Measures how well your project aligns with the sponsor’s values and goals.",
+                            "weight": 20,
+                            "icon": "fas fa-clipboard-check",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Slight alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Perfect alignment"
+                            }
+                        },
+                        {
+                            "metric": "Sponsorship Proposal",
+                            "description": "Assesses the quality and persuasiveness of your sponsorship proposal.",
+                            "weight": 20,
+                            "icon": "fas fa-file-alt",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Brand Visibility",
+                            "description": "Evaluates the potential exposure and visibility the sponsor will receive.",
+                            "weight": 20,
+                            "icon": "fas fa-eye",
+                            "scoreDescriptors": {
+                                "1": "Very low",
+                                "2": "Low",
+                                "3": "Moderate",
+                                "4": "High",
+                                "5": "Very high"
+                            }
+                        },
+                        {
+                            "metric": "Impact Measurement",
+                            "description": "Measures how effectively you can track and report the impact of sponsorship.",
+                            "weight": 15,
+                            "icon": "fas fa-chart-line",
+                            "scoreDescriptors": {
+                                "1": "No measurement",
+                                "2": "Poor measurement",
+                                "3": "Moderate measurement",
+                                "4": "Good measurement",
+                                "5": "Excellent measurement"
+                            }
+                        },
+                        {
+                            "metric": "Long-Term Partnership Potential",
+                            "description": "Assesses the potential for long-term partnerships with the sponsor.",
+                            "weight": 15,
+                            "icon": "fas fa-handshake-alt",
+                            "scoreDescriptors": {
+                                "1": "No potential",
+                                "2": "Slight potential",
+                                "3": "Moderate potential",
+                                "4": "High potential",
+                                "5": "Very high potential"
+                            }
+                        },
+                        {
+                            "metric": "Sponsor Benefits",
+                            "description": "Evaluates the benefits and value offered to the sponsor.",
+                            "weight": 10,
+                            "icon": "fas fa-gift",
+                            "scoreDescriptors": {
+                                "1": "No benefits",
+                                "2": "Minimal benefits",
+                                "3": "Moderate benefits",
+                                "4": "Good benefits",
+                                "5": "Extensive and valuable benefits"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Arts Film",
+            "slug": "arts-film",
+            "description": "Assess your likelihood of successfully financing and executing film projects.",
+            "icon": "fas fa-film",
+            "weight": 7,
+            "savename": "Project",
+            "profiles": [
+                {
+                    "name": "Studio Funding",
+                    "icon": "fas fa-building",
+                    "criteria": [
+                        {
+                            "metric": "Script Quality",
+                            "description": "Measures the quality and appeal of your film script.",
+                            "weight": 20,
+                            "icon": "fas fa-scroll",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Director and Cast",
+                            "description": "Assesses the relevance and stature of the director and main cast members.",
+                            "weight": 20,
+                            "icon": "fas fa-star",
+                            "scoreDescriptors": {
+                                "1": "No experience",
+                                "2": "Minimal experience",
+                                "3": "Moderate experience",
+                                "4": "High experience",
+                                "5": "Extremely high experience and reputation"
+                            }
+                        },
+                        {
+                            "metric": "Pitch Presentation",
+                            "description": "Evaluates the effectiveness and clarity of your pitch to studio executives.",
+                            "weight": 20,
+                            "icon": "fas fa-microphone-alt",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Market Research",
+                            "description": "Measures the depth and relevance of your market research and target audience analysis.",
+                            "weight": 15,
+                            "icon": "fas fa-chart-area",
+                            "scoreDescriptors": {
+                                "1": "No research",
+                                "2": "Minimal research",
+                                "3": "Moderate research",
+                                "4": "Good research",
+                                "5": "Extensive and thorough research"
+                            }
+                        },
+                        {
+                            "metric": "Budget Feasibility",
+                            "description": "Assesses the realism and feasibility of your project budget.",
+                            "weight": 15,
+                            "icon": "fas fa-calculator",
+                            "scoreDescriptors": {
+                                "1": "Not feasible",
+                                "2": "Slightly feasible",
+                                "3": "Moderately feasible",
+                                "4": "Highly feasible",
+                                "5": "Extremely feasible and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Distribution Plan",
+                            "description": "Evaluates the thoroughness and potential of your distribution plan.",
+                            "weight": 10,
+                            "icon": "fas fa-globe",
+                            "scoreDescriptors": {
+                                "1": "No plan",
+                                "2": "Vague plan",
+                                "3": "Moderately defined",
+                                "4": "Well-defined",
+                                "5": "Very detailed and realistic"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Independent Financing",
+                    "icon": "fas fa-lightbulb",
+                    "criteria": [
+                        {
+                            "metric": "Personal Investment",
+                            "description": "Measures your willingness and ability to invest personally in the project.",
+                            "weight": 20,
+                            "icon": "fas fa-money-bill-wave",
+                            "scoreDescriptors": {
+                                "1": "No investment",
+                                "2": "Minimal investment",
+                                "3": "Moderate investment",
+                                "4": "Significant investment",
+                                "5": "Full investment"
+                            }
+                        },
+                        {
+                            "metric": "Private Investors Engagement",
+                            "description": "Assesses the strength of your relationships and engagement with private investors.",
+                            "weight": 20,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Minimal engagement",
+                                "3": "Moderate engagement",
+                                "4": "Good engagement",
+                                "5": "Excellent engagement"
+                            }
+                        },
+                        {
+                            "metric": "ROI for Investors",
+                            "description": "Evaluates the potential return on investment for your financiers.",
+                            "weight": 20,
+                            "icon": "fas fa-coins",
+                            "scoreDescriptors": {
+                                "1": "No ROI",
+                                "2": "Low ROI",
+                                "3": "Moderate ROI",
+                                "4": "High ROI",
+                                "5": "Very high ROI"
+                            }
+                        },
+                        {
+                            "metric": "Risk Management",
+                            "description": "Measures how well you have identified and mitigated potential risks in the project's execution.",
+                            "weight": 15,
+                            "icon": "fas fa-shield-alt",
+                            "scoreDescriptors": {
+                                "1": "No risk management",
+                                "2": "Poor risk management",
+                                "3": "Moderate risk management",
+                                "4": "Good risk management",
+                                "5": "Excellent risk management"
+                            }
+                        },
+                        {
+                            "metric": "Creative Freedom",
+                            "description": "Assesses the level of creative freedom your project maintains.",
+                            "weight": 15,
+                            "icon": "fas fa-palette",
+                            "scoreDescriptors": {
+                                "1": "No creative freedom",
+                                "2": "Minimal creative freedom",
+                                "3": "Moderate creative freedom",
+                                "4": "High creative freedom",
+                                "5": "Full creative freedom"
+                            }
+                        },
+                        {
+                            "metric": "Networking and Relationships",
+                            "description": "Measures the strength of your professional network in the film industry.",
+                            "weight": 10,
+                            "icon": "fas fa-handshake",
+                            "scoreDescriptors": {
+                                "1": "No network",
+                                "2": "Minimal network",
+                                "3": "Moderate network",
+                                "4": "Good network",
+                                "5": "Extensive and strong network"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Crowdfunding",
+                    "icon": "fas fa-hand-holding-usd",
+                    "criteria": [
+                        {
+                            "metric": "Campaign Preparation",
+                            "description": "Measures how well-prepared you are for launching a crowdfunding campaign for your film.",
+                            "weight": 20,
+                            "icon": "fas fa-clipboard-list",
+                            "scoreDescriptors": {
+                                "1": "No preparation",
+                                "2": "Poor preparation",
+                                "3": "Moderate preparation",
+                                "4": "Good preparation",
+                                "5": "Excellent preparation"
+                            }
+                        },
+                        {
+                            "metric": "Storytelling",
+                            "description": "Assesses the strength and emotional appeal of your project's story to potential backers.",
+                            "weight": 20,
+                            "icon": "fas fa-book",
+                            "scoreDescriptors": {
+                                "1": "No story",
+                                "2": "Weak story",
+                                "3": "Moderate story",
+                                "4": "Strong story",
+                                "5": "Extremely compelling story"
+                            }
+                        },
+                        {
+                            "metric": "Visual Presentation",
+                            "description": "Evaluates the quality and impact of your campaign's visual materials.",
+                            "weight": 15,
+                            "icon": "fas fa-image",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Rewards and Incentives",
+                            "description": "Measures the attractiveness and variety of rewards offered to backers.",
+                            "weight": 15,
+                            "icon": "fas fa-gift",
+                            "scoreDescriptors": {
+                                "1": "No rewards",
+                                "2": "Minimal rewards",
+                                "3": "Moderate rewards",
+                                "4": "Good rewards",
+                                "5": "Excellent and varied rewards"
+                            }
+                        },
+                        {
+                            "metric": "Backer Engagement",
+                            "description": "Assesses your ability to engage with and update backers about the project's progress.",
+                            "weight": 15,
+                            "icon": "fas fa-comments",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Minimal engagement",
+                                "3": "Moderate engagement",
+                                "4": "Good engagement",
+                                "5": "Excellent engagement"
+                            }
+                        },
+                        {
+                            "metric": "Funding Goal Realism",
+                            "description": "Evaluates how realistic and achievable your funding goal is.",
+                            "weight": 15,
+                            "icon": "fas fa-bullseye",
+                            "scoreDescriptors": {
+                                "1": "Unrealistic",
+                                "2": "Slightly unrealistic",
+                                "3": "Moderately realistic",
+                                "4": "Realistic",
+                                "5": "Highly achievable"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Film Grants",
+                    "icon": "fas fa-graduation-cap",
+                    "criteria": [
+                        {
+                            "metric": "Eligibility",
+                            "description": "Measures how well your project meets the grant’s eligibility criteria.",
+                            "weight": 20,
+                            "icon": "fas fa-check-double",
+                            "scoreDescriptors": {
+                                "1": "Not eligible",
+                                "2": "Slightly eligible",
+                                "3": "Moderately eligible",
+                                "4": "Highly eligible",
+                                "5": "Completely eligible"
+                            }
+                        },
+                        {
+                            "metric": "Grant Writing Skills",
+                            "description": "Assesses the quality and persuasiveness of your grant proposal.",
+                            "weight": 20,
+                            "icon": "fas fa-pen",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Project Impact",
+                            "description": "Evaluates the potential impact and importance of your film project.",
+                            "weight": 20,
+                            "icon": "fas fa-chart-line",
+                            "scoreDescriptors": {
+                                "1": "No impact",
+                                "2": "Minimal impact",
+                                "3": "Moderate impact",
+                                "4": "High impact",
+                                "5": "Extremely high impact"
+                            }
+                        },
+                        {
+                            "metric": "Budget Realism",
+                            "description": "Assesses the realism and feasibility of your budget plan.",
+                            "weight": 15,
+                            "icon": "fas fa-calculator",
+                            "scoreDescriptors": {
+                                "1": "Not feasible",
+                                "2": "Slightly feasible",
+                                "3": "Moderately feasible",
+                                "4": "Highly feasible",
+                                "5": "Extremely feasible and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Previous Work",
+                            "description": "Measures the quality and success of your previous works and relevance to the grant criteria.",
+                            "weight": 15,
+                            "icon": "fas fa-film",
+                            "scoreDescriptors": {
+                                "1": "No previous work",
+                                "2": "Minimal previous works",
+                                "3": "Moderate previous works",
+                                "4": "Significant previous works",
+                                "5": "Highly acclaimed previous works"
+                            }
+                        },
+                        {
+                            "metric": "Community and Cultural Relevance",
+                            "description": "Evaluates how your project addresses community or cultural issues.",
+                            "weight": 10,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "Not relevant",
+                                "2": "Slightly relevant",
+                                "3": "Moderately relevant",
+                                "4": "Highly relevant",
+                                "5": "Extremely relevant"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Arts Commissioned Installations",
+            "slug": "arts-commissioned-installations",
+            "description": "Assess your likelihood of successfully financing and executing commissioned art installations.",
+            "icon": "fas fa-palette",
+            "weight": 8,
+            "savename": "Project",
+            "profiles": [
+                {
+                    "name": "Government Grants",
+                    "icon": "fas fa-university",
+                    "criteria": [
+                        {
+                            "metric": "Eligibility",
+                            "description": "Measures how well your installation project meets the grant's eligibility criteria.",
+                            "weight": 20,
+                            "icon": "fas fa-check-double",
+                            "scoreDescriptors": {
+                                "1": "Not eligible",
+                                "2": "Slightly eligible",
+                                "3": "Moderately eligible",
+                                "4": "Highly eligible",
+                                "5": "Completely eligible"
+                            }
+                        },
+                        {
+                            "metric": "Grant Proposal Quality",
+                            "description": "Assesses the quality and persuasiveness of your grant proposal.",
+                            "weight": 20,
+                            "icon": "fas fa-pen",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Project Impact",
+                            "description": "Evaluates the potential social or cultural impact of your installation project.",
+                            "weight": 20,
+                            "icon": "fas fa-chart-line",
+                            "scoreDescriptors": {
+                                "1": "No impact",
+                                "2": "Minimal impact",
+                                "3": "Moderate impact",
+                                "4": "High impact",
+                                "5": "Extremely high impact"
+                            }
+                        },
+                        {
+                            "metric": "Budget Feasibility",
+                            "description": "Assesses the realism and feasibility of your project budget.",
+                            "weight": 15,
+                            "icon": "fas fa-calculator",
+                            "scoreDescriptors": {
+                                "1": "Not feasible",
+                                "2": "Slightly feasible",
+                                "3": "Moderately feasible",
+                                "4": "Highly feasible",
+                                "5": "Extremely feasible and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Timeline and Milestones",
+                            "description": "Measures how well-defined your project timeline and milestones are.",
+                            "weight": 15,
+                            "icon": "fas fa-calendar-alt",
+                            "scoreDescriptors": {
+                                "1": "No timeline",
+                                "2": "Vague timeline",
+                                "3": "Moderately defined",
+                                "4": "Well-defined",
+                                "5": "Very detailed and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Community Engagement",
+                            "description": "Assesses the level of community involvement and engagement with your project.",
+                            "weight": 10,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Minimal engagement",
+                                "3": "Moderate engagement",
+                                "4": "High engagement",
+                                "5": "Extremely high engagement"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Private Commissions",
+                    "icon": "fas fa-business-time",
+                    "criteria": [
+                        {
+                            "metric": "Client Relationship",
+                            "description": "Measures the strength and quality of your relationship with the commissioning client.",
+                            "weight": 20,
+                            "icon": "fas fa-handshake",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Artistic Vision Alignment",
+                            "description": "Assesses how well your artistic vision aligns with the client’s expectations.",
+                            "weight": 20,
+                            "icon": "fas fa-eye",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Slight alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Perfect alignment"
+                            }
+                        },
+                        {
+                            "metric": "Proposal Quality",
+                            "description": "Evaluates the clarity and persuasiveness of your project proposal.",
+                            "weight": 20,
+                            "icon": "fas fa-file-alt",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Material Sourcing",
+                            "description": "Measures the feasibility and quality of sourcing materials for the installation.",
+                            "weight": 15,
+                            "icon": "fas fa-cubes",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Budget and Cost Control",
+                            "description": "Assesses the realism of your budget and ability to control costs.",
+                            "weight": 15,
+                            "icon": "fas fa-calculator",
+                            "scoreDescriptors": {
+                                "1": "Not feasible",
+                                "2": "Slightly feasible",
+                                "3": "Moderately feasible",
+                                "4": "Highly feasible",
+                                "5": "Extremely feasible and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Project Execution",
+                            "description": "Evaluates your ability to execute the project according to the client's specifications.",
+                            "weight": 10,
+                            "icon": "fas fa-tools",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Corporate Sponsorship",
+                    "icon": "fas fa-handshake-alt",
+                    "criteria": [
+                        {
+                            "metric": "Sponsor Fit",
+                            "description": "Measures how well your project fits with the sponsor’s brand and values.",
+                            "weight": 20,
+                            "icon": "fas fa-network-wired",
+                            "scoreDescriptors": {
+                                "1": "Not fit at all",
+                                "2": "Slightly fit",
+                                "3": "Moderately fit",
+                                "4": "Highly fit",
+                                "5": "Perfectly fit"
+                            }
+                        },
+                        {
+                            "metric": "Sponsorship Proposal",
+                            "description": "Assesses the quality and persuasiveness of your sponsorship proposal.",
+                            "weight": 20,
+                            "icon": "fas fa-file-alt",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Brand Visibility",
+                            "description": "Evaluates the potential exposure and visibility the sponsor will receive.",
+                            "weight": 20,
+                            "icon": "fas fa-eye",
+                            "scoreDescriptors": {
+                                "1": "Very low",
+                                "2": "Low",
+                                "3": "Moderate",
+                                "4": "High",
+                                "5": "Very high"
+                            }
+                        },
+                        {
+                            "metric": "Creative Freedom",
+                            "description": "Measures the level of creative freedom allowed by the sponsor.",
+                            "weight": 15,
+                            "icon": "fas fa-paint-brush",
+                            "scoreDescriptors": {
+                                "1": "No freedom",
+                                "2": "Minimal freedom",
+                                "3": "Moderate freedom",
+                                "4": "High freedom",
+                                "5": "Complete freedom"
+                            }
+                        },
+                        {
+                            "metric": "Community Engagement",
+                            "description": "Assesses the level of community involvement and engagement with your project.",
+                            "weight": 15,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Minimal engagement",
+                                "3": "Moderate engagement",
+                                "4": "High engagement",
+                                "5": "Extremely high engagement"
+                            }
+                        },
+                        {
+                            "metric": "Long-Term Partnership Potential",
+                            "description": "Evaluates the potential for long-term partnerships with the sponsor.",
+                            "weight": 10,
+                            "icon": "fas fa-handshake",
+                            "scoreDescriptors": {
+                                "1": "No potential",
+                                "2": "Slight potential",
+                                "3": "Moderate potential",
+                                "4": "High potential",
+                                "5": "Very high potential"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Arts Foundations",
+                    "icon": "fas fa-cube",
+                    "criteria": [
+                        {
+                            "metric": "Foundation Alignment",
+                            "description": "Measures how well your project aligns with the foundation’s mission and values.",
+                            "weight": 20,
+                            "icon": "fas fa-building",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Minimal alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Complete alignment"
+                            }
+                        },
+                        {
+                            "metric": "Project Proposal",
+                            "description": "Assesses the quality and clarity of your project proposal.",
+                            "weight": 20,
+                            "icon": "fas fa-file-signature",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Impact and Reach",
+                            "description": "Evaluates the potential impact and reach of your project.",
+                            "weight": 20,
+                            "icon": "fas fa-globe",
+                            "scoreDescriptors": {
+                                "1": "No impact",
+                                "2": "Minimal impact",
+                                "3": "Moderate impact",
+                                "4": "High impact",
+                                "5": "Extremely high impact"
+                            }
+                        },
+                        {
+                            "metric": "Material Feasibility",
+                            "description": "Measures the practicality and accessibility of sourcing materials for the project.",
+                            "weight": 15,
+                            "icon": "fas fa-cube",
+                            "scoreDescriptors": {
+                                "1": "Not feasible",
+                                "2": "Slightly feasible",
+                                "3": "Moderately feasible",
+                                "4": "Highly feasible",
+                                "5": "Extremely feasible and realistic"
+                            }
+                        },
+                        {
+                            "metric": "Public Engagement",
+                            "description": "Assesses the effectiveness of your strategy to engage the public with your installation.",
+                            "weight": 15,
+                            "icon": "fas fa-user-friends",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Minimal engagement",
+                                "3": "Moderate engagement",
+                                "4": "High engagement",
+                                "5": "Extremely high engagement"
+                            }
+                        },
+                        {
+                            "metric": "Sustainability",
+                            "description": "Evaluates the environmental and social sustainability aspects of your project.",
+                            "weight": 10,
+                            "icon": "fas fa-leaf",
+                            "scoreDescriptors": {
+                                "1": "Not sustainable",
+                                "2": "Slightly sustainable",
+                                "3": "Moderately sustainable",
+                                "4": "Highly sustainable",
+                                "5": "Extremely sustainable"
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     ]
 }
