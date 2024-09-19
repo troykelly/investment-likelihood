@@ -1322,11 +1322,11 @@
                             "weight": 20,
                             "icon": "fas fa-hand-sparkles",
                             "scoreDescriptors": {
-                                "1": "Never",
-                                "2": "Rarely",
+                                "1": "Always",
+                                "2": "Often",
                                 "3": "Sometimes",
-                                "4": "Often",
-                                "5": "Always"
+                                "4": "Rarely",
+                                "5": "Never"
                             }
                         },
                         {
@@ -1335,11 +1335,11 @@
                             "weight": 20,
                             "icon": "fas fa-bed",
                             "scoreDescriptors": {
-                                "1": "Very poor",
-                                "2": "Poor",
+                                "1": "Excellent",
+                                "2": "Good",
                                 "3": "Average",
-                                "4": "Good",
-                                "5": "Excellent"
+                                "4": "Poor",
+                                "5": "Very poor"
                             }
                         },
                         {
@@ -1348,11 +1348,11 @@
                             "weight": 15,
                             "icon": "fas fa-apple-alt",
                             "scoreDescriptors": {
-                                "1": "Very unhealthy",
-                                "2": "Unhealthy",
+                                "1": "Very healthy",
+                                "2": "healthy",
                                 "3": "Moderate",
-                                "4": "Healthy",
-                                "5": "Very healthy"
+                                "4": "Unhealthy",
+                                "5": "Very unhealthy"
                             }
                         },
                         {
@@ -1361,11 +1361,11 @@
                             "weight": 10,
                             "icon": "fas fa-running",
                             "scoreDescriptors": {
-                                "1": "Never",
-                                "2": "Rarely",
+                                "1": "Always",
+                                "2": "Often",
                                 "3": "Sometimes",
-                                "4": "Often",
-                                "5": "Always"
+                                "4": "Rarely",
+                                "5": "Never"
                             }
                         },
                         {
@@ -1374,11 +1374,11 @@
                             "weight": 5,
                             "icon": "fas fa-heart-pulse",
                             "scoreDescriptors": {
-                                "1": "Very high",
-                                "2": "High",
+                                "1": "Very low",
+                                "2": "Low",
                                 "3": "Moderate",
-                                "4": "Low",
-                                "5": "Very low"
+                                "4": "High",
+                                "5": "Very high"
                             }
                         }
                     ]
@@ -1419,11 +1419,11 @@
                             "weight": 20,
                             "icon": "fas fa-syringe",
                             "scoreDescriptors": {
-                                "1": "Not vaccinated",
-                                "2": "Partially vaccinated",
+                                "1": "Fully up-to-date",
+                                "2": "Well vaccinated",
                                 "3": "Moderately vaccinated",
-                                "4": "Well vaccinated",
-                                "5": "Fully up-to-date"
+                                "4": "Partially vaccinated",
+                                "5": "Not vaccinated"
                             }
                         },
                         {
@@ -1432,11 +1432,11 @@
                             "weight": 15,
                             "icon": "fas fa-cleaning-services",
                             "scoreDescriptors": {
-                                "1": "Very poor",
-                                "2": "Poor",
+                                "1": "Excellent",
+                                "2": "Good",
                                 "3": "Average",
-                                "4": "Good",
-                                "5": "Excellent"
+                                "4": "Poor",
+                                "5": "Very poor"
                             }
                         },
                         {
@@ -1445,11 +1445,11 @@
                             "weight": 10,
                             "icon": "fas fa-bread-slice",
                             "scoreDescriptors": {
-                                "1": "Very unhealthy",
-                                "2": "Unhealthy",
+                                "1": "Very healthy",
+                                "2": "Healthy",
                                 "3": "Moderate",
-                                "4": "Healthy",
-                                "5": "Very healthy"
+                                "4": "Unhealthy",
+                                "5": "Very unhealthy"
                             }
                         }
                     ]
