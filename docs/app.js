@@ -91,6 +91,9 @@ class InvestmentLikelihoodCalculator {
                 this.loadInvestors();
                 // Load the first profile by default
                 this.displayCriteria(this.profiles[0]);
+
+                // Handle explainer display
+                this.handleExplainerDisplay();
             })
             .catch((error) => {
                 console.error('Error initializing the application:', error);
@@ -688,6 +691,43 @@ class InvestmentLikelihoodCalculator {
 
         // Close modal
         this.investorEditModalInstance.hide();
+    }
+
+    /**
+     * Handle the display of the explainer section based on visit count.
+     */
+    handleExplainerDisplay() {
+        const explainerElement = document.getElementById('explainer');
+        const explainerContent = document.getElementById('explainerContent');
+        const visitCount = parseInt(localStorage.getItem('visitCount') || '0', 10);
+
+        // Check if user has manually collapsed the explainer
+        const explainerCollapsed = localStorage.getItem('explainerCollapsed');
+        if (explainerCollapsed === 'true') {
+            explainerContent.classList.remove('show');
+        } else if (explainerCollapsed === 'false') {
+            explainerContent.classList.add('show');
+        } else {
+            // Display explainer automatically on first three visits
+            if (visitCount < 3) {
+                explainerContent.classList.add('show');
+            } else {
+                explainerContent.classList.remove('show');
+            }
+        }
+
+        // Increment visit count
+        localStorage.setItem('visitCount', (visitCount + 1).toString());
+
+        // Add event listener to update localStorage when explainer is toggled
+        explainerElement.querySelector('[data-bs-toggle="collapse"]').addEventListener('click', () => {
+            const isExpanded = explainerContent.classList.contains('show');
+            if (isExpanded) {
+                localStorage.setItem('explainerCollapsed', 'true');
+            } else {
+                localStorage.setItem('explainerCollapsed', 'false');
+            }
+        });
     }
 }
 
