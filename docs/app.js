@@ -1,7 +1,7 @@
 /**
  * Filename: app.js
- * Purpose: Provides functionality for the Investment Likelihood Calculator with investor management, copy to clipboard, and new UI enhancements.
- * Description: This script allows users to create investors, save and load their inputs locally, calculate the investment likelihood, display a pie chart, and copy results to clipboard. It includes features such as profile selection via cards and investor image upload through a modal.
+ * Purpose: Provides functionality for the Investment Likelihood Calculator with investor management, copy to clipboard, and updated chart functionality.
+ * Description: This script allows users to create investors, save and load their inputs locally, calculate the investment likelihood, display a pie chart with two modes, and copy results to clipboard. It includes features such as profile selection via cards and investor image upload through a modal.
  * Author: Troy Kelly
  * Contact: troy@aperim.com
  * Code history:
@@ -12,14 +12,15 @@
  * - User experience enhancements: 18 September 2024
  * - UI changes: 19 September 2024
  * - Added pie chart and UI enhancements: 19 September 2024
- * - Further UI improvements: 20 September 2024
+ * - Updated chart functionality: 20 September 2024
+ * - Fixed 'Show Full 100%' mode in pie chart: 21 September 2024
  */
 
 'use strict';
 
 /**
- * Investment Likelihood Calculator Application
- * Provides the functionality to load calculation profiles,
+ * @class InvestmentLikelihoodCalculator
+ * @classdesc Provides the functionality to load calculation profiles,
  * manage investors, save inputs locally, and copy results to clipboard.
  */
 class InvestmentLikelihoodCalculator {
@@ -421,26 +422,41 @@ class InvestmentLikelihoodCalculator {
         const data = [];
         const backgroundColors = [];
 
-        // Prepare data for the chart
+        let totalWeightedScore = 0;
+        const weightedScores = [];
+
+        // Calculate weighted scores and total score
         scores.forEach((item, index) => {
             const criterion = this.adjustedCriteria[index];
-            labels.push(criterion.metric);
-
-            let value = 0;
-            if (pieChartOption === '100') {
-                // Display based on full 100%
-                value = ((item.score - 1) * item.weight) / 4;
-            } else if (pieChartOption === 'likelihood') {
-                // Display based on percentage likelihood
-                const totalWeightedScore = ((item.score - 1) * item.weight) / 4;
-                value = (totalWeightedScore / 100) * percentageLikelihood;
-            }
-            data.push(value);
-
-            // Assign colours
-            const color = this.getColor(index);
-            backgroundColors.push(color);
+            const weightedScore = ((item.score - 1) * criterion.adjustedWeight) / 4;
+            weightedScores.push(weightedScore);
+            totalWeightedScore += weightedScore;
         });
+
+        if (pieChartOption === '100') {
+            // In "Show Full 100%" mode, display each metric's weighted score and the unlikelihood
+            scores.forEach((item, index) => {
+                const criterion = this.adjustedCriteria[index];
+                labels.push(criterion.metric);
+                data.push(weightedScores[index]);
+                backgroundColors.push(this.getColor(index));
+            });
+            // Add unlikelihood slice
+            const unlikelihood = 100 - totalWeightedScore;
+            if (unlikelihood > 0) {
+                labels.push('Unlikelihood');
+                data.push(unlikelihood);
+                backgroundColors.push('#CCCCCC'); // Grey colour for unlikelihood
+            }
+        } else if (pieChartOption === 'likelihood') {
+            // In "Show Percentage Likelihood" mode, display metrics' contributions proportionally
+            scores.forEach((item, index) => {
+                const criterion = this.adjustedCriteria[index];
+                labels.push(criterion.metric);
+                data.push(weightedScores[index]);
+                backgroundColors.push(this.getColor(index));
+            });
+        }
 
         // If the chart already exists, update it; otherwise, create it
         if (this.likelihoodChart) {
@@ -742,7 +758,7 @@ class InvestmentLikelihoodCalculator {
                 input.value = '1';
                 const descriptorCell = input.parentElement.nextElementSibling;
                 const descriptorText = descriptorCell.querySelector('.score-descriptor');
-                descriptorText.textContent = '';
+                descriptorText.textContent = this.getScoreDescriptor(this.adjustedCriteria[index], 1);
             });
             this.percentageLikelihoodElement.textContent = '0%';
         }
@@ -851,11 +867,11 @@ class InvestmentLikelihoodCalculator {
      * @param {!Event} event The change event.
      */
     handleModalInvestorImageUpload(event) {
-        const fileInput = event.target;
+        const fileInput = /** @type {!HTMLInputElement} */ (event.target);
         if (fileInput.files && fileInput.files[0]) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                const dataURL = e.target.result;
+                const dataURL = /** @type {string} */ (e.target.result);
                 this.modalInvestorImagePreview.src = dataURL;
                 this.modalInvestorImagePreview.style.display = 'block';
             };
