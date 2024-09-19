@@ -4,6 +4,9 @@
 INCLUDE_DIRS=("docs")
 INCLUDE_FILES=("README.md" ".env.example")
 
+# Extensions to ignore
+IGNORE_EXTENSIONS=("svg" "jpg" "png" "gif" "pdf" "zip" "tar" "gz")
+
 # Output markdown file
 OUTPUT_FILE="llm.md"
 
@@ -23,7 +26,23 @@ process_file() {
 
 # Function to check if a file is ignored
 is_ignored() {
-    git check-ignore -q "$1"
+    local file_path="$1"
+    local file_extension="${file_path##*.}"
+
+    # Check against ignored extensions
+    for ext in "${IGNORE_EXTENSIONS[@]}"; do
+        if [[ "$file_extension" == "$ext" ]]; then
+            # Check if the file is explicitly included
+            for include_file in "${INCLUDE_FILES[@]}"; do
+                if [[ "$file_path" == "$include_file" ]]; then
+                    return 1 # Not ignored
+                fi
+            done
+            return 0 # Ignored
+        fi
+    done
+
+    return 1 # Not ignored
 }
 
 # Function to check if a file is binary

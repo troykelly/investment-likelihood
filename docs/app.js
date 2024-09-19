@@ -10,6 +10,7 @@
  * - Added local storage and copy functionality: 18 September 2024
  * - Added fixes and improvements: 18 September 2024
  * - User experience enhancements: 18 September 2024
+ * - UI changes: 19 September 2024
  */
 
 'use strict';
@@ -34,8 +35,6 @@ class InvestmentLikelihoodCalculator {
         this.totalScoreElement = document.getElementById('totalScore');
         /** @type {?HTMLElement} */
         this.percentageLikelihoodElement = document.getElementById('percentageLikelihood');
-        /** @type {?HTMLButtonElement} */
-        this.calculateButton = document.getElementById('calculateButton');
         /** @type {?HTMLButtonElement} */
         this.copyButton = document.getElementById('copyButton');
         /** @type {?HTMLSelectElement} */
@@ -76,7 +75,6 @@ class InvestmentLikelihoodCalculator {
         this.loadProfiles()
             .then(() => {
                 this.displayProfileCards();
-                this.calculateButton.addEventListener('click', () => this.handleCalculate());
                 this.copyButton.addEventListener('click', () => this.handleCopy());
                 this.newInvestorButton.addEventListener('click', () => this.handleNewInvestor());
                 this.investorSelect.addEventListener('change', () => this.handleInvestorChange());
@@ -96,7 +94,7 @@ class InvestmentLikelihoodCalculator {
             })
             .catch((error) => {
                 console.error('Error initializing the application:', error);
-                alert('Failed to initialize the application. Please try again later.');
+                alert('Failed to initialise the application. Please try again later.');
             });
     }
 
@@ -218,20 +216,33 @@ class InvestmentLikelihoodCalculator {
             weightCell.textContent = criterion.weight.toString();
             row.appendChild(weightCell);
 
-            // Score input
+            // Score input (slider)
             const scoreCell = document.createElement('td');
-            const scoreSelect = document.createElement('select');
-            scoreSelect.name = 'score_' + index;
-            scoreSelect.dataset.weight = criterion.weight.toString();
-            scoreSelect.classList.add('form-select');
-            for (let i = 1; i <= 5; i++) {
-                const option = document.createElement('option');
-                option.value = i.toString();
-                option.textContent = i.toString();
-                scoreSelect.appendChild(option);
-            }
-            scoreCell.appendChild(scoreSelect);
+            const sliderInput = document.createElement('input');
+            sliderInput.type = 'range';
+            sliderInput.min = '1';
+            sliderInput.max = '5';
+            sliderInput.step = '0.25';
+            sliderInput.value = '1';
+            sliderInput.name = 'score_' + index;
+            sliderInput.dataset.weight = criterion.weight.toString();
+            sliderInput.classList.add('form-range');
+            scoreCell.appendChild(sliderInput);
             row.appendChild(scoreCell);
+
+            // Descriptor
+            const descriptorCell = document.createElement('td');
+            const descriptorText = document.createElement('div');
+            descriptorText.classList.add('score-descriptor');
+            descriptorText.textContent = this.getScoreDescriptor(criterion, parseFloat(sliderInput.value));
+            descriptorCell.appendChild(descriptorText);
+            row.appendChild(descriptorCell);
+
+            // Event listener for slider input
+            sliderInput.addEventListener('input', () => {
+                descriptorText.textContent = this.getScoreDescriptor(criterion, parseFloat(sliderInput.value));
+                this.calculateAndDisplayResults();
+            });
 
             this.criteriaTableBody.appendChild(row);
         });
@@ -245,9 +256,34 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Handle calculate button click event.
+     * Get the closest score descriptor based on the score.
+     * @param {!Object} criterion The criterion object.
+     * @param {number} score The current score value.
+     * @return {string}
      */
-    handleCalculate() {
+    getScoreDescriptor(criterion, score) {
+        const descriptors = criterion.scoreDescriptors;
+        if (!descriptors) {
+            return '';
+        }
+        const scores = Object.keys(descriptors).map(Number);
+        // Find the closest score
+        let closestScore = scores[0];
+        let minDiff = Math.abs(score - closestScore);
+        scores.forEach((s) => {
+            const diff = Math.abs(score - s);
+            if (diff < minDiff) {
+                minDiff = diff;
+                closestScore = s;
+            }
+        });
+        return descriptors[closestScore.toString()] || '';
+    }
+
+    /**
+     * Calculate and display results.
+     */
+    calculateAndDisplayResults() {
         try {
             const scores = this.getScores();
             const weightedScores = this.calculateWeightedScores(scores);
@@ -271,11 +307,11 @@ class InvestmentLikelihoodCalculator {
      * @return {!Array<!Object>}
      */
     getScores() {
-        const scoreSelects = this.criteriaTableBody.querySelectorAll('select');
+        const scoreInputs = this.criteriaTableBody.querySelectorAll('input[type="range"]');
         const scores = [];
-        scoreSelects.forEach((select) => {
-            const score = parseInt(select.value, 10);
-            const weight = parseFloat(select.dataset.weight);
+        scoreInputs.forEach((input) => {
+            const score = parseFloat(input.value);
+            const weight = parseFloat(input.dataset.weight);
             scores.push({ score: score, weight: weight });
         });
         return scores;
@@ -335,8 +371,8 @@ class InvestmentLikelihoodCalculator {
         rows.forEach((row) => {
             const metricCell = row.cells[0].textContent || '';
             const weightCell = row.cells[2].textContent || '';
-            const selectElement = row.cells[3].querySelector('select');
-            const scoreValue = selectElement.value;
+            const inputElement = row.cells[3].querySelector('input[type="range"]');
+            const scoreValue = inputElement.value;
             text += `- ${metricCell.trim()} (Weight: ${weightCell}%) - Score: ${scoreValue}\n`;
         });
 
@@ -483,17 +519,25 @@ class InvestmentLikelihoodCalculator {
         if (investorData && investorData[profileName]) {
             const savedData = investorData[profileName];
             const savedScores = savedData.scores;
-            const scoreSelects = this.criteriaTableBody.querySelectorAll('select');
-            scoreSelects.forEach((select, index) => {
-                select.value = savedScores[index].score.toString();
+            const scoreInputs = this.criteriaTableBody.querySelectorAll('input[type="range"]');
+            scoreInputs.forEach((input, index) => {
+                input.value = savedScores[index].score.toString();
+                // Update descriptor
+                const descriptorCell = input.parentElement.nextElementSibling;
+                const criterion = this.profiles[this.selectedProfileIndex].criteria[index];
+                const descriptorText = descriptorCell.querySelector('.score-descriptor');
+                descriptorText.textContent = this.getScoreDescriptor(criterion, parseFloat(input.value));
             });
             this.totalScoreElement.textContent = savedData.totalScore;
             this.percentageLikelihoodElement.textContent = savedData.percentageLikelihood;
         } else {
             // Reset inputs and results
-            const scoreSelects = this.criteriaTableBody.querySelectorAll('select');
-            scoreSelects.forEach((select) => {
-                select.value = '1';
+            const scoreInputs = this.criteriaTableBody.querySelectorAll('input[type="range"]');
+            scoreInputs.forEach((input) => {
+                input.value = '1';
+                const descriptorCell = input.parentElement.nextElementSibling;
+                const descriptorText = descriptorCell.querySelector('.score-descriptor');
+                descriptorText.textContent = '';
             });
             this.totalScoreElement.textContent = '0';
             this.percentageLikelihoodElement.textContent = '0%';

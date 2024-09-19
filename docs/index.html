@@ -10,6 +10,7 @@ Code history:
 - Added local storage and copy functionality: 18 September 2024
 - Added fixes and improvements: 18 September 2024
 - User experience enhancements: 18 September 2024
+- UI changes: 19 September 2024
 -->
 
 <!DOCTYPE html>
@@ -77,6 +78,16 @@ Code history:
         .selected-profile {
             border: 2px solid #007bff;
         }
+
+        .score-descriptor {
+            font-size: 0.9rem;
+            color: #6c757d;
+            margin-top: 5px;
+        }
+
+        .form-range {
+            width: 100%;
+        }
     </style>
     <!-- Favicons and manifest files -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=964">
@@ -143,6 +154,7 @@ Code history:
                             <th scope="col">Description</th>
                             <th scope="col">Weight (%)</th>
                             <th scope="col">Score (1-5)</th>
+                            <th scope="col">Descriptor</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -150,9 +162,8 @@ Code history:
                     </tbody>
                 </table>
             </div>
-            <!-- Calculate and Copy buttons -->
+            <!-- Copy Button -->
             <div class="d-grid gap-2 mb-4">
-                <button id="calculateButton" class="btn btn-success btn-lg">Calculate</button>
                 <button id="copyButton" class="btn btn-primary btn-lg">Copy Results to Clipboard</button>
             </div>
             <!-- Results -->
