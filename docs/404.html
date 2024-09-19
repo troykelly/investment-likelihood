@@ -1,19 +1,15 @@
 <!--
-Filename: investment_likelihood_calculator.html
-Purpose: A stand-alone HTML page to calculate investment likelihood based on specified criteria.
-Description: This app allows users to create investors, save their inputs locally, and calculate the investment likelihood. Users can also copy the results table to their clipboard.
+Filename: index.html
+Purpose: A single-page application that allows users to calculate likelihood based on specified criteria. Includes category and profile selection via URL slugs, a navigation bar for category change, and handles random selection.
+Description: This app displays categories of calculation profiles, allows users to select a category and profile via URL slugs (e.g., /investment/general-investor-engagement), incorporates a navigation bar for category selection, and includes a random selection feature via /random.
 Author: Troy Kelly
 Contact: troy@aperim.com
 Code history:
 - Initial creation: 18 September 2024
 - Bootstrap integration: 18 September 2024
-- Added local storage and copy functionality: 18 September 2024
-- Added fixes and improvements: 18 September 2024
-- User experience enhancements: 18 September 2024
-- UI changes: 19 September 2024
-- Added pie chart and UI enhancements: 19 September 2024
-- Updated chart functionality: 20 September 2024
-- Further UI improvements: 21 September 2024
+- Converted to SPA with category selection: 19 September 2024
+- URL slug and navigation updates: 19 September 2024
+- Updated savename handling and dynamic labels: 19 September 2024
 -->
 
 <!DOCTYPE html>
@@ -21,27 +17,21 @@ Code history:
 
 <head>
     <meta charset="UTF-8" />
-    <title>Investment Likelihood Calculator</title>
+    <title>Likelihood Calculator</title>
     <!-- Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- SEO Meta Tags -->
     <meta name="description"
-        content="Investment Likelihood Calculator - Assess and enhance your investment prospects using this comprehensive tool designed for integration with CRMs like Odoo and Pipedrive." />
+        content="Likelihood Calculator - Assess and enhance your prospects using this comprehensive tool designed for integration with CRMs like Odoo and Pipedrive." />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-utilities.min.css"
-        integrity="sha512-4ocAKAxnrkSm7MvkkF1D435kko3/HWWvoi/U9+7+ln94B/U01Mggca05Pm3W59BIv3abl0U3MPdygAPLo5aeqg=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap-grid.min.css"
-        integrity="sha512-i1b/nzkVo97VN5WbEtaPebBG8REvjWeqNclJ6AItj7msdVcaveKrlIIByDpvjk5nwHjXkIqGZscVxOrTb9tsMA=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <!-- Font Awesome CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css"
-        crossorigin="anonymous" referrerpolicy="no-referrer"
-        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" />
-    <!-- Chart.js CSS (Optional if needed for styling) -->
+        integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Custom Styles -->
     <style>
         /* Custom styles */
         body {
@@ -73,16 +63,19 @@ Code history:
             color: #dc3545;
         }
 
-        .profile-card {
+        .profile-card,
+        .category-card {
             cursor: pointer;
             transition: transform 0.2s;
         }
 
-        .profile-card:hover {
+        .profile-card:hover,
+        .category-card:hover {
             transform: scale(1.05);
         }
 
-        .selected-profile {
+        .selected-profile,
+        .selected-category {
             border: 2px solid #007bff;
         }
 
@@ -101,6 +94,17 @@ Code history:
             max-width: 100%;
             height: auto;
         }
+
+        /* Center the category selection */
+        #categorySelection {
+            margin-top: 50px;
+        }
+
+        /* Navigation Bar Styles */
+        .navbar-nav .nav-link.active {
+            font-weight: bold;
+            color: #007bff;
+        }
     </style>
     <!-- Favicons and manifest files -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=964">
@@ -111,18 +115,37 @@ Code history:
     <link rel="manifest" href="/site.webmanifest?v=964">
     <link rel="mask-icon" href="/safari-pinned-tab.svg?v=964" color="#5bbad5">
     <link rel="shortcut icon" href="/favicon.ico?v=964">
-    <meta name="apple-mobile-web-app-title" content="Investor Calc">
-    <meta name="application-name" content="Investor Calc">
+    <meta name="apple-mobile-web-app-title" content="Likelihood Calc">
+    <meta name="application-name" content="Likelihood Calc">
     <meta name="msapplication-TileColor" content="#553921">
     <meta name="msapplication-TileImage" content="/mstile-144x144.png?v=964">
     <meta name="theme-color" content="#ffffff">
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="text-center">Investment Likelihood Calculator</h1>
+    <!-- Navigation Bar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="/">Likelihood Calculator</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCategories"
+                aria-controls="navbarCategories" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCategories">
+                <ul id="categoryMenu" class="navbar-nav me-auto mb-2 mb-lg-0">
+                    <!-- Category menu items will be populated here -->
+                </ul>
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/random">Random</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
 
-        <!-- Collapsible Explainer -->
+    <div class="container">
+        <!-- Explainer Section -->
         <div id="explainer" class="mb-4">
             <div class="card">
                 <div class="card-header">
@@ -133,11 +156,12 @@ Code history:
                 </div>
                 <div id="explainerContent" class="collapse show">
                     <div class="card-body">
-                        <p>Welcome to the Investment Likelihood Calculator, a comprehensive tool designed to help you
-                            assess and enhance your investment prospects. By evaluating various metrics, you can
-                            understand where you stand and identify areas for improvement.</p>
+                        <p>Welcome to the Likelihood Calculator, a comprehensive tool designed to help you assess and
+                            enhance your prospects. By
+                            evaluating various metrics, you can understand where you stand and identify areas for
+                            improvement.</p>
                         <p>This calculator is ideal for use with Customer Relationship Management (CRM) systems like
-                            <strong>Odoo</strong> and <strong>Pipedrive</strong>. After assessing an investor, you can
+                            <strong>Odoo</strong> and <strong>Pipedrive</strong>. After assessing an entity, you can
                             easily <strong>copy</strong> the report and paste it into your CRM for broader visibility
                             among your team members, ensuring everyone is informed and aligned.
                         </p>
@@ -146,7 +170,7 @@ Code history:
                         <p>This tool was created by <a href="https://troykelly.com/" target="_blank">Troy Kelly</a> on
                             the land of the Gadigal and Wangal peoples of the
                             Eora nation.</p>
-                        <p>Contribute changes or make your own investment likelihood calculator - <a
+                        <p>Contribute changes or make your own likelihood calculator - <a
                                 href="https://github.com/troykelly/investment-likelihood" target="_blank">source
                                 code</a>.</p>
                     </div>
@@ -154,28 +178,38 @@ Code history:
             </div>
         </div>
 
-        <div id="app">
+        <!-- Category Selection -->
+        <div id="categorySelection" class="mb-5" style="display: none;">
+            <h2 class="text-center">Select a Category</h2>
+            <div id="categoryCards" class="row row-cols-1 row-cols-md-3 g-3">
+                <!-- Category cards will be populated here -->
+            </div>
+        </div>
+
+        <!-- Main App Content -->
+        <div id="app" style="display: none;">
             <!-- Warning message -->
             <div class="alert alert-warning" role="alert">
                 <strong>Note:</strong> All data is stored locally in your browser. This data is not portable and is not
                 seen by our servers.
             </div>
-            <!-- Investor management -->
+            <!-- Entity management -->
             <div class="mb-4">
-                <label for="investorSelect" class="form-label">Select Investor:</label>
+                <label for="investorSelect" class="form-label">Select <span id="savenameLabel">Entity</span>:</label>
                 <div class="input-group mb-2">
                     <select id="investorSelect" class="form-select"></select>
-                    <button id="newInvestorButton" class="btn btn-outline-secondary" type="button">New Investor</button>
-                    <button id="deleteInvestorButton" class="btn btn-outline-danger" type="button">Delete
-                        Investor</button>
+                    <button id="newInvestorButton" class="btn btn-outline-secondary" type="button">New <span
+                            id="savenameLabelNew">Entity</span></button>
+                    <button id="deleteInvestorButton" class="btn btn-outline-danger" type="button">Delete <span
+                            id="savenameLabelDelete">Entity</span></button>
                 </div>
                 <!-- Image preview -->
                 <div id="investorImageContainer" class="mb-2">
-                    <img id="investorImage" src="" alt="Investor Image" class="img-thumbnail"
+                    <img id="investorImage" src="" alt="" class="img-thumbnail"
                         style="max-width: 200px; display: none;" />
                 </div>
             </div>
-            <!-- Calculation profile selection -->
+            <!-- Profile Selection -->
             <div class="mb-4">
                 <label class="form-label">Select Calculation Profile:</label>
                 <div id="profileCards" class="row row-cols-1 row-cols-md-2 g-3">
@@ -253,38 +287,40 @@ Code history:
             <div class="d-grid gap-2 mb-4">
                 <button id="copyButton" class="btn btn-primary btn-lg">Copy Results to Clipboard</button>
             </div>
-            <!-- Investors List -->
+            <!-- Entities List -->
             <div class="mb-5">
-                <label class="form-label">Stored Investors:</label>
+                <label class="form-label">Stored <span id="savenameLabelStored">Entities</span>:</label>
                 <ul id="investorList" class="list-group">
-                    <!-- Investor items will be populated here -->
+                    <!-- Entity items will be populated here -->
                 </ul>
             </div>
         </div>
     </div>
 
-    <!-- Investor Edit Modal -->
+    <!-- Entity Edit Modal -->
     <div class="modal fade" id="investorEditModal" tabindex="-1" aria-labelledby="investorEditModalLabel"
         aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 id="investorEditModalLabel" class="modal-title">Edit Investor</h5>
+                    <h5 id="investorEditModalLabel" class="modal-title">Edit <span
+                            id="savenameLabelEditModal">Entity</span></h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form id="investorEditForm">
                     <div class="modal-body">
-                        <!-- Investor Image Upload -->
+                        <!-- Entity Image Upload -->
                         <div class="mb-3">
-                            <label for="modalInvestorImageInput" class="form-label">Upload Investor Image:</label>
+                            <label for="modalInvestorImageInput" class="form-label">Upload <span
+                                    id="savenameLabelUpload">Entity</span> Image:</label>
                             <input type="file" id="modalInvestorImageInput" accept="image/*" class="form-control">
                         </div>
                         <!-- Image Preview -->
                         <div class="mb-3">
-                            <img id="modalInvestorImagePreview" src="" alt="Investor Image" class="img-thumbnail"
+                            <img id="modalInvestorImagePreview" src="" alt="" class="img-thumbnail"
                                 style="max-width: 200px; display: none;" />
                         </div>
-                        <!-- Additional investor editing fields can be added here -->
+                        <!-- Additional entity editing fields can be added here -->
                     </div>
                     <div class="modal-footer">
                         <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -295,7 +331,7 @@ Code history:
         </div>
     </div>
 
-    <!-- Bootstrap Bundle JS (includes Popper) -->
+    <!-- Bootstrap Bundle JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
         integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
         crossorigin="anonymous" referrerpolicy="no-referrer"></script>

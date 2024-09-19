@@ -1,27 +1,24 @@
 /**
  * Filename: app.js
- * Purpose: Provides functionality for the Investment Likelihood Calculator with investor management, copy to clipboard, and updated chart functionality.
- * Description: This script allows users to create investors, save and load their inputs locally, calculate the investment likelihood, display a pie chart with two modes, and copy results to clipboard. It includes features such as profile selection via cards and investor image upload through a modal.
+ * Purpose: Provides functionality for the Likelihood Calculator with category and profile management, supports URL path slugs (e.g., /investment/general-investor-engagement), includes a navigation bar for category change, and handles random selection.
+ * Description: This script loads categories and profiles from a JSON file, displays categories sorted by weight and name, handles slug-based navigation using URL paths, updates the URL when categories and profiles change, includes a beautifully formatted menu bar, and allows users to calculate likelihood based on selected criteria.
  * Author: Troy Kelly
  * Contact: troy@aperim.com
  * Code history:
  * - Initial creation: 18 September 2024
  * - Bootstrap integration: 18 September 2024
- * - Added local storage and copy functionality: 18 September 2024
- * - Added fixes and improvements: 18 September 2024
- * - User experience enhancements: 18 September 2024
- * - UI changes: 19 September 2024
- * - Added pie chart and UI enhancements: 19 September 2024
- * - Updated chart functionality: 20 September 2024
- * - Fixed 'Show Full 100%' mode in pie chart: 21 September 2024
+ * - Converted to SPA with category selection: 19 September 2024
+ * - URL slug and navigation updates: 19 September 2024
+ * - Updated savename handling and dynamic labels: 19 September 2024
  */
 
 'use strict';
 
 /**
  * @class InvestmentLikelihoodCalculator
- * @classdesc Provides the functionality to load calculation profiles,
- * manage investors, save inputs locally, and copy results to clipboard.
+ * @classdesc Provides the functionality to load categories and profiles,
+ * manage entities, support URL path slugs for navigation, handle 404 errors,
+ * and compute likelihood.
  */
 class InvestmentLikelihoodCalculator {
     /**
@@ -29,25 +26,35 @@ class InvestmentLikelihoodCalculator {
      */
     constructor() {
         /** @type {!Array<!Object>} */
-        this.profiles = [];
+        this.categories = [];
         /** @type {?HTMLDivElement} */
-        this.profileCardsContainer = document.getElementById('profileCards');
+        this.categoryCardsContainer = /** @type {?HTMLDivElement} */ (document.getElementById('categoryCards'));
+        /** @type {?HTMLUListElement} */
+        this.categoryMenu = /** @type {?HTMLUListElement} */ (document.getElementById('categoryMenu'));
+        /** @type {?HTMLDivElement} */
+        this.profileCardsContainer = /** @type {?HTMLDivElement} */ (document.getElementById('profileCards'));
         /** @type {?HTMLElement} */
-        this.criteriaTableBody = document.querySelector('#criteriaTable tbody');
+        this.criteriaTableBody = /** @type {?HTMLElement} */ (document.querySelector('#criteriaTable tbody'));
         /** @type {?HTMLElement} */
-        this.percentageLikelihoodElement = document.getElementById('percentageLikelihood');
+        this.percentageLikelihoodElement = /** @type {?HTMLElement} */ (document.getElementById('percentageLikelihood'));
         /** @type {?HTMLButtonElement} */
-        this.copyButton = document.getElementById('copyButton');
+        this.copyButton = /** @type {?HTMLButtonElement} */ (document.getElementById('copyButton'));
         /** @type {?HTMLSelectElement} */
-        this.investorSelect = document.getElementById('investorSelect');
+        this.investorSelect = /** @type {?HTMLSelectElement} */ (document.getElementById('investorSelect'));
         /** @type {?HTMLButtonElement} */
-        this.newInvestorButton = document.getElementById('newInvestorButton');
+        this.newInvestorButton = /** @type {?HTMLButtonElement} */ (document.getElementById('newInvestorButton'));
         /** @type {?HTMLButtonElement} */
-        this.deleteInvestorButton = document.getElementById('deleteInvestorButton');
+        this.deleteInvestorButton = /** @type {?HTMLButtonElement} */ (document.getElementById('deleteInvestorButton'));
         /** @type {?HTMLElement} */
-        this.investorListElement = document.getElementById('investorList');
+        this.investorListElement = /** @type {?HTMLElement} */ (document.getElementById('investorList'));
         /** @type {?HTMLImageElement} */
-        this.investorImage = document.getElementById('investorImage');
+        this.investorImage = /** @type {?HTMLImageElement} */ (document.getElementById('investorImage'));
+        /** @type {?HTMLDivElement} */
+        this.appContainer = /** @type {?HTMLDivElement} */ (document.getElementById('app'));
+        /** @type {?HTMLDivElement} */
+        this.categorySelectionContainer = /** @type {?HTMLDivElement} */ (document.getElementById('categorySelection'));
+        /** @type {number} */
+        this.selectedCategoryIndex = 0;
         /** @type {number} */
         this.selectedProfileIndex = 0;
         /** @type {!Array<!Object>} */
@@ -57,17 +64,20 @@ class InvestmentLikelihoodCalculator {
 
         // Modal elements
         /** @type {?HTMLElement} */
-        this.investorEditModal = document.getElementById('investorEditModal');
+        this.investorEditModal = /** @type {?HTMLElement} */ (document.getElementById('investorEditModal'));
         /** @type {?HTMLInputElement} */
-        this.modalInvestorImageInput = document.getElementById('modalInvestorImageInput');
+        this.modalInvestorImageInput = /** @type {?HTMLInputElement} */ (document.getElementById('modalInvestorImageInput'));
         /** @type {?HTMLImageElement} */
-        this.modalInvestorImagePreview = document.getElementById('modalInvestorImagePreview');
+        this.modalInvestorImagePreview = /** @type {?HTMLImageElement} */ (document.getElementById('modalInvestorImagePreview'));
         /** @type {?HTMLFormElement} */
-        this.investorEditForm = document.getElementById('investorEditForm');
+        this.investorEditForm = /** @type {?HTMLFormElement} */ (document.getElementById('investorEditForm'));
         /** @type {?bootstrap.Modal} */
         this.investorEditModalInstance = null;
         /** @type {string} */
         this.currentEditingInvestorName = '';
+
+        /** @type {string} */
+        this.savename = 'Entity'; // Default savename
 
         // Initialize the app
         this.init();
@@ -77,36 +87,20 @@ class InvestmentLikelihoodCalculator {
      * Initialise the application.
      */
     init() {
-        this.loadProfiles()
+        this.loadCategories()
             .then(() => {
-                this.displayProfileCards();
-                this.copyButton.addEventListener('click', () => this.handleCopy());
-                this.newInvestorButton.addEventListener('click', () => this.handleNewInvestor());
-                this.investorSelect.addEventListener('change', () => this.handleInvestorChange());
-                this.deleteInvestorButton.addEventListener('click', () => this.handleDeleteInvestor());
-
-                // Modal event listeners
-                this.modalInvestorImageInput.addEventListener('change', (event) => this.handleModalInvestorImageUpload(event));
-                this.investorEditForm.addEventListener('submit', (event) => this.handleInvestorEditFormSubmit(event));
-
+                this.displayCategoryCards();
+                this.displayCategoryMenu();
                 // Initialize Bootstrap Modal
                 this.investorEditModalInstance = new bootstrap.Modal(this.investorEditModal);
-
-                // Load investors from local storage
-                this.loadInvestors();
-                // Load the first profile by default
-                this.displayCriteria(this.profiles[0]);
-
-                // Event listener for pie chart options
-                const pieChartOptions = document.querySelectorAll('input[name="pieChartOption"]');
-                pieChartOptions.forEach((option) => {
-                    option.addEventListener('change', () => {
-                        this.calculateAndDisplayResults();
-                    });
-                });
-
+                // Handle URL slug
+                this.handleSlugNavigation();
                 // Handle explainer display
                 this.handleExplainerDisplay();
+                // Handle popstate event for browser navigation
+                window.addEventListener('popstate', () => {
+                    this.handleSlugNavigation();
+                });
             })
             .catch((error) => {
                 console.error('Error initializing the application:', error);
@@ -115,29 +109,167 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Load calculation profiles from the JSON file.
+     * Load categories from the JSON file.
      * @return {!Promise<void>}
      */
-    async loadProfiles() {
+    async loadCategories() {
         try {
             const response = await fetch('profiles.json');
             if (!response.ok) {
                 throw new Error('Network response was not ok ' + response.statusText);
             }
             const data = await response.json();
-            this.profiles = data.profiles;
+            this.categories = data.categories;
         } catch (error) {
-            console.error('Error loading profiles:', error);
-            alert('Failed to load calculation profiles. Please try again later.');
+            console.error('Error loading categories:', error);
+            alert('Failed to load categories. Please try again later.');
             throw error;
         }
     }
 
     /**
-     * Display profile cards for selection.
+     * Display category cards for selection, sorted by weight and name.
      */
-    displayProfileCards() {
-        this.profiles.forEach((profile, index) => {
+    displayCategoryCards() {
+        // Sort categories by weight (ascending, i.e., 1 is highest) and then by name
+        this.categories.sort((a, b) => {
+            if (a.weight !== b.weight) {
+                return a.weight - b.weight; // Lower weight comes first
+            } else {
+                return a.name.localeCompare(b.name); // Alphabetical order
+            }
+        });
+    }
+
+    /**
+     * Display category menu bar for navigation.
+     */
+    displayCategoryMenu() {
+        if (!this.categoryMenu) {
+            return;
+        }
+
+        this.categories.forEach((category, index) => {
+            const menuItem = document.createElement('li');
+            menuItem.classList.add('nav-item');
+
+            const link = document.createElement('a');
+            link.classList.add('nav-link');
+            link.href = `/${category.slug}`;
+            link.textContent = category.name;
+            link.dataset.index = index.toString();
+
+            menuItem.appendChild(link);
+            this.categoryMenu.appendChild(menuItem);
+
+            // Add event listener for click
+            link.addEventListener('click', (event) => {
+                event.preventDefault();
+                this.handleCategoryMenuClick(index);
+            });
+        });
+    }
+
+    /**
+     * Handle category menu bar click event.
+     * @param {number} index The index of the selected category.
+     */
+    handleCategoryMenuClick(index) {
+        this.handleCategoryCardClick(index);
+    }
+
+    /**
+     * Handle category card click event.
+     * @param {number} index Index of the selected category.
+     */
+    handleCategoryCardClick(index) {
+        this.selectedCategoryIndex = index;
+        const selectedCategory = this.categories[this.selectedCategoryIndex];
+
+        // Update savename
+        this.savename = selectedCategory.savename || 'Entity';
+
+        // Update labels with the new savename
+        this.updateSavenameLabels();
+
+        // Update URL with slug
+        history.pushState({}, '', `/${selectedCategory.slug}`);
+
+        // Update menu bar to highlight selected category
+        this.updateMenuBar();
+
+        // Display profiles for the selected category
+        this.displayProfiles(selectedCategory);
+
+        // Show the app container and hide category selection
+        if (this.appContainer && this.categorySelectionContainer) {
+            this.appContainer.style.display = 'block';
+            this.categorySelectionContainer.style.display = 'none';
+        }
+
+        // Initialize entity management
+        this.initInvestorManagement();
+
+        // Handle profile selection (default first profile)
+        this.handleProfileCardClick(0);
+    }
+
+    /**
+     * Update the savename labels throughout the application.
+     */
+    updateSavenameLabels() {
+        const savenameElements = {
+            savenameLabel: document.getElementById('savenameLabel'),
+            savenameLabelNew: document.getElementById('savenameLabelNew'),
+            savenameLabelDelete: document.getElementById('savenameLabelDelete'),
+            savenameLabelStored: document.getElementById('savenameLabelStored'),
+            savenameLabelEditModal: document.getElementById('savenameLabelEditModal'),
+            savenameLabelUpload: document.getElementById('savenameLabelUpload'),
+        };
+
+        for (const key in savenameElements) {
+            if (savenameElements[key]) {
+                savenameElements[key].textContent = this.savename;
+            }
+        }
+
+        // Update alt attributes
+        if (this.investorImage) {
+            this.investorImage.alt = `${this.savename} Image`;
+        }
+        if (this.modalInvestorImagePreview) {
+            this.modalInvestorImagePreview.alt = `${this.savename} Image`;
+        }
+    }
+
+    /**
+     * Update the menu bar to highlight the selected category.
+     */
+    updateMenuBar() {
+        if (!this.categoryMenu) {
+            return;
+        }
+        const menuLinks = this.categoryMenu.querySelectorAll('.nav-link');
+        menuLinks.forEach((link) => {
+            link.classList.remove('active');
+        });
+        const activeLink = this.categoryMenu.querySelector(`.nav-link[data-index="${this.selectedCategoryIndex}"]`);
+        if (activeLink) {
+            activeLink.classList.add('active');
+        }
+    }
+
+    /**
+     * Display profiles for the selected category.
+     * @param {!Object} category The selected category.
+     */
+    displayProfiles(category) {
+        // Clear existing profiles
+        while (this.profileCardsContainer.firstChild) {
+            this.profileCardsContainer.removeChild(this.profileCardsContainer.firstChild);
+        }
+
+        category.profiles.forEach((profile, index) => {
             const colDiv = document.createElement('div');
             colDiv.className = 'col';
             const cardDiv = document.createElement('div');
@@ -163,17 +295,13 @@ class InvestmentLikelihoodCalculator {
 
             cardDiv.appendChild(cardBody);
             colDiv.appendChild(cardDiv);
-            this.profileCardsContainer.appendChild(colDiv);
+            if (this.profileCardsContainer) {
+                this.profileCardsContainer.appendChild(colDiv);
+            }
 
             // Add event listener for selection
             cardDiv.addEventListener('click', () => this.handleProfileCardClick(index));
         });
-
-        // Highlight the first profile by default
-        const firstCard = this.profileCardsContainer.querySelector('.card');
-        if (firstCard) {
-            firstCard.classList.add('selected-profile');
-        }
     }
 
     /**
@@ -190,8 +318,17 @@ class InvestmentLikelihoodCalculator {
             selectedCard.classList.add('selected-profile');
         }
         this.selectedProfileIndex = index;
-        const selectedProfile = this.profiles[this.selectedProfileIndex];
+        const selectedCategory = this.categories[this.selectedCategoryIndex];
+        const selectedProfile = selectedCategory.profiles[this.selectedProfileIndex];
         this.displayCriteria(selectedProfile);
+
+        // Update URL with profile slug
+        const profileSlug = this.generateSlug(selectedProfile.name);
+        history.pushState({}, '', `/${selectedCategory.slug}/${profileSlug}`);
+
+        // Update document title
+        document.title = `Likelihood Calculator | ${selectedCategory.name} - ${selectedProfile.name}`;
+
         // Load saved inputs if available
         this.loadSavedInputs();
         // Calculate and display results
@@ -216,10 +353,12 @@ class InvestmentLikelihoodCalculator {
 
         // Display a warning if totalWeights != 100
         const weightWarningElement = document.getElementById('weightWarning');
-        if (totalWeights !== 100) {
-            weightWarningElement.style.display = 'block';
-        } else {
-            weightWarningElement.style.display = 'none';
+        if (weightWarningElement) {
+            if (totalWeights !== 100) {
+                weightWarningElement.style.display = 'block';
+            } else {
+                weightWarningElement.style.display = 'none';
+            }
         }
 
         // Adjust the weights proportionally
@@ -288,7 +427,9 @@ class InvestmentLikelihoodCalculator {
         });
 
         // Reset results
-        this.percentageLikelihoodElement.textContent = '0%';
+        if (this.percentageLikelihoodElement) {
+            this.percentageLikelihoodElement.textContent = '0%';
+        }
 
         // Load saved inputs if available
         this.loadSavedInputs();
@@ -330,7 +471,9 @@ class InvestmentLikelihoodCalculator {
             const percentageLikelihood = (totalScore / 100) * 100;
 
             // Display results
-            this.percentageLikelihoodElement.textContent = percentageLikelihood.toFixed(2) + '%';
+            if (this.percentageLikelihoodElement) {
+                this.percentageLikelihoodElement.textContent = percentageLikelihood.toFixed(2) + '%';
+            }
 
             // Update the breakdown table
             this.updateBreakdownTable(scores);
@@ -392,6 +535,9 @@ class InvestmentLikelihoodCalculator {
      */
     updateBreakdownTable(scores) {
         const breakdownTableBody = document.querySelector('#breakdownTable tbody');
+        if (!breakdownTableBody) {
+            return;
+        }
         // Clear existing rows
         while (breakdownTableBody.firstChild) {
             breakdownTableBody.removeChild(breakdownTableBody.firstChild);
@@ -416,7 +562,11 @@ class InvestmentLikelihoodCalculator {
      * @param {!Array<!Object>} scores The scores and weights.
      */
     updateChart(percentageLikelihood, scores) {
-        const pieChartOption = document.querySelector('input[name="pieChartOption"]:checked').value;
+        const pieChartOptionElement = document.querySelector('input[name="pieChartOption"]:checked');
+        if (!pieChartOptionElement) {
+            return;
+        }
+        const pieChartOption = pieChartOptionElement.value;
 
         const labels = [];
         const data = [];
@@ -465,7 +615,11 @@ class InvestmentLikelihoodCalculator {
             this.likelihoodChart.data.datasets[0].backgroundColor = backgroundColors;
             this.likelihoodChart.update();
         } else {
-            const ctx = document.getElementById('likelihoodChart').getContext('2d');
+            const ctxElement = document.getElementById('likelihoodChart');
+            if (!ctxElement) {
+                return;
+            }
+            const ctx = ctxElement.getContext('2d');
             this.likelihoodChart = new Chart(ctx, {
                 type: 'pie',
                 data: {
@@ -544,18 +698,19 @@ class InvestmentLikelihoodCalculator {
      * @return {string}
      */
     generateResultsHTML() {
-        const investorName = this.investorSelect.value;
-        const profileName = this.profiles[this.selectedProfileIndex].name;
+        const entityName = this.investorSelect.value;
+        const selectedCategory = this.categories[this.selectedCategoryIndex];
+        const profileName = selectedCategory.profiles[this.selectedProfileIndex].name;
 
         let html = '<div style="font-family: Arial, sans-serif;">';
 
-        // Investor details
-        html += `<h2>Investor Name: ${investorName}</h2>`;
+        // Entity details
+        html += `<h2>${this.savename} Name: ${entityName}</h2>`;
 
-        // Investor Image
-        const investorImageSrc = this.investorImage.src;
-        if (investorImageSrc) {
-            html += `<img src="${investorImageSrc}" alt="Investor Image" style="max-width: 200px;"/>`;
+        // Entity Image
+        const entityImageSrc = this.investorImage.src;
+        if (entityImageSrc) {
+            html += `<img src="${entityImageSrc}" alt="${this.savename} Image" style="max-width: 200px;"/>`;
         }
 
         // Profile Name
@@ -617,84 +772,93 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Handle new investor creation.
+     * Handle new entity creation.
      */
     handleNewInvestor() {
-        const investorName = prompt('Enter new investor name:');
-        if (investorName) {
-            const investors = this.getInvestorsFromLocalStorage();
-            if (investors[investorName]) {
-                alert('An investor with that name already exists.');
+        const entityName = prompt(`Enter new ${this.savename} name:`);
+        if (entityName) {
+            const entities = this.getEntitiesFromLocalStorage();
+            if (entities[entityName]) {
+                alert(`A ${this.savename} with that name already exists.`);
                 return;
             }
-            investors[investorName] = {};
-            this.saveInvestorsToLocalStorage(investors);
-            this.populateInvestorSelect(investorName);
+            entities[entityName] = {};
+            this.saveEntitiesToLocalStorage(entities);
+            this.populateInvestorSelect(entityName);
             this.loadInvestorList();
         }
     }
 
     /**
-     * Populate the investor select dropdown.
-     * @param {string=} selectInvestorName Investor name to select after populating.
+     * Populate the entity select dropdown.
+     * @param {string=} selectEntityName Entity name to select after populating.
      */
-    populateInvestorSelect(selectInvestorName) {
-        const investors = this.getInvestorsFromLocalStorage();
+    populateInvestorSelect(selectEntityName = '') {
+        const entities = this.getEntitiesFromLocalStorage();
         // Clear existing options
         while (this.investorSelect.firstChild) {
             this.investorSelect.removeChild(this.investorSelect.firstChild);
         }
-        // Populate investor select
-        Object.keys(investors).forEach((name) => {
+        // Populate entity select
+        Object.keys(entities).forEach((name) => {
             const option = document.createElement('option');
             option.value = name;
             option.textContent = name;
             this.investorSelect.appendChild(option);
         });
-        // Select the specified investor
-        if (selectInvestorName) {
-            this.investorSelect.value = selectInvestorName;
+        // Select the specified entity
+        if (selectEntityName) {
+            this.investorSelect.value = selectEntityName;
         }
     }
 
     /**
-     * Load investors from local storage.
+     * Load entities from local storage.
      */
-    loadInvestors() {
+    loadEntities() {
         this.populateInvestorSelect();
         this.loadInvestorList();
     }
 
     /**
-     * Get investors from local storage.
+     * Get entities from local storage for the current category.
      * @return {!Object}
      */
-    getInvestorsFromLocalStorage() {
-        const investorsJson = localStorage.getItem('investors');
-        return investorsJson ? JSON.parse(investorsJson) : {};
+    getEntitiesFromLocalStorage() {
+        const entitiesJson = localStorage.getItem('entities');
+        const entitiesData = entitiesJson ? JSON.parse(entitiesJson) : {};
+        const categoryName = this.categories[this.selectedCategoryIndex].name;
+        if (!entitiesData[categoryName]) {
+            entitiesData[categoryName] = {};
+        }
+        return entitiesData[categoryName];
     }
 
     /**
-     * Save investors to local storage.
-     * @param {!Object} investors Investors data to save.
+     * Save entities to local storage for the current category.
+     * @param {!Object} entities Entities data to save.
      */
-    saveInvestorsToLocalStorage(investors) {
-        localStorage.setItem('investors', JSON.stringify(investors));
+    saveEntitiesToLocalStorage(entities) {
+        const entitiesJson = localStorage.getItem('entities');
+        const entitiesData = entitiesJson ? JSON.parse(entitiesJson) : {};
+        const categoryName = this.categories[this.selectedCategoryIndex].name;
+        entitiesData[categoryName] = entities;
+        localStorage.setItem('entities', JSON.stringify(entitiesData));
     }
 
     /**
-     * Handle investor selection change event.
+     * Handle entity selection change event.
      */
     handleInvestorChange() {
         // Load saved inputs if available
         this.loadSavedInputs();
 
-        // Load investor image
-        const investorName = this.investorSelect.value;
-        const investors = this.getInvestorsFromLocalStorage();
-        const investorData = investors[investorName];
-        if (investorData && investorData.image) {
-            this.investorImage.src = investorData.image;
+        // Load entity image
+        const entityName = this.investorSelect.value;
+        const entities = this.getEntitiesFromLocalStorage();
+        const entityData = entities[entityName];
+        if (entityData && entityData.image) {
+            this.investorImage.src = entityData.image;
             this.investorImage.style.display = 'block';
         } else {
             this.investorImage.src = '';
@@ -706,40 +870,48 @@ class InvestmentLikelihoodCalculator {
      * Save user inputs and results to local storage.
      */
     saveInputsAndResults() {
-        const investorName = this.investorSelect.value;
-        if (!investorName) {
+        const entityName = this.investorSelect.value;
+        if (!entityName) {
             return;
         }
-        const profileName = this.profiles[this.selectedProfileIndex].name;
+        const selectedCategory = this.categories[this.selectedCategoryIndex];
+        const profileName = selectedCategory.profiles[this.selectedProfileIndex].name;
         const scores = this.getScores();
         const percentageLikelihood = this.percentageLikelihoodElement.textContent || '0%';
 
-        const investors = this.getInvestorsFromLocalStorage();
-        if (!investors[investorName]) {
-            investors[investorName] = {};
+        const entities = this.getEntitiesFromLocalStorage();
+        if (!entities[entityName]) {
+            entities[entityName] = {};
         }
-        investors[investorName][profileName] = {
+        if (!entities[entityName][selectedCategory.name]) {
+            entities[entityName][selectedCategory.name] = {};
+        }
+        if (!entities[entityName][selectedCategory.name][profileName]) {
+            entities[entityName][selectedCategory.name][profileName] = {};
+        }
+        entities[entityName][selectedCategory.name][profileName] = {
             scores: scores,
             percentageLikelihood: percentageLikelihood
         };
-        this.saveInvestorsToLocalStorage(investors);
+        this.saveEntitiesToLocalStorage(entities);
         this.loadInvestorList();
     }
 
     /**
-     * Load saved inputs for the selected investor and profile.
+     * Load saved inputs for the selected entity and profile.
      */
     loadSavedInputs() {
-        const investorName = this.investorSelect.value;
-        if (!investorName) {
+        const entityName = this.investorSelect.value;
+        if (!entityName) {
             return;
         }
-        const profileName = this.profiles[this.selectedProfileIndex].name;
+        const selectedCategory = this.categories[this.selectedCategoryIndex];
+        const profileName = selectedCategory.profiles[this.selectedProfileIndex].name;
 
-        const investors = this.getInvestorsFromLocalStorage();
-        const investorData = investors[investorName];
-        if (investorData && investorData[profileName]) {
-            const savedData = investorData[profileName];
+        const entities = this.getEntitiesFromLocalStorage();
+        const entityData = entities[entityName];
+        if (entityData && entityData[selectedCategory.name] && entityData[selectedCategory.name][profileName]) {
+            const savedData = entityData[selectedCategory.name][profileName];
             const savedScores = savedData.scores;
             const scoreInputs = this.criteriaTableBody.querySelectorAll('input[type="range"]');
             scoreInputs.forEach((input, index) => {
@@ -750,7 +922,9 @@ class InvestmentLikelihoodCalculator {
                 const descriptorText = descriptorCell.querySelector('.score-descriptor');
                 descriptorText.textContent = this.getScoreDescriptor(criterion, parseFloat(input.value));
             });
-            this.percentageLikelihoodElement.textContent = savedData.percentageLikelihood;
+            if (this.percentageLikelihoodElement) {
+                this.percentageLikelihoodElement.textContent = savedData.percentageLikelihood;
+            }
         } else {
             // Reset inputs and results
             const scoreInputs = this.criteriaTableBody.querySelectorAll('input[type="range"]');
@@ -760,12 +934,14 @@ class InvestmentLikelihoodCalculator {
                 const descriptorText = descriptorCell.querySelector('.score-descriptor');
                 descriptorText.textContent = this.getScoreDescriptor(this.adjustedCriteria[index], 1);
             });
-            this.percentageLikelihoodElement.textContent = '0%';
+            if (this.percentageLikelihoodElement) {
+                this.percentageLikelihoodElement.textContent = '0%';
+            }
         }
 
-        // Load investor image
-        if (investorData && investorData.image) {
-            this.investorImage.src = investorData.image;
+        // Load entity image
+        if (entityData && entityData.image) {
+            this.investorImage.src = entityData.image;
             this.investorImage.style.display = 'block';
         } else {
             this.investorImage.src = '';
@@ -774,81 +950,81 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Load investor list with existing calculations.
+     * Load entity list with existing calculations.
      */
     loadInvestorList() {
         // Clear existing list
         while (this.investorListElement.firstChild) {
             this.investorListElement.removeChild(this.investorListElement.firstChild);
         }
-        const investors = this.getInvestorsFromLocalStorage();
-        Object.keys(investors).forEach((investorName) => {
-            const investorData = investors[investorName];
+        const entities = this.getEntitiesFromLocalStorage();
+        Object.keys(entities).forEach((entityName) => {
+            const entityData = entities[entityName];
             const listItem = document.createElement('li');
             listItem.classList.add('list-group-item', 'd-flex', 'align-items-center');
-            listItem.dataset.name = investorName;
+            listItem.dataset.name = entityName;
 
-            // Investor Image
-            const investorProfiles = investorData;
-            const profilesCount = Object.keys(investorProfiles).filter((key) => key !== 'image').length;
-            const imageSrc = investorData.image || '';
+            // Entity Image
+            const entityProfiles = entityData;
+            const profilesCount = Object.keys(entityProfiles).filter((key) => key !== 'image').length;
+            const imageSrc = entityData.image || '';
 
             if (imageSrc) {
                 const imgElement = document.createElement('img');
                 imgElement.src = imageSrc;
-                imgElement.alt = 'Investor Image';
+                imgElement.alt = `${this.savename} Image`;
                 imgElement.classList.add('img-thumbnail', 'me-2');
                 imgElement.style.width = '50px';
                 imgElement.style.height = '50px';
                 listItem.appendChild(imgElement);
             }
 
-            // Investor Name and Profile Count
+            // Entity Name and Profile Count
             const textContent = document.createElement('div');
-            textContent.textContent = `${investorName} - ${profilesCount} profile(s) saved`;
+            textContent.textContent = `${entityName} - ${profilesCount} profile(s) saved`;
             listItem.appendChild(textContent);
 
             this.investorListElement.appendChild(listItem);
 
             // Add click event to open modal
-            listItem.addEventListener('click', () => this.handleInvestorListItemClick(investorName));
+            listItem.addEventListener('click', () => this.handleInvestorListItemClick(entityName));
         });
     }
 
     /**
-     * Handle delete investor button click event.
+     * Handle delete entity button click event.
      */
     handleDeleteInvestor() {
-        const investorName = this.investorSelect.value;
-        if (!investorName) {
-            alert('Please select an investor to delete.');
+        const entityName = this.investorSelect.value;
+        if (!entityName) {
+            alert(`Please select a ${this.savename.toLowerCase()} to delete.`);
             return;
         }
-        if (confirm(`Are you sure you want to delete investor "${investorName}"? This action cannot be undone.`)) {
-            const investors = this.getInvestorsFromLocalStorage();
-            delete investors[investorName];
-            this.saveInvestorsToLocalStorage(investors);
+        if (confirm(`Are you sure you want to delete ${this.savename.toLowerCase()} "${entityName}"? This action cannot be undone.`)) {
+            const entities = this.getEntitiesFromLocalStorage();
+            delete entities[entityName];
+            this.saveEntitiesToLocalStorage(entities);
             this.populateInvestorSelect();
             this.loadInvestorList();
             // Reset inputs and results
-            this.displayCriteria(this.profiles[this.selectedProfileIndex]);
+            this.displayCriteria(this.categories[this.selectedCategoryIndex].profiles[this.selectedProfileIndex]);
             this.investorImage.src = '';
             this.investorImage.style.display = 'none';
         }
     }
 
     /**
-     * Handle investor list item click event to open modal.
-     * @param {string} investorName The name of the investor to edit.
+     * Handle entity list item click event to open modal.
+     * @param {string} entityName The name of the entity to edit.
      */
-    handleInvestorListItemClick(investorName) {
-        this.currentEditingInvestorName = investorName;
-        const investors = this.getInvestorsFromLocalStorage();
-        const investorData = investors[investorName];
+    handleInvestorListItemClick(entityName) {
+        this.currentEditingInvestorName = entityName;
+        const entities = this.getEntitiesFromLocalStorage();
+        const entityData = entities[entityName];
 
         // Load existing image
-        if (investorData && investorData.image) {
-            this.modalInvestorImagePreview.src = investorData.image;
+        if (entityData && entityData.image) {
+            this.modalInvestorImagePreview.src = entityData.image;
             this.modalInvestorImagePreview.style.display = 'block';
         } else {
             this.modalInvestorImagePreview.src = '';
@@ -863,7 +1039,7 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Handle modal investor image upload.
+     * Handle modal entity image upload.
      * @param {!Event} event The change event.
      */
     handleModalInvestorImageUpload(event) {
@@ -880,27 +1056,27 @@ class InvestmentLikelihoodCalculator {
     }
 
     /**
-     * Handle investor edit form submission.
+     * Handle entity edit form submission.
      * @param {!Event} event The submit event.
      */
     handleInvestorEditFormSubmit(event) {
         event.preventDefault();
 
-        const investors = this.getInvestorsFromLocalStorage();
-        const investorData = investors[this.currentEditingInvestorName];
+        const entities = this.getEntitiesFromLocalStorage();
+        const entityData = entities[this.currentEditingInvestorName];
 
         // Save image if available
         if (this.modalInvestorImagePreview.src) {
-            if (!investorData) {
-                investors[this.currentEditingInvestorName] = {};
+            if (!entityData) {
+                entities[this.currentEditingInvestorName] = {};
             }
-            investors[this.currentEditingInvestorName].image = this.modalInvestorImagePreview.src;
+            entities[this.currentEditingInvestorName].image = this.modalInvestorImagePreview.src;
         }
 
-        this.saveInvestorsToLocalStorage(investors);
+        this.saveEntitiesToLocalStorage(entities);
         this.loadInvestorList();
 
-        // Update image if the current investor is selected
+        // Update image if the current entity is selected
         if (this.investorSelect.value === this.currentEditingInvestorName) {
             this.investorImage.src = this.modalInvestorImagePreview.src;
             this.investorImage.style.display = 'block';
@@ -937,13 +1113,131 @@ class InvestmentLikelihoodCalculator {
         localStorage.setItem('visitCount', (visitCount + 1).toString());
 
         // Add event listener to update localStorage when explainer is toggled
-        explainerElement.querySelector('[data-bs-toggle="collapse"]').addEventListener('click', () => {
-            const isExpanded = explainerContent.classList.contains('show');
-            if (isExpanded) {
-                localStorage.setItem('explainerCollapsed', 'true');
+        const toggleButton = explainerElement.querySelector('[data-bs-toggle="collapse"]');
+        if (toggleButton) {
+            toggleButton.addEventListener('click', () => {
+                const isExpanded = explainerContent.classList.contains('show');
+                if (isExpanded) {
+                    localStorage.setItem('explainerCollapsed', 'true');
+                } else {
+                    localStorage.setItem('explainerCollapsed', 'false');
+                }
+            });
+        }
+    }
+
+    /**
+     * Handle URL slug navigation and 404 handling.
+     */
+    handleSlugNavigation() {
+        const pathname = window.location.pathname;
+        const pathSegments = pathname.split('/').filter(Boolean);
+
+        if (pathSegments.length === 0) {
+            // No slug provided, select highest ordered category
+            this.selectHighestOrderedCategory();
+            return;
+        }
+
+        if (pathSegments[0] === 'random') {
+            // Implement /random to select a completely random category and profile
+            this.selectRandomCategoryAndProfile();
+            return;
+        }
+
+        const categorySlug = pathSegments[0];
+        const categoryIndex = this.categories.findIndex((category) => category.slug === categorySlug);
+        if (categoryIndex !== -1) {
+            this.handleCategoryCardClick(categoryIndex);
+            if (pathSegments.length > 1) {
+                const profileSlug = pathSegments[1];
+                const category = this.categories[categoryIndex];
+                const profileIndex = category.profiles.findIndex((profile) => this.generateSlug(profile.name) === profileSlug);
+                if (profileIndex !== -1) {
+                    this.handleProfileCardClick(profileIndex);
+                } else {
+                    // Profile not found
+                    alert('The requested profile does not exist.');
+                    // Default to first profile
+                    this.handleProfileCardClick(0);
+                }
             } else {
-                localStorage.setItem('explainerCollapsed', 'false');
+                // No profile specified, default to first profile
+                this.handleProfileCardClick(0);
             }
+        } else {
+            // Category not found
+            alert('The requested category does not exist.');
+            // Redirect to highest ordered category
+            this.selectHighestOrderedCategory();
+        }
+    }
+
+    /**
+     * Generate a slug from a given string.
+     * Convert to lower-case hyphenated format.
+     * @param {string} name The string to convert to a slug.
+     * @return {string}
+     */
+    generateSlug(name) {
+        return name.toLowerCase().replace(/[\s]+/g, '-').replace(/[^\w\-]+/g, '');
+    }
+
+    /**
+     * Select the highest ordered category (weight 1 is highest, then alphasort)
+     */
+    selectHighestOrderedCategory() {
+        // Categories are already sorted
+        this.handleCategoryCardClick(0);
+        // By default, select first profile
+        this.handleProfileCardClick(0);
+
+        // Update the URL
+        const selectedCategory = this.categories[0];
+        history.replaceState({}, '', `/${selectedCategory.slug}`);
+    }
+
+    /**
+     * Select a completely random category and profile.
+     */
+    selectRandomCategoryAndProfile() {
+        const randomCategoryIndex = Math.floor(Math.random() * this.categories.length);
+        const category = this.categories[randomCategoryIndex];
+
+        const randomProfileIndex = Math.floor(Math.random() * category.profiles.length);
+
+        // Simulate category and profile selection
+        this.handleCategoryCardClick(randomCategoryIndex);
+        this.handleProfileCardClick(randomProfileIndex);
+
+        // Update the URL
+        const categorySlug = category.slug;
+        const profileSlug = this.generateSlug(category.profiles[randomProfileIndex].name);
+        history.pushState({}, '', `/${categorySlug}/${profileSlug}`);
+    }
+
+    /**
+     * Initialize entity management event listeners.
+     */
+    initInvestorManagement() {
+        this.copyButton.addEventListener('click', () => this.handleCopy());
+        this.newInvestorButton.addEventListener('click', () => this.handleNewInvestor());
+        this.investorSelect.addEventListener('change', () => this.handleInvestorChange());
+        this.deleteInvestorButton.addEventListener('click', () => this.handleDeleteInvestor());
+
+        // Modal event listeners
+        this.modalInvestorImageInput.addEventListener('change', (event) => this.handleModalInvestorImageUpload(event));
+        this.investorEditForm.addEventListener('submit', (event) => this.handleInvestorEditFormSubmit(event));
+
+        // Load entities from local storage
+        this.loadEntities();
+
+        // Event listener for pie chart options
+        const pieChartOptions = document.querySelectorAll('input[name="pieChartOption"]');
+        pieChartOptions.forEach((option) => {
+            option.addEventListener('change', () => {
+                this.calculateAndDisplayResults();
+            });
         });
     }
 }

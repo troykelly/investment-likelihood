@@ -1,1283 +1,2150 @@
 {
-    "profiles": [
+    "categories": [
         {
-            "name": "General Investor Engagement",
-            "icon": "fas fa-handshake",
-            "criteria": [
+            "name": "Investment",
+            "slug": "investment",
+            "description": "Tools for founders to calculate investment probability",
+            "icon": "fas fa-money",
+            "weight": 1,
+            "savename": "Investor",
+            "profiles": [
                 {
-                    "metric": "Responsiveness",
-                    "description": "Measures how promptly the investor responds to communications.",
-                    "weight": 15,
-                    "icon": "fas fa-reply",
-                    "scoreDescriptors": {
-                        "1": "Never responds",
-                        "2": "Rarely responds",
-                        "3": "Sometimes responds",
-                        "4": "Often responds",
-                        "5": "Always responds promptly"
-                    }
-                },
-                {
-                    "metric": "Interest Level",
-                    "description": "Evaluates the investor's expressed enthusiasm and proactive engagement.",
-                    "weight": 15,
-                    "icon": "fas fa-star",
-                    "scoreDescriptors": {
-                        "1": "Not interested at all",
-                        "2": "Slightly interested",
-                        "3": "Moderately interested",
-                        "4": "Very interested",
-                        "5": "Extremely interested and proactive"
-                    }
-                },
-                {
-                    "metric": "Meeting Frequency",
-                    "description": "Counts the number of meetings or calls held with the investor.",
-                    "weight": 10,
-                    "icon": "fas fa-calendar-alt",
-                    "scoreDescriptors": {
-                        "1": "No meetings or calls",
-                        "2": "One or two meetings or calls",
-                        "3": "Occasional meetings or calls",
-                        "4": "Frequent meetings or calls",
-                        "5": "Very frequent meetings or calls"
-                    }
-                },
-                {
-                    "metric": "Introductions Made",
-                    "description": "Assesses whether the investor has introduced you to other potential investors or partners.",
-                    "weight": 10,
-                    "icon": "fas fa-user-friends",
-                    "scoreDescriptors": {
-                        "1": "No introductions",
-                        "2": "One or two introductions",
-                        "3": "Occasional introductions",
-                        "4": "Several introductions",
-                        "5": "Many valuable introductions"
-                    }
-                },
-                {
-                    "metric": "Feedback Quality",
-                    "description": "Evaluates the constructiveness and usefulness of the feedback provided.",
-                    "weight": 10,
-                    "icon": "fas fa-comments",
-                    "scoreDescriptors": {
-                        "1": "No feedback",
-                        "2": "Poor feedback",
-                        "3": "Adequate feedback",
-                        "4": "Good, constructive feedback",
-                        "5": "Excellent, highly useful feedback"
-                    }
-                },
-                {
-                    "metric": "Alignment with Vision",
-                    "description": "Measures how well the investor understands and supports your startup's mission and goals.",
-                    "weight": 10,
-                    "icon": "fas fa-bullseye",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Low alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Complete alignment and support"
-                    }
-                },
-                {
-                    "metric": "Investment Fit",
-                    "description": "Assesses the suitability of the investor's focus area, stage, and cheque size for your startup.",
-                    "weight": 10,
-                    "icon": "fas fa-hand-holding-usd",
-                    "scoreDescriptors": {
-                        "1": "Not a fit at all",
-                        "2": "Slight fit",
-                        "3": "Moderate fit",
-                        "4": "Good fit",
-                        "5": "Perfect fit"
-                    }
-                },
-                {
-                    "metric": "Decision-Making Process",
-                    "description": "Evaluates the transparency and efficiency of the investor's decision-making process.",
-                    "weight": 10,
-                    "icon": "fas fa-cogs",
-                    "scoreDescriptors": {
-                        "1": "Very opaque and slow",
-                        "2": "Somewhat opaque and slow",
-                        "3": "Moderately transparent and timely",
-                        "4": "Mostly transparent and quick",
-                        "5": "Very transparent and efficient"
-                    }
-                },
-                {
-                    "metric": "Trustworthiness",
-                    "description": "Measures your confidence in the investor's integrity and reliability.",
-                    "weight": 5,
-                    "icon": "fas fa-shield-alt",
-                    "scoreDescriptors": {
-                        "1": "No trust at all",
-                        "2": "Very little trust",
-                        "3": "Moderate trust",
-                        "4": "High trust",
-                        "5": "Complete trust"
-                    }
-                },
-                {
-                    "metric": "Reputation",
-                    "description": "Considers the investor’s standing in the industry and among other founders.",
-                    "weight": 5,
-                    "icon": "fas fa-thumbs-up",
-                    "scoreDescriptors": {
-                        "1": "Very poor reputation",
-                        "2": "Poor reputation",
-                        "3": "Average reputation",
-                        "4": "Good reputation",
-                        "5": "Excellent reputation"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Angel Investors",
-            "icon": "fas fa-user-astronaut",
-            "criteria": [
-                {
-                    "metric": "Personal Rapport",
-                    "description": "Assesses the personal connection and chemistry with the investor.",
-                    "weight": 20,
-                    "icon": "fas fa-smile",
-                    "scoreDescriptors": {
-                        "1": "No connection at all",
-                        "2": "Slight connection",
-                        "3": "Moderate connection",
-                        "4": "Strong connection",
-                        "5": "Exceptional connection"
-                    }
-                },
-                {
-                    "metric": "Speed of Commitment",
-                    "description": "Measures how quickly the investor moves from interest to commitment.",
-                    "weight": 15,
-                    "icon": "fas fa-tachometer-alt",
-                    "scoreDescriptors": {
-                        "1": "Very slow",
-                        "2": "Slow",
-                        "3": "Moderate speed",
-                        "4": "Fast",
-                        "5": "Very fast"
-                    }
-                },
-                {
-                    "metric": "Value-Add Services",
-                    "description": "Evaluates the additional support provided, such as mentorship or industry contacts.",
-                    "weight": 15,
-                    "icon": "fas fa-user-plus",
-                    "scoreDescriptors": {
-                        "1": "No additional support",
-                        "2": "Very little support",
-                        "3": "Moderate support",
-                        "4": "Significant support",
-                        "5": "Extensive support"
-                    }
-                },
-                {
-                    "metric": "Investment Capacity",
-                    "description": "Assesses the investor's ability to meet your funding needs.",
-                    "weight": 15,
-                    "icon": "fas fa-wallet",
-                    "scoreDescriptors": {
-                        "1": "Very limited capacity",
-                        "2": "Small capacity",
-                        "3": "Moderate capacity",
-                        "4": "Large capacity",
-                        "5": "Very large capacity"
-                    }
-                },
-                {
-                    "metric": "Experience with Startups",
-                    "description": "Measures the investor's background in investing in early-stage startups.",
-                    "weight": 15,
-                    "icon": "fas fa-lightbulb",
-                    "scoreDescriptors": {
-                        "1": "No experience",
-                        "2": "Limited experience",
-                        "3": "Moderate experience",
-                        "4": "Considerable experience",
-                        "5": "Extensive experience"
-                    }
-                },
-                {
-                    "metric": "Interest Alignment",
-                    "description": "Evaluates how well the investor's interests align with your industry and objectives.",
-                    "weight": 10,
-                    "icon": "fas fa-heart",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Low alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Perfect alignment"
-                    }
-                },
-                {
-                    "metric": "Transparency",
-                    "description": "Assesses openness in communication regarding expectations and terms.",
-                    "weight": 10,
-                    "icon": "fas fa-eye",
-                    "scoreDescriptors": {
-                        "1": "Very opaque",
-                        "2": "Somewhat opaque",
-                        "3": "Moderately transparent",
-                        "4": "Mostly transparent",
-                        "5": "Fully transparent"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Venture Capital Firms",
-            "icon": "fas fa-building",
-            "criteria": [
-                {
-                    "metric": "Reputation and Brand",
-                    "description": "Measures the prestige and recognition of the VC firm in the industry.",
-                    "weight": 15,
-                    "icon": "fas fa-award",
-                    "scoreDescriptors": {
-                        "1": "Very poor reputation",
-                        "2": "Poor reputation",
-                        "3": "Average reputation",
-                        "4": "Good reputation",
-                        "5": "Excellent reputation"
-                    }
-                },
-                {
-                    "metric": "Partner Engagement",
-                    "description": "Evaluates the involvement and interest level of senior partners.",
-                    "weight": 15,
-                    "icon": "fas fa-user-tie",
-                    "scoreDescriptors": {
-                        "1": "No engagement",
-                        "2": "Low engagement",
-                        "3": "Moderate engagement",
-                        "4": "High engagement",
-                        "5": "Very high engagement"
-                    }
-                },
-                {
-                    "metric": "Term Sheet Favourability",
-                    "description": "Assesses the fairness and attractiveness of the proposed investment terms.",
-                    "weight": 15,
-                    "icon": "fas fa-file-contract",
-                    "scoreDescriptors": {
-                        "1": "Very unfavourable",
-                        "2": "Unfavourable",
-                        "3": "Neutral",
-                        "4": "Favourable",
-                        "5": "Very favourable"
-                    }
-                },
-                {
-                    "metric": "Decision Timeline",
-                    "description": "Measures the length of time the firm takes to make an investment decision.",
-                    "weight": 10,
-                    "icon": "fas fa-stopwatch",
-                    "scoreDescriptors": {
-                        "1": "Very long",
-                        "2": "Long",
-                        "3": "Moderate",
-                        "4": "Short",
-                        "5": "Very short"
-                    }
-                },
-                {
-                    "metric": "Portfolio Synergy",
-                    "description": "Evaluates the potential for collaboration with other portfolio companies.",
-                    "weight": 10,
-                    "icon": "fas fa-sitemap",
-                    "scoreDescriptors": {
-                        "1": "No synergy",
-                        "2": "Limited synergy",
-                        "3": "Moderate synergy",
-                        "4": "High synergy",
-                        "5": "Very high synergy"
-                    }
-                },
-                {
-                    "metric": "Industry Expertise",
-                    "description": "Assesses the firm's knowledge and experience in your startup's industry.",
-                    "weight": 10,
-                    "icon": "fas fa-industry",
-                    "scoreDescriptors": {
-                        "1": "No expertise",
-                        "2": "Limited expertise",
-                        "3": "Moderate expertise",
-                        "4": "High expertise",
-                        "5": "Very high expertise"
-                    }
-                },
-                {
-                    "metric": "Post-Investment Support",
-                    "description": "Measures the resources and support the firm offers after investment.",
-                    "weight": 10,
-                    "icon": "fas fa-hands-helping",
-                    "scoreDescriptors": {
-                        "1": "No support",
-                        "2": "Limited support",
-                        "3": "Moderate support",
-                        "4": "High support",
-                        "5": "Very high support"
-                    }
-                },
-                {
-                    "metric": "Cultural Fit",
-                    "description": "Considers how well the firm's culture aligns with your company values.",
-                    "weight": 10,
-                    "icon": "fas fa-users-cog",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Limited alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Very high alignment"
-                    }
-                },
-                {
-                    "metric": "Investor Network",
-                    "description": "Evaluates the firm's connections with other investors for future funding rounds.",
-                    "weight": 5,
-                    "icon": "fas fa-network-wired",
-                    "scoreDescriptors": {
-                        "1": "No network",
-                        "2": "Limited network",
-                        "3": "Moderate network",
-                        "4": "High network",
-                        "5": "Very high network"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Corporate Investors",
-            "icon": "fas fa-city",
-            "criteria": [
-                {
-                    "metric": "Strategic Alignment",
-                    "description": "Measures how closely the corporation's goals align with your startup's objectives.",
-                    "weight": 20,
-                    "icon": "fas fa-sync-alt",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Low alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Very high alignment"
-                    }
-                },
-                {
-                    "metric": "Integration Potential",
-                    "description": "Assesses the opportunities for partnerships or integrations.",
-                    "weight": 15,
-                    "icon": "fas fa-project-diagram",
-                    "scoreDescriptors": {
-                        "1": "No potential",
-                        "2": "Low potential",
-                        "3": "Moderate potential",
-                        "4": "High potential",
-                        "5": "Very high potential"
-                    }
-                },
-                {
-                    "metric": "Control Terms",
-                    "description": "Evaluates any restrictions or controls the investor wants to impose.",
-                    "weight": 15,
-                    "icon": "fas fa-handcuffs",
-                    "scoreDescriptors": {
-                        "1": "Very restrictive",
-                        "2": "Somewhat restrictive",
-                        "3": "Moderately restrictive",
-                        "4": "Lightly restrictive",
-                        "5": "Not restrictive"
-                    }
-                },
-                {
-                    "metric": "Reputation in Industry",
-                    "description": "Measures the corporation's standing and influence in your market.",
-                    "weight": 15,
-                    "icon": "fas fa-star-half-alt",
-                    "scoreDescriptors": {
-                        "1": "Very poor reputation",
-                        "2": "Poor reputation",
-                        "3": "Average reputation",
-                        "4": "Good reputation",
-                        "5": "Excellent reputation"
-                    }
-                },
-                {
-                    "metric": "Conflict of Interest Risks",
-                    "description": "Assesses potential conflicts that may arise from the investment.",
-                    "weight": 10,
-                    "icon": "fas fa-exclamation-triangle",
-                    "scoreDescriptors": {
-                        "1": "Very high risk",
-                        "2": "High risk",
-                        "3": "Moderate risk",
-                        "4": "Low risk",
-                        "5": "Very low risk"
-                    }
-                },
-                {
-                    "metric": "Decision Hierarchy",
-                    "description": "Evaluates the complexity of the corporation's decision-making process.",
-                    "weight": 10,
-                    "icon": "fas fa-layer-group",
-                    "scoreDescriptors": {
-                        "1": "Very complex",
-                        "2": "Complex",
-                        "3": "Moderately complex",
-                        "4": "Simple",
-                        "5": "Very simple"
-                    }
-                },
-                {
-                    "metric": "Confidentiality Assurance",
-                    "description": "Measures the safeguards in place to protect your proprietary information.",
-                    "weight": 10,
-                    "icon": "fas fa-shield-virus",
-                    "scoreDescriptors": {
-                        "1": "No safeguards",
-                        "2": "Limited safeguards",
-                        "3": "Moderate safeguards",
-                        "4": "High safeguards",
-                        "5": "Very high safeguards"
-                    }
-                },
-                {
-                    "metric": "Future Acquisition Interest",
-                    "description": "Assesses the likelihood that the corporation may aim to acquire your startup.",
-                    "weight": 5,
-                    "icon": "fas fa-handshake-alt-slash",
-                    "scoreDescriptors": {
-                        "1": "No interest",
-                        "2": "Low interest",
-                        "3": "Moderate interest",
-                        "4": "High interest",
-                        "5": "Very high interest"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Incubators and Accelerators",
-            "icon": "fas fa-rocket",
-            "criteria": [
-                {
-                    "metric": "Program Benefits",
-                    "description": "Evaluates the value provided in terms of mentorship, resources, and networking.",
-                    "weight": 25,
-                    "icon": "fas fa-gem",
-                    "scoreDescriptors": {
-                        "1": "No benefits",
-                        "2": "Limited benefits",
-                        "3": "Moderate benefits",
-                        "4": "High benefits",
-                        "5": "Very high benefits"
-                    }
-                },
-                {
-                    "metric": "Equity Taken",
-                    "description": "Measures the amount of equity the program requires for participation.",
-                    "weight": 20,
-                    "icon": "fas fa-percentage",
-                    "scoreDescriptors": {
-                        "1": "Very high equity",
-                        "2": "High equity",
-                        "3": "Moderate equity",
-                        "4": "Low equity",
-                        "5": "Very low equity"
-                    }
-                },
-                {
-                    "metric": "Alumni Success",
-                    "description": "Assesses the track record of the program's graduates.",
-                    "weight": 15,
-                    "icon": "fas fa-graduation-cap",
-                    "scoreDescriptors": {
-                        "1": "No success",
-                        "2": "Limited success",
-                        "3": "Moderate success",
-                        "4": "High success",
-                        "5": "Very high success"
-                    }
-                },
-                {
-                    "metric": "Cohort Fit",
-                    "description": "Evaluates how well your startup aligns with the focus of the cohort.",
-                    "weight": 15,
-                    "icon": "fas fa-users",
-                    "scoreDescriptors": {
-                        "1": "No fit",
-                        "2": "Limited fit",
-                        "3": "Moderate fit",
-                        "4": "High fit",
-                        "5": "Perfect fit"
-                    }
-                },
-                {
-                    "metric": "Program Duration and Intensity",
-                    "description": "Considers the time commitment and workload required.",
-                    "weight": 10,
-                    "icon": "fas fa-hourglass-half",
-                    "scoreDescriptors": {
-                        "1": "Very high duration and intensity",
-                        "2": "High duration and intensity",
-                        "3": "Moderate duration and intensity",
-                        "4": "Low duration and intensity",
-                        "5": "Very low duration and intensity"
-                    }
-                },
-                {
-                    "metric": "Location and Logistics",
-                    "description": "Measures the impact of the program's location on your operations.",
-                    "weight": 10,
-                    "icon": "fas fa-map-marker-alt",
-                    "scoreDescriptors": {
-                        "1": "Very inconvenient",
-                        "2": "Inconvenient",
-                        "3": "Moderately convenient",
-                        "4": "Convenient",
-                        "5": "Very convenient"
-                    }
-                },
-                {
-                    "metric": "Post-Program Support",
-                    "description": "Assesses the level of ongoing assistance after program completion.",
-                    "weight": 5,
-                    "icon": "fas fa-heart",
-                    "scoreDescriptors": {
-                        "1": "No support",
-                        "2": "Limited support",
-                        "3": "Moderate support",
-                        "4": "Considerable support",
-                        "5": "Extensive support"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Crowdfunding Platforms",
-            "icon": "fas fa-users",
-            "criteria": [
-                {
-                    "metric": "Platform Reputation",
-                    "description": "Measures the credibility and popularity of the crowdfunding platform.",
-                    "weight": 20,
-                    "icon": "fas fa-chess-queen",
-                    "scoreDescriptors": {
-                        "1": "Very poor reputation",
-                        "2": "Poor reputation",
-                        "3": "Average reputation",
-                        "4": "Good reputation",
-                        "5": "Excellent reputation"
-                    }
-                },
-                {
-                    "metric": "Funding Success Rate",
-                    "description": "Assesses the likelihood of reaching your funding goal on the platform.",
-                    "weight": 20,
-                    "icon": "fas fa-bullseye-arrow",
-                    "scoreDescriptors": {
-                        "1": "Very low success rate",
-                        "2": "Low success rate",
-                        "3": "Moderate success rate",
-                        "4": "High success rate",
-                        "5": "Very high success rate"
-                    }
-                },
-                {
-                    "metric": "Fees and Costs",
-                    "description": "Evaluates the financial cost of using the platform.",
-                    "weight": 15,
-                    "icon": "fas fa-coins",
-                    "scoreDescriptors": {
-                        "1": "Very high fees",
-                        "2": "High fees",
-                        "3": "Moderate fees",
-                        "4": "Low fees",
-                        "5": "Very low fees"
-                    }
-                },
-                {
-                    "metric": "Audience Match",
-                    "description": "Measures how well the platform's user base matches your target audience.",
-                    "weight": 15,
-                    "icon": "fas fa-users-crown",
-                    "scoreDescriptors": {
-                        "1": "No match",
-                        "2": "Low match",
-                        "3": "Moderate match",
-                        "4": "High match",
-                        "5": "Perfect match"
-                    }
-                },
-                {
-                    "metric": "Campaign Support Tools",
-                    "description": "Assesses the availability of promotional and analytical tools.",
-                    "weight": 10,
-                    "icon": "fas fa-toolbox",
-                    "scoreDescriptors": {
-                        "1": "No tools",
-                        "2": "Limited tools",
-                        "3": "Moderate tools",
-                        "4": "Good tools",
-                        "5": "Excellent tools"
-                    }
-                },
-                {
-                    "metric": "Legal and Compliance",
-                    "description": "Considers the regulatory requirements and protections.",
-                    "weight": 10,
-                    "icon": "fas fa-shield-alt",
-                    "scoreDescriptors": {
-                        "1": "No compliance",
-                        "2": "Limited compliance",
-                        "3": "Moderate compliance",
-                        "4": "Good compliance",
-                        "5": "Excellent compliance"
-                    }
-                },
-                {
-                    "metric": "Community Engagement",
-                    "description": "Evaluates the level of interaction and support from the platform community.",
-                    "weight": 10,
-                    "icon": "fas fa-hands-helping",
-                    "scoreDescriptors": {
-                        "1": "No engagement",
-                        "2": "Low engagement",
-                        "3": "Moderate engagement",
-                        "4": "High engagement",
-                        "5": "Very high engagement"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Government Grants and Funds",
-            "icon": "fas fa-university",
-            "criteria": [
-                {
-                    "metric": "Eligibility",
-                    "description": "Assesses how well your startup meets the criteria for the grant or fund.",
-                    "weight": 25,
-                    "icon": "fas fa-check-double",
-                    "scoreDescriptors": {
-                        "1": "Not eligible",
-                        "2": "Slightly eligible",
-                        "3": "Moderately eligible",
-                        "4": "Highly eligible",
-                        "5": "Completely eligible"
-                    }
-                },
-                {
-                    "metric": "Application Complexity",
-                    "description": "Evaluates the effort required to complete the application process.",
-                    "weight": 20,
-                    "icon": "fas fa-file-alt",
-                    "scoreDescriptors": {
-                        "1": "Extremely complex",
-                        "2": "Very complex",
-                        "3": "Moderately complex",
-                        "4": "Slightly complex",
-                        "5": "Not complex"
-                    }
-                },
-                {
-                    "metric": "Funding Amount",
-                    "description": "Measures the potential financial benefit.",
-                    "weight": 15,
-                    "icon": "fas fa-hand-holding-usd",
-                    "scoreDescriptors": {
-                        "1": "Very low amount",
-                        "2": "Low amount",
-                        "3": "Moderate amount",
-                        "4": "High amount",
-                        "5": "Very high amount"
-                    }
-                },
-                {
-                    "metric": "Restrictions and Obligations",
-                    "description": "Assesses any limitations or requirements tied to the funding.",
-                    "weight": 15,
-                    "icon": "fas fa-exclamation-circle",
-                    "scoreDescriptors": {
-                        "1": "Very restrictive",
-                        "2": "Restrictive",
-                        "3": "Moderately restrictive",
-                        "4": "Slightly restrictive",
-                        "5": "Not restrictive"
-                    }
-                },
-                {
-                    "metric": "Disbursement Timeline",
-                    "description": "Considers how quickly funds will be available.",
-                    "weight": 10,
-                    "icon": "fas fa-calendar-check",
-                    "scoreDescriptors": {
-                        "1": "Very long",
-                        "2": "Long",
-                        "3": "Moderate",
-                        "4": "Short",
-                        "5": "Very short"
-                    }
-                },
-                {
-                    "metric": "Impact on Equity",
-                    "description": "Evaluates whether the funding affects ownership structure.",
-                    "weight": 10,
-                    "icon": "fas fa-chart-pie",
-                    "scoreDescriptors": {
-                        "1": "Major impact",
-                        "2": "Significant impact",
-                        "3": "Moderate impact",
-                        "4": "Minor impact",
-                        "5": "No impact"
-                    }
-                },
-                {
-                    "metric": "Reputation and Credibility",
-                    "description": "Measures the prestige associated with receiving the grant or fund.",
-                    "weight": 5,
-                    "icon": "fas fa-medal",
-                    "scoreDescriptors": {
-                        "1": "No reputation",
-                        "2": "Poor reputation",
-                        "3": "Average reputation",
-                        "4": "Good reputation",
-                        "5": "Excellent reputation"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Family and Friends",
-            "icon": "fas fa-user-friends",
-            "criteria": [
-                {
-                    "metric": "Trust Level",
-                    "description": "Measures the level of trust and support from the individual.",
-                    "weight": 25,
+                    "name": "General Investor Engagement",
                     "icon": "fas fa-handshake",
-                    "scoreDescriptors": {
-                        "1": "No trust",
-                        "2": "Little trust",
-                        "3": "Moderate trust",
-                        "4": "High trust",
-                        "5": "Complete trust"
-                    }
+                    "criteria": [
+                        {
+                            "metric": "Responsiveness",
+                            "description": "Measures how promptly the investor responds to communications.",
+                            "weight": 15,
+                            "icon": "fas fa-reply",
+                            "scoreDescriptors": {
+                                "1": "Never responds",
+                                "2": "Rarely responds",
+                                "3": "Sometimes responds",
+                                "4": "Often responds",
+                                "5": "Always responds promptly"
+                            }
+                        },
+                        {
+                            "metric": "Interest Level",
+                            "description": "Evaluates the investor's expressed enthusiasm and proactive engagement.",
+                            "weight": 15,
+                            "icon": "fas fa-star",
+                            "scoreDescriptors": {
+                                "1": "Not interested at all",
+                                "2": "Slightly interested",
+                                "3": "Moderately interested",
+                                "4": "Very interested",
+                                "5": "Extremely interested and proactive"
+                            }
+                        },
+                        {
+                            "metric": "Meeting Frequency",
+                            "description": "Counts the number of meetings or calls held with the investor.",
+                            "weight": 10,
+                            "icon": "fas fa-calendar-alt",
+                            "scoreDescriptors": {
+                                "1": "No meetings or calls",
+                                "2": "One or two meetings or calls",
+                                "3": "Occasional meetings or calls",
+                                "4": "Frequent meetings or calls",
+                                "5": "Very frequent meetings or calls"
+                            }
+                        },
+                        {
+                            "metric": "Introductions Made",
+                            "description": "Assesses whether the investor has introduced you to other potential investors or partners.",
+                            "weight": 10,
+                            "icon": "fas fa-user-friends",
+                            "scoreDescriptors": {
+                                "1": "No introductions",
+                                "2": "One or two introductions",
+                                "3": "Occasional introductions",
+                                "4": "Several introductions",
+                                "5": "Many valuable introductions"
+                            }
+                        },
+                        {
+                            "metric": "Feedback Quality",
+                            "description": "Evaluates the constructiveness and usefulness of the feedback provided.",
+                            "weight": 10,
+                            "icon": "fas fa-comments",
+                            "scoreDescriptors": {
+                                "1": "No feedback",
+                                "2": "Poor feedback",
+                                "3": "Adequate feedback",
+                                "4": "Good, constructive feedback",
+                                "5": "Excellent, highly useful feedback"
+                            }
+                        },
+                        {
+                            "metric": "Alignment with Vision",
+                            "description": "Measures how well the investor understands and supports your startup's mission and goals.",
+                            "weight": 10,
+                            "icon": "fas fa-bullseye",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Low alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Complete alignment and support"
+                            }
+                        },
+                        {
+                            "metric": "Investment Fit",
+                            "description": "Assesses the suitability of the investor's focus area, stage, and cheque size for your startup.",
+                            "weight": 10,
+                            "icon": "fas fa-hand-holding-usd",
+                            "scoreDescriptors": {
+                                "1": "Not a fit at all",
+                                "2": "Slight fit",
+                                "3": "Moderate fit",
+                                "4": "Good fit",
+                                "5": "Perfect fit"
+                            }
+                        },
+                        {
+                            "metric": "Decision-Making Process",
+                            "description": "Evaluates the transparency and efficiency of the investor's decision-making process.",
+                            "weight": 10,
+                            "icon": "fas fa-cogs",
+                            "scoreDescriptors": {
+                                "1": "Very opaque and slow",
+                                "2": "Somewhat opaque and slow",
+                                "3": "Moderately transparent and timely",
+                                "4": "Mostly transparent and quick",
+                                "5": "Very transparent and efficient"
+                            }
+                        },
+                        {
+                            "metric": "Trustworthiness",
+                            "description": "Measures your confidence in the investor's integrity and reliability.",
+                            "weight": 5,
+                            "icon": "fas fa-shield-alt",
+                            "scoreDescriptors": {
+                                "1": "No trust at all",
+                                "2": "Very little trust",
+                                "3": "Moderate trust",
+                                "4": "High trust",
+                                "5": "Complete trust"
+                            }
+                        },
+                        {
+                            "metric": "Reputation",
+                            "description": "Considers the investor’s standing in the industry and among other founders.",
+                            "weight": 5,
+                            "icon": "fas fa-thumbs-up",
+                            "scoreDescriptors": {
+                                "1": "Very poor reputation",
+                                "2": "Poor reputation",
+                                "3": "Average reputation",
+                                "4": "Good reputation",
+                                "5": "Excellent reputation"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Financial Capacity",
-                    "description": "Assesses their ability to provide the required funds without hardship.",
-                    "weight": 20,
-                    "icon": "fas fa-piggy-bank",
-                    "scoreDescriptors": {
-                        "1": "No capacity",
-                        "2": "Limited capacity",
-                        "3": "Moderate capacity",
-                        "4": "High capacity",
-                        "5": "Very high capacity"
-                    }
-                },
-                {
-                    "metric": "Relationship Impact",
-                    "description": "Considers the potential effect on personal relationships.",
-                    "weight": 20,
-                    "icon": "fas fa-heart-broken",
-                    "scoreDescriptors": {
-                        "1": "Very negative impact",
-                        "2": "Negative impact",
-                        "3": "Neutral impact",
-                        "4": "Positive impact",
-                        "5": "Very positive impact"
-                    }
-                },
-                {
-                    "metric": "Involvement Level",
-                    "description": "Evaluates their expectation for involvement in the business.",
-                    "weight": 15,
-                    "icon": "fas fa-user-tag",
-                    "scoreDescriptors": {
-                        "1": "No involvement",
-                        "2": "Little involvement",
-                        "3": "Moderate involvement",
-                        "4": "High involvement",
-                        "5": "Very high involvement"
-                    }
-                },
-                {
-                    "metric": "Repayment Flexibility",
-                    "description": "Measures the leniency in repayment terms or expectations.",
-                    "weight": 10,
-                    "icon": "fas fa-sliders-h",
-                    "scoreDescriptors": {
-                        "1": "Very inflexible",
-                        "2": "Inflexible",
-                        "3": "Moderately flexible",
-                        "4": "Flexible",
-                        "5": "Very flexible"
-                    }
-                },
-                {
-                    "metric": "Communication Clarity",
-                    "description": "Assesses how openly terms and expectations are discussed.",
-                    "weight": 10,
-                    "icon": "fas fa-comments",
-                    "scoreDescriptors": {
-                        "1": "Very unclear",
-                        "2": "Unclear",
-                        "3": "Moderately clear",
-                        "4": "Clear",
-                        "5": "Very clear"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "Y Combinator Engagement",
-            "icon": "fas fa-lightbulb",
-            "criteria": [
-                {
-                    "metric": "Application Progress",
-                    "description": "Assesses how far you've progressed in the YC application process.",
-                    "weight": 20,
-                    "icon": "fas fa-clipboard-check",
-                    "scoreDescriptors": {
-                        "1": "No progress",
-                        "2": "Minimal progress",
-                        "3": "Moderate progress",
-                        "4": "Significant progress",
-                        "5": "Full progress"
-                    }
-                },
-                {
-                    "metric": "Interaction Quality",
-                    "description": "Evaluates the quality of interactions with YC partners or representatives.",
-                    "weight": 15,
-                    "icon": "fas fa-user-shield",
-                    "scoreDescriptors": {
-                        "1": "Very poor quality",
-                        "2": "Poor quality",
-                        "3": "Moderate quality",
-                        "4": "Good quality",
-                        "5": "Excellent quality"
-                    }
-                },
-                {
-                    "metric": "Fit with YC Thesis",
-                    "description": "Measures alignment with YC's areas of interest and investment patterns.",
-                    "weight": 15,
-                    "icon": "fas fa-thumbs-up",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Low alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Very high alignment"
-                    }
-                },
-                {
-                    "metric": "Feedback Received",
-                    "description": "Assesses the usefulness of any feedback or advice provided.",
-                    "weight": 15,
-                    "icon": "fas fa-comment-dots",
-                    "scoreDescriptors": {
-                        "1": "No feedback",
-                        "2": "Poor feedback",
-                        "3": "Moderate feedback",
-                        "4": "Good feedback",
-                        "5": "Excellent feedback"
-                    }
-                },
-                {
-                    "metric": "Referral Strength",
-                    "description": "Evaluates the influence of any referrals or recommendations you have.",
-                    "weight": 10,
-                    "icon": "fas fa-user-friends",
-                    "scoreDescriptors": {
-                        "1": "No referrals",
-                        "2": "Weak referrals",
-                        "3": "Moderate referrals",
-                        "4": "Strong referrals",
-                        "5": "Very strong referrals"
-                    }
-                },
-                {
-                    "metric": "Network Engagement",
-                    "description": "Measures how actively you are engaging with the YC community.",
-                    "weight": 10,
-                    "icon": "fas fa-network-wired",
-                    "scoreDescriptors": {
-                        "1": "No engagement",
-                        "2": "Low engagement",
-                        "3": "Moderate engagement",
-                        "4": "High engagement",
-                        "5": "Very high engagement"
-                    }
-                },
-                {
-                    "metric": "Timing and Season",
-                    "description": "Considers the timing of your application relative to YC's funding cycles.",
-                    "weight": 10,
-                    "icon": "fas fa-calendar-alt",
-                    "scoreDescriptors": {
-                        "1": "Very bad timing",
-                        "2": "Bad timing",
-                        "3": "Neutral timing",
-                        "4": "Good timing",
-                        "5": "Very good timing"
-                    }
-                },
-                {
-                    "metric": "Previous Applications",
-                    "description": "Assesses any improvements since previous applications to YC.",
-                    "weight": 5,
-                    "icon": "fas fa-sync",
-                    "scoreDescriptors": {
-                        "1": "No improvement",
-                        "2": "Little improvement",
-                        "3": "Moderate improvement",
-                        "4": "Significant improvement",
-                        "5": "Very significant improvement"
-                    }
-                }
-            ]
-        },
-        {
-            "name": "500 Startups Engagement",
-            "icon": "fas fa-globe",
-            "criteria": [
-                {
-                    "metric": "Geographic Focus Match",
-                    "description": "Evaluates alignment with 500 Startups' regional programs.",
-                    "weight": 20,
-                    "icon": "fas fa-map",
-                    "scoreDescriptors": {
-                        "1": "No match",
-                        "2": "Low match",
-                        "3": "Moderate match",
-                        "4": "High match",
-                        "5": "Perfect match"
-                    }
-                },
-                {
-                    "metric": "Program Relevance",
-                    "description": "Measures how well your startup fits with specific 500 Startups programs.",
-                    "weight": 15,
-                    "icon": "fas fa-rocket",
-                    "scoreDescriptors": {
-                        "1": "No relevance",
-                        "2": "Low relevance",
-                        "3": "Moderate relevance",
-                        "4": "High relevance",
-                        "5": "Very high relevance"
-                    }
-                },
-                {
-                    "metric": "Staff Engagement",
-                    "description": "Assesses the level of interest shown by 500 Startups staff.",
-                    "weight": 15,
+                    "name": "Angel Investors",
                     "icon": "fas fa-user-astronaut",
-                    "scoreDescriptors": {
-                        "1": "No engagement",
-                        "2": "Low engagement",
-                        "3": "Moderate engagement",
-                        "4": "High engagement",
-                        "5": "Very high engagement"
-                    }
+                    "criteria": [
+                        {
+                            "metric": "Personal Rapport",
+                            "description": "Assesses the personal connection and chemistry with the investor.",
+                            "weight": 20,
+                            "icon": "fas fa-smile",
+                            "scoreDescriptors": {
+                                "1": "No connection at all",
+                                "2": "Slight connection",
+                                "3": "Moderate connection",
+                                "4": "Strong connection",
+                                "5": "Exceptional connection"
+                            }
+                        },
+                        {
+                            "metric": "Speed of Commitment",
+                            "description": "Measures how quickly the investor moves from interest to commitment.",
+                            "weight": 15,
+                            "icon": "fas fa-tachometer-alt",
+                            "scoreDescriptors": {
+                                "1": "Very slow",
+                                "2": "Slow",
+                                "3": "Moderate speed",
+                                "4": "Fast",
+                                "5": "Very fast"
+                            }
+                        },
+                        {
+                            "metric": "Value-Add Services",
+                            "description": "Evaluates the additional support provided, such as mentorship or industry contacts.",
+                            "weight": 15,
+                            "icon": "fas fa-user-plus",
+                            "scoreDescriptors": {
+                                "1": "No additional support",
+                                "2": "Very little support",
+                                "3": "Moderate support",
+                                "4": "Significant support",
+                                "5": "Extensive support"
+                            }
+                        },
+                        {
+                            "metric": "Investment Capacity",
+                            "description": "Assesses the investor's ability to meet your funding needs.",
+                            "weight": 15,
+                            "icon": "fas fa-wallet",
+                            "scoreDescriptors": {
+                                "1": "Very limited capacity",
+                                "2": "Small capacity",
+                                "3": "Moderate capacity",
+                                "4": "Large capacity",
+                                "5": "Very large capacity"
+                            }
+                        },
+                        {
+                            "metric": "Experience with Startups",
+                            "description": "Measures the investor's background in investing in early-stage startups.",
+                            "weight": 15,
+                            "icon": "fas fa-lightbulb",
+                            "scoreDescriptors": {
+                                "1": "No experience",
+                                "2": "Limited experience",
+                                "3": "Moderate experience",
+                                "4": "Considerable experience",
+                                "5": "Extensive experience"
+                            }
+                        },
+                        {
+                            "metric": "Interest Alignment",
+                            "description": "Evaluates how well the investor's interests align with your industry and objectives.",
+                            "weight": 10,
+                            "icon": "fas fa-heart",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Low alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Perfect alignment"
+                            }
+                        },
+                        {
+                            "metric": "Transparency",
+                            "description": "Assesses openness in communication regarding expectations and terms.",
+                            "weight": 10,
+                            "icon": "fas fa-eye",
+                            "scoreDescriptors": {
+                                "1": "Very opaque",
+                                "2": "Somewhat opaque",
+                                "3": "Moderately transparent",
+                                "4": "Mostly transparent",
+                                "5": "Fully transparent"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Mentorship Opportunities",
-                    "description": "Evaluates the potential for valuable mentorship.",
-                    "weight": 15,
-                    "icon": "fas fa-chalkboard-teacher",
-                    "scoreDescriptors": {
-                        "1": "No mentorship",
-                        "2": "Limited mentorship",
-                        "3": "Moderate mentorship",
-                        "4": "Good mentorship",
-                        "5": "Excellent mentorship"
-                    }
+                    "name": "Venture Capital Firms",
+                    "icon": "fas fa-building",
+                    "criteria": [
+                        {
+                            "metric": "Reputation and Brand",
+                            "description": "Measures the prestige and recognition of the VC firm in the industry.",
+                            "weight": 15,
+                            "icon": "fas fa-award",
+                            "scoreDescriptors": {
+                                "1": "Very poor reputation",
+                                "2": "Poor reputation",
+                                "3": "Average reputation",
+                                "4": "Good reputation",
+                                "5": "Excellent reputation"
+                            }
+                        },
+                        {
+                            "metric": "Partner Engagement",
+                            "description": "Evaluates the involvement and interest level of senior partners.",
+                            "weight": 15,
+                            "icon": "fas fa-user-tie",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Low engagement",
+                                "3": "Moderate engagement",
+                                "4": "High engagement",
+                                "5": "Very high engagement"
+                            }
+                        },
+                        {
+                            "metric": "Term Sheet Favourability",
+                            "description": "Assesses the fairness and attractiveness of the proposed investment terms.",
+                            "weight": 15,
+                            "icon": "fas fa-file-contract",
+                            "scoreDescriptors": {
+                                "1": "Very unfavourable",
+                                "2": "Unfavourable",
+                                "3": "Neutral",
+                                "4": "Favourable",
+                                "5": "Very favourable"
+                            }
+                        },
+                        {
+                            "metric": "Decision Timeline",
+                            "description": "Measures the length of time the firm takes to make an investment decision.",
+                            "weight": 10,
+                            "icon": "fas fa-stopwatch",
+                            "scoreDescriptors": {
+                                "1": "Very long",
+                                "2": "Long",
+                                "3": "Moderate",
+                                "4": "Short",
+                                "5": "Very short"
+                            }
+                        },
+                        {
+                            "metric": "Portfolio Synergy",
+                            "description": "Evaluates the potential for collaboration with other portfolio companies.",
+                            "weight": 10,
+                            "icon": "fas fa-sitemap",
+                            "scoreDescriptors": {
+                                "1": "No synergy",
+                                "2": "Limited synergy",
+                                "3": "Moderate synergy",
+                                "4": "High synergy",
+                                "5": "Very high synergy"
+                            }
+                        },
+                        {
+                            "metric": "Industry Expertise",
+                            "description": "Assesses the firm's knowledge and experience in your startup's industry.",
+                            "weight": 10,
+                            "icon": "fas fa-industry",
+                            "scoreDescriptors": {
+                                "1": "No expertise",
+                                "2": "Limited expertise",
+                                "3": "Moderate expertise",
+                                "4": "High expertise",
+                                "5": "Very high expertise"
+                            }
+                        },
+                        {
+                            "metric": "Post-Investment Support",
+                            "description": "Measures the resources and support the firm offers after investment.",
+                            "weight": 10,
+                            "icon": "fas fa-hands-helping",
+                            "scoreDescriptors": {
+                                "1": "No support",
+                                "2": "Limited support",
+                                "3": "Moderate support",
+                                "4": "High support",
+                                "5": "Very high support"
+                            }
+                        },
+                        {
+                            "metric": "Cultural Fit",
+                            "description": "Considers how well the firm's culture aligns with your company values.",
+                            "weight": 10,
+                            "icon": "fas fa-users-cog",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Limited alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Very high alignment"
+                            }
+                        },
+                        {
+                            "metric": "Investor Network",
+                            "description": "Evaluates the firm's connections with other investors for future funding rounds.",
+                            "weight": 5,
+                            "icon": "fas fa-network-wired",
+                            "scoreDescriptors": {
+                                "1": "No network",
+                                "2": "Limited network",
+                                "3": "Moderate network",
+                                "4": "High network",
+                                "5": "Very high network"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Alumni Network Access",
-                    "description": "Measures the benefits of connecting with the alumni network.",
-                    "weight": 10,
+                    "name": "Corporate Investors",
+                    "icon": "fas fa-city",
+                    "criteria": [
+                        {
+                            "metric": "Strategic Alignment",
+                            "description": "Measures how closely the corporation's goals align with your startup's objectives.",
+                            "weight": 20,
+                            "icon": "fas fa-sync-alt",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Low alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Very high alignment"
+                            }
+                        },
+                        {
+                            "metric": "Integration Potential",
+                            "description": "Assesses the opportunities for partnerships or integrations.",
+                            "weight": 15,
+                            "icon": "fas fa-project-diagram",
+                            "scoreDescriptors": {
+                                "1": "No potential",
+                                "2": "Low potential",
+                                "3": "Moderate potential",
+                                "4": "High potential",
+                                "5": "Very high potential"
+                            }
+                        },
+                        {
+                            "metric": "Control Terms",
+                            "description": "Evaluates any restrictions or controls the investor wants to impose.",
+                            "weight": 15,
+                            "icon": "fas fa-handcuffs",
+                            "scoreDescriptors": {
+                                "1": "Very restrictive",
+                                "2": "Somewhat restrictive",
+                                "3": "Moderately restrictive",
+                                "4": "Lightly restrictive",
+                                "5": "Not restrictive"
+                            }
+                        },
+                        {
+                            "metric": "Reputation in Industry",
+                            "description": "Measures the corporation's standing and influence in your market.",
+                            "weight": 15,
+                            "icon": "fas fa-star-half-alt",
+                            "scoreDescriptors": {
+                                "1": "Very poor reputation",
+                                "2": "Poor reputation",
+                                "3": "Average reputation",
+                                "4": "Good reputation",
+                                "5": "Excellent reputation"
+                            }
+                        },
+                        {
+                            "metric": "Conflict of Interest Risks",
+                            "description": "Assesses potential conflicts that may arise from the investment.",
+                            "weight": 10,
+                            "icon": "fas fa-exclamation-triangle",
+                            "scoreDescriptors": {
+                                "1": "Very high risk",
+                                "2": "High risk",
+                                "3": "Moderate risk",
+                                "4": "Low risk",
+                                "5": "Very low risk"
+                            }
+                        },
+                        {
+                            "metric": "Decision Hierarchy",
+                            "description": "Evaluates the complexity of the corporation's decision-making process.",
+                            "weight": 10,
+                            "icon": "fas fa-layer-group",
+                            "scoreDescriptors": {
+                                "1": "Very complex",
+                                "2": "Complex",
+                                "3": "Moderately complex",
+                                "4": "Simple",
+                                "5": "Very simple"
+                            }
+                        },
+                        {
+                            "metric": "Confidentiality Assurance",
+                            "description": "Measures the safeguards in place to protect your proprietary information.",
+                            "weight": 10,
+                            "icon": "fas fa-shield-virus",
+                            "scoreDescriptors": {
+                                "1": "No safeguards",
+                                "2": "Limited safeguards",
+                                "3": "Moderate safeguards",
+                                "4": "High safeguards",
+                                "5": "Very high safeguards"
+                            }
+                        },
+                        {
+                            "metric": "Future Acquisition Interest",
+                            "description": "Assesses the likelihood that the corporation may aim to acquire your startup.",
+                            "weight": 5,
+                            "icon": "fas fa-handshake-alt-slash",
+                            "scoreDescriptors": {
+                                "1": "No interest",
+                                "2": "Low interest",
+                                "3": "Moderate interest",
+                                "4": "High interest",
+                                "5": "Very high interest"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Incubators and Accelerators",
+                    "icon": "fas fa-rocket",
+                    "criteria": [
+                        {
+                            "metric": "Program Benefits",
+                            "description": "Evaluates the value provided in terms of mentorship, resources, and networking.",
+                            "weight": 25,
+                            "icon": "fas fa-gem",
+                            "scoreDescriptors": {
+                                "1": "No benefits",
+                                "2": "Limited benefits",
+                                "3": "Moderate benefits",
+                                "4": "High benefits",
+                                "5": "Very high benefits"
+                            }
+                        },
+                        {
+                            "metric": "Equity Taken",
+                            "description": "Measures the amount of equity the program requires for participation.",
+                            "weight": 20,
+                            "icon": "fas fa-percentage",
+                            "scoreDescriptors": {
+                                "1": "Very high equity",
+                                "2": "High equity",
+                                "3": "Moderate equity",
+                                "4": "Low equity",
+                                "5": "Very low equity"
+                            }
+                        },
+                        {
+                            "metric": "Alumni Success",
+                            "description": "Assesses the track record of the program's graduates.",
+                            "weight": 15,
+                            "icon": "fas fa-graduation-cap",
+                            "scoreDescriptors": {
+                                "1": "No success",
+                                "2": "Limited success",
+                                "3": "Moderate success",
+                                "4": "High success",
+                                "5": "Very high success"
+                            }
+                        },
+                        {
+                            "metric": "Cohort Fit",
+                            "description": "Evaluates how well your startup aligns with the focus of the cohort.",
+                            "weight": 15,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "No fit",
+                                "2": "Limited fit",
+                                "3": "Moderate fit",
+                                "4": "High fit",
+                                "5": "Perfect fit"
+                            }
+                        },
+                        {
+                            "metric": "Program Duration and Intensity",
+                            "description": "Considers the time commitment and workload required.",
+                            "weight": 10,
+                            "icon": "fas fa-hourglass-half",
+                            "scoreDescriptors": {
+                                "1": "Very high duration and intensity",
+                                "2": "High duration and intensity",
+                                "3": "Moderate duration and intensity",
+                                "4": "Low duration and intensity",
+                                "5": "Very low duration and intensity"
+                            }
+                        },
+                        {
+                            "metric": "Location and Logistics",
+                            "description": "Measures the impact of the program's location on your operations.",
+                            "weight": 10,
+                            "icon": "fas fa-map-marker-alt",
+                            "scoreDescriptors": {
+                                "1": "Very inconvenient",
+                                "2": "Inconvenient",
+                                "3": "Moderately convenient",
+                                "4": "Convenient",
+                                "5": "Very convenient"
+                            }
+                        },
+                        {
+                            "metric": "Post-Program Support",
+                            "description": "Assesses the level of ongoing assistance after program completion.",
+                            "weight": 5,
+                            "icon": "fas fa-heart",
+                            "scoreDescriptors": {
+                                "1": "No support",
+                                "2": "Limited support",
+                                "3": "Moderate support",
+                                "4": "Considerable support",
+                                "5": "Extensive support"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Crowdfunding Platforms",
                     "icon": "fas fa-users",
-                    "scoreDescriptors": {
-                        "1": "No access",
-                        "2": "Limited access",
-                        "3": "Moderate access",
-                        "4": "Good access",
-                        "5": "Excellent access"
-                    }
+                    "criteria": [
+                        {
+                            "metric": "Platform Reputation",
+                            "description": "Measures the credibility and popularity of the crowdfunding platform.",
+                            "weight": 20,
+                            "icon": "fas fa-chess-queen",
+                            "scoreDescriptors": {
+                                "1": "Very poor reputation",
+                                "2": "Poor reputation",
+                                "3": "Average reputation",
+                                "4": "Good reputation",
+                                "5": "Excellent reputation"
+                            }
+                        },
+                        {
+                            "metric": "Funding Success Rate",
+                            "description": "Assesses the likelihood of reaching your funding goal on the platform.",
+                            "weight": 20,
+                            "icon": "fas fa-bullseye-arrow",
+                            "scoreDescriptors": {
+                                "1": "Very low success rate",
+                                "2": "Low success rate",
+                                "3": "Moderate success rate",
+                                "4": "High success rate",
+                                "5": "Very high success rate"
+                            }
+                        },
+                        {
+                            "metric": "Fees and Costs",
+                            "description": "Evaluates the financial cost of using the platform.",
+                            "weight": 15,
+                            "icon": "fas fa-coins",
+                            "scoreDescriptors": {
+                                "1": "Very high fees",
+                                "2": "High fees",
+                                "3": "Moderate fees",
+                                "4": "Low fees",
+                                "5": "Very low fees"
+                            }
+                        },
+                        {
+                            "metric": "Audience Match",
+                            "description": "Measures how well the platform's user base matches your target audience.",
+                            "weight": 15,
+                            "icon": "fas fa-users-crown",
+                            "scoreDescriptors": {
+                                "1": "No match",
+                                "2": "Low match",
+                                "3": "Moderate match",
+                                "4": "High match",
+                                "5": "Perfect match"
+                            }
+                        },
+                        {
+                            "metric": "Campaign Support Tools",
+                            "description": "Assesses the availability of promotional and analytical tools.",
+                            "weight": 10,
+                            "icon": "fas fa-toolbox",
+                            "scoreDescriptors": {
+                                "1": "No tools",
+                                "2": "Limited tools",
+                                "3": "Moderate tools",
+                                "4": "Good tools",
+                                "5": "Excellent tools"
+                            }
+                        },
+                        {
+                            "metric": "Legal and Compliance",
+                            "description": "Considers the regulatory requirements and protections.",
+                            "weight": 10,
+                            "icon": "fas fa-shield-alt",
+                            "scoreDescriptors": {
+                                "1": "No compliance",
+                                "2": "Limited compliance",
+                                "3": "Moderate compliance",
+                                "4": "Good compliance",
+                                "5": "Excellent compliance"
+                            }
+                        },
+                        {
+                            "metric": "Community Engagement",
+                            "description": "Evaluates the level of interaction and support from the platform community.",
+                            "weight": 10,
+                            "icon": "fas fa-hands-helping",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Low engagement",
+                                "3": "Moderate engagement",
+                                "4": "High engagement",
+                                "5": "Very high engagement"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Cultural Fit",
-                    "description": "Assesses how well your company culture aligns with 500 Startups.",
-                    "weight": 10,
-                    "icon": "fas fa-heart",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Limited alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Perfect alignment"
-                    }
+                    "name": "Government Grants and Funds",
+                    "icon": "fas fa-university",
+                    "criteria": [
+                        {
+                            "metric": "Eligibility",
+                            "description": "Assesses how well your startup meets the criteria for the grant or fund.",
+                            "weight": 25,
+                            "icon": "fas fa-check-double",
+                            "scoreDescriptors": {
+                                "1": "Not eligible",
+                                "2": "Slightly eligible",
+                                "3": "Moderately eligible",
+                                "4": "Highly eligible",
+                                "5": "Completely eligible"
+                            }
+                        },
+                        {
+                            "metric": "Application Complexity",
+                            "description": "Evaluates the effort required to complete the application process.",
+                            "weight": 20,
+                            "icon": "fas fa-file-alt",
+                            "scoreDescriptors": {
+                                "1": "Extremely complex",
+                                "2": "Very complex",
+                                "3": "Moderately complex",
+                                "4": "Slightly complex",
+                                "5": "Not complex"
+                            }
+                        },
+                        {
+                            "metric": "Funding Amount",
+                            "description": "Measures the potential financial benefit.",
+                            "weight": 15,
+                            "icon": "fas fa-hand-holding-usd",
+                            "scoreDescriptors": {
+                                "1": "Very low amount",
+                                "2": "Low amount",
+                                "3": "Moderate amount",
+                                "4": "High amount",
+                                "5": "Very high amount"
+                            }
+                        },
+                        {
+                            "metric": "Restrictions and Obligations",
+                            "description": "Assesses any limitations or requirements tied to the funding.",
+                            "weight": 15,
+                            "icon": "fas fa-exclamation-circle",
+                            "scoreDescriptors": {
+                                "1": "Very restrictive",
+                                "2": "Restrictive",
+                                "3": "Moderately restrictive",
+                                "4": "Slightly restrictive",
+                                "5": "Not restrictive"
+                            }
+                        },
+                        {
+                            "metric": "Disbursement Timeline",
+                            "description": "Considers how quickly funds will be available.",
+                            "weight": 10,
+                            "icon": "fas fa-calendar-check",
+                            "scoreDescriptors": {
+                                "1": "Very long",
+                                "2": "Long",
+                                "3": "Moderate",
+                                "4": "Short",
+                                "5": "Very short"
+                            }
+                        },
+                        {
+                            "metric": "Impact on Equity",
+                            "description": "Evaluates whether the funding affects ownership structure.",
+                            "weight": 10,
+                            "icon": "fas fa-chart-pie",
+                            "scoreDescriptors": {
+                                "1": "Major impact",
+                                "2": "Significant impact",
+                                "3": "Moderate impact",
+                                "4": "Minor impact",
+                                "5": "No impact"
+                            }
+                        },
+                        {
+                            "metric": "Reputation and Credibility",
+                            "description": "Measures the prestige associated with receiving the grant or fund.",
+                            "weight": 5,
+                            "icon": "fas fa-medal",
+                            "scoreDescriptors": {
+                                "1": "No reputation",
+                                "2": "Poor reputation",
+                                "3": "Average reputation",
+                                "4": "Good reputation",
+                                "5": "Excellent reputation"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Follow-on Funding Potential",
-                    "description": "Considers the likelihood of additional investment post-program.",
-                    "weight": 10,
-                    "icon": "fas fa-arrow-circle-up",
-                    "scoreDescriptors": {
-                        "1": "Very unlikely",
-                        "2": "Unlikely",
-                        "3": "Moderately likely",
-                        "4": "Likely",
-                        "5": "Very likely"
-                    }
+                    "name": "Family and Friends",
+                    "icon": "fas fa-user-friends",
+                    "criteria": [
+                        {
+                            "metric": "Trust Level",
+                            "description": "Measures the level of trust and support from the individual.",
+                            "weight": 25,
+                            "icon": "fas fa-handshake",
+                            "scoreDescriptors": {
+                                "1": "No trust",
+                                "2": "Little trust",
+                                "3": "Moderate trust",
+                                "4": "High trust",
+                                "5": "Complete trust"
+                            }
+                        },
+                        {
+                            "metric": "Financial Capacity",
+                            "description": "Assesses their ability to provide the required funds without hardship.",
+                            "weight": 20,
+                            "icon": "fas fa-piggy-bank",
+                            "scoreDescriptors": {
+                                "1": "No capacity",
+                                "2": "Limited capacity",
+                                "3": "Moderate capacity",
+                                "4": "High capacity",
+                                "5": "Very high capacity"
+                            }
+                        },
+                        {
+                            "metric": "Relationship Impact",
+                            "description": "Considers the potential effect on personal relationships.",
+                            "weight": 20,
+                            "icon": "fas fa-heart-broken",
+                            "scoreDescriptors": {
+                                "1": "Very negative impact",
+                                "2": "Negative impact",
+                                "3": "Neutral impact",
+                                "4": "Positive impact",
+                                "5": "Very positive impact"
+                            }
+                        },
+                        {
+                            "metric": "Involvement Level",
+                            "description": "Evaluates their expectation for involvement in the business.",
+                            "weight": 15,
+                            "icon": "fas fa-user-tag",
+                            "scoreDescriptors": {
+                                "1": "No involvement",
+                                "2": "Little involvement",
+                                "3": "Moderate involvement",
+                                "4": "High involvement",
+                                "5": "Very high involvement"
+                            }
+                        },
+                        {
+                            "metric": "Repayment Flexibility",
+                            "description": "Measures the leniency in repayment terms or expectations.",
+                            "weight": 10,
+                            "icon": "fas fa-sliders-h",
+                            "scoreDescriptors": {
+                                "1": "Very inflexible",
+                                "2": "Inflexible",
+                                "3": "Moderately flexible",
+                                "4": "Flexible",
+                                "5": "Very flexible"
+                            }
+                        },
+                        {
+                            "metric": "Communication Clarity",
+                            "description": "Assesses how openly terms and expectations are discussed.",
+                            "weight": 10,
+                            "icon": "fas fa-comments",
+                            "scoreDescriptors": {
+                                "1": "Very unclear",
+                                "2": "Unclear",
+                                "3": "Moderately clear",
+                                "4": "Clear",
+                                "5": "Very clear"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Initial Feedback",
-                    "description": "Evaluates the constructiveness of any initial feedback received.",
-                    "weight": 5,
-                    "icon": "fas fa-comment-alt",
-                    "scoreDescriptors": {
-                        "1": "No feedback",
-                        "2": "Poor feedback",
-                        "3": "Moderate feedback",
-                        "4": "Good feedback",
-                        "5": "Excellent feedback"
-                    }
+                    "name": "Y Combinator Engagement",
+                    "icon": "fas fa-lightbulb",
+                    "criteria": [
+                        {
+                            "metric": "Application Progress",
+                            "description": "Assesses how far you've progressed in the YC application process.",
+                            "weight": 20,
+                            "icon": "fas fa-clipboard-check",
+                            "scoreDescriptors": {
+                                "1": "No progress",
+                                "2": "Minimal progress",
+                                "3": "Moderate progress",
+                                "4": "Significant progress",
+                                "5": "Full progress"
+                            }
+                        },
+                        {
+                            "metric": "Interaction Quality",
+                            "description": "Evaluates the quality of interactions with YC partners or representatives.",
+                            "weight": 15,
+                            "icon": "fas fa-user-shield",
+                            "scoreDescriptors": {
+                                "1": "Very poor quality",
+                                "2": "Poor quality",
+                                "3": "Moderate quality",
+                                "4": "Good quality",
+                                "5": "Excellent quality"
+                            }
+                        },
+                        {
+                            "metric": "Fit with YC Thesis",
+                            "description": "Measures alignment with YC's areas of interest and investment patterns.",
+                            "weight": 15,
+                            "icon": "fas fa-thumbs-up",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Low alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Very high alignment"
+                            }
+                        },
+                        {
+                            "metric": "Feedback Received",
+                            "description": "Assesses the usefulness of any feedback or advice provided.",
+                            "weight": 15,
+                            "icon": "fas fa-comment-dots",
+                            "scoreDescriptors": {
+                                "1": "No feedback",
+                                "2": "Poor feedback",
+                                "3": "Moderate feedback",
+                                "4": "Good feedback",
+                                "5": "Excellent feedback"
+                            }
+                        },
+                        {
+                            "metric": "Referral Strength",
+                            "description": "Evaluates the influence of any referrals or recommendations you have.",
+                            "weight": 10,
+                            "icon": "fas fa-user-friends",
+                            "scoreDescriptors": {
+                                "1": "No referrals",
+                                "2": "Weak referrals",
+                                "3": "Moderate referrals",
+                                "4": "Strong referrals",
+                                "5": "Very strong referrals"
+                            }
+                        },
+                        {
+                            "metric": "Network Engagement",
+                            "description": "Measures how actively you are engaging with the YC community.",
+                            "weight": 10,
+                            "icon": "fas fa-network-wired",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Low engagement",
+                                "3": "Moderate engagement",
+                                "4": "High engagement",
+                                "5": "Very high engagement"
+                            }
+                        },
+                        {
+                            "metric": "Timing and Season",
+                            "description": "Considers the timing of your application relative to YC's funding cycles.",
+                            "weight": 10,
+                            "icon": "fas fa-calendar-alt",
+                            "scoreDescriptors": {
+                                "1": "Very bad timing",
+                                "2": "Bad timing",
+                                "3": "Neutral timing",
+                                "4": "Good timing",
+                                "5": "Very good timing"
+                            }
+                        },
+                        {
+                            "metric": "Previous Applications",
+                            "description": "Assesses any improvements since previous applications to YC.",
+                            "weight": 5,
+                            "icon": "fas fa-sync",
+                            "scoreDescriptors": {
+                                "1": "No improvement",
+                                "2": "Little improvement",
+                                "3": "Moderate improvement",
+                                "4": "Significant improvement",
+                                "5": "Very significant improvement"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "500 Startups Engagement",
+                    "icon": "fas fa-globe",
+                    "criteria": [
+                        {
+                            "metric": "Geographic Focus Match",
+                            "description": "Evaluates alignment with 500 Startups' regional programs.",
+                            "weight": 20,
+                            "icon": "fas fa-map",
+                            "scoreDescriptors": {
+                                "1": "No match",
+                                "2": "Low match",
+                                "3": "Moderate match",
+                                "4": "High match",
+                                "5": "Perfect match"
+                            }
+                        },
+                        {
+                            "metric": "Program Relevance",
+                            "description": "Measures how well your startup fits with specific 500 Startups programs.",
+                            "weight": 15,
+                            "icon": "fas fa-rocket",
+                            "scoreDescriptors": {
+                                "1": "No relevance",
+                                "2": "Low relevance",
+                                "3": "Moderate relevance",
+                                "4": "High relevance",
+                                "5": "Very high relevance"
+                            }
+                        },
+                        {
+                            "metric": "Staff Engagement",
+                            "description": "Assesses the level of interest shown by 500 Startups staff.",
+                            "weight": 15,
+                            "icon": "fas fa-user-astronaut",
+                            "scoreDescriptors": {
+                                "1": "No engagement",
+                                "2": "Low engagement",
+                                "3": "Moderate engagement",
+                                "4": "High engagement",
+                                "5": "Very high engagement"
+                            }
+                        },
+                        {
+                            "metric": "Mentorship Opportunities",
+                            "description": "Evaluates the potential for valuable mentorship.",
+                            "weight": 15,
+                            "icon": "fas fa-chalkboard-teacher",
+                            "scoreDescriptors": {
+                                "1": "No mentorship",
+                                "2": "Limited mentorship",
+                                "3": "Moderate mentorship",
+                                "4": "Good mentorship",
+                                "5": "Excellent mentorship"
+                            }
+                        },
+                        {
+                            "metric": "Alumni Network Access",
+                            "description": "Measures the benefits of connecting with the alumni network.",
+                            "weight": 10,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "No access",
+                                "2": "Limited access",
+                                "3": "Moderate access",
+                                "4": "Good access",
+                                "5": "Excellent access"
+                            }
+                        },
+                        {
+                            "metric": "Cultural Fit",
+                            "description": "Assesses how well your company culture aligns with 500 Startups.",
+                            "weight": 10,
+                            "icon": "fas fa-heart",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Limited alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Perfect alignment"
+                            }
+                        },
+                        {
+                            "metric": "Follow-on Funding Potential",
+                            "description": "Considers the likelihood of additional investment post-program.",
+                            "weight": 10,
+                            "icon": "fas fa-arrow-circle-up",
+                            "scoreDescriptors": {
+                                "1": "Very unlikely",
+                                "2": "Unlikely",
+                                "3": "Moderately likely",
+                                "4": "Likely",
+                                "5": "Very likely"
+                            }
+                        },
+                        {
+                            "metric": "Initial Feedback",
+                            "description": "Evaluates the constructiveness of any initial feedback received.",
+                            "weight": 5,
+                            "icon": "fas fa-comment-alt",
+                            "scoreDescriptors": {
+                                "1": "No feedback",
+                                "2": "Poor feedback",
+                                "3": "Moderate feedback",
+                                "4": "Good feedback",
+                                "5": "Excellent feedback"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Strategic Investors",
+                    "icon": "fas fa-chess",
+                    "criteria": [
+                        {
+                            "metric": "Long-Term Alignment",
+                            "description": "Measures the investor's commitment to a long-term partnership.",
+                            "weight": 20,
+                            "icon": "fas fa-infinity",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Limited alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Perfect alignment"
+                            }
+                        },
+                        {
+                            "metric": "Complementary Strengths",
+                            "description": "Assesses how the investor's strengths complement your weaknesses.",
+                            "weight": 15,
+                            "icon": "fas fa-puzzle-piece",
+                            "scoreDescriptors": {
+                                "1": "No complement",
+                                "2": "Limited complement",
+                                "3": "Moderate complement",
+                                "4": "High complement",
+                                "5": "Perfect complement"
+                            }
+                        },
+                        {
+                            "metric": "Market Access",
+                            "description": "Evaluates the investor's ability to open new markets for your startup.",
+                            "weight": 15,
+                            "icon": "fas fa-globe-asia",
+                            "scoreDescriptors": {
+                                "1": "No access",
+                                "2": "Limited access",
+                                "3": "Moderate access",
+                                "4": "High access",
+                                "5": "Excellent access"
+                            }
+                        },
+                        {
+                            "metric": "Resource Availability",
+                            "description": "Measures the resources the investor is willing to provide beyond capital.",
+                            "weight": 15,
+                            "icon": "fas fa-hands-helping",
+                            "scoreDescriptors": {
+                                "1": "No resources",
+                                "2": "Limited resources",
+                                "3": "Moderate resources",
+                                "4": "Considerable resources",
+                                "5": "Extensive resources"
+                            }
+                        },
+                        {
+                            "metric": "Exit Strategy Impact",
+                            "description": "Assesses how the partnership affects your potential exit strategies.",
+                            "weight": 10,
+                            "icon": "fas fa-door-open",
+                            "scoreDescriptors": {
+                                "1": "Very negative impact",
+                                "2": "Negative impact",
+                                "3": "Neutral impact",
+                                "4": "Positive impact",
+                                "5": "Very positive impact"
+                            }
+                        },
+                        {
+                            "metric": "Negotiation Flexibility",
+                            "description": "Evaluates the investor's willingness to negotiate terms.",
+                            "weight": 10,
+                            "icon": "fas fa-exchange-alt",
+                            "scoreDescriptors": {
+                                "1": "No flexibility",
+                                "2": "Limited flexibility",
+                                "3": "Moderate flexibility",
+                                "4": "Considerable flexibility",
+                                "5": "Complete flexibility"
+                            }
+                        },
+                        {
+                            "metric": "Cultural Fit",
+                            "description": "Measures alignment in company culture and values.",
+                            "weight": 10,
+                            "icon": "fas fa-handshake",
+                            "scoreDescriptors": {
+                                "1": "No alignment",
+                                "2": "Limited alignment",
+                                "3": "Moderate alignment",
+                                "4": "High alignment",
+                                "5": "Perfect alignment"
+                            }
+                        },
+                        {
+                            "metric": "Due Diligence Process",
+                            "description": "Assesses the thoroughness and reasonableness of their due diligence.",
+                            "weight": 5,
+                            "icon": "fas fa-search",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "name": "Private Equity Firms",
+                    "icon": "fas fa-chart-line",
+                    "criteria": [
+                        {
+                            "metric": "Investment Size Compatibility",
+                            "description": "Measures how well your funding needs match the firm's investment ranges.",
+                            "weight": 20,
+                            "icon": "fas fa-money-bill-wave",
+                            "scoreDescriptors": {
+                                "1": "Not compatible",
+                                "2": "Slightly compatible",
+                                "3": "Moderately compatible",
+                                "4": "Highly compatible",
+                                "5": "Perfectly compatible"
+                            }
+                        },
+                        {
+                            "metric": "Control Preferences",
+                            "description": "Assesses the level of control the firm wants over your company.",
+                            "weight": 15,
+                            "icon": "fas fa-sliders-h",
+                            "scoreDescriptors": {
+                                "1": "Very high control",
+                                "2": "High control",
+                                "3": "Moderate control",
+                                "4": "Low control",
+                                "5": "No control"
+                            }
+                        },
+                        {
+                            "metric": "Exit Timeline",
+                            "description": "Evaluates the firm's expected timeframe for return on investment.",
+                            "weight": 15,
+                            "icon": "fas fa-hourglass-end",
+                            "scoreDescriptors": {
+                                "1": "Very long",
+                                "2": "Long",
+                                "3": "Moderate",
+                                "4": "Short",
+                                "5": "Very short"
+                            }
+                        },
+                        {
+                            "metric": "Operational Involvement",
+                            "description": "Measures how much the firm wants to be involved in day-to-day operations.",
+                            "weight": 15,
+                            "icon": "fas fa-briefcase",
+                            "scoreDescriptors": {
+                                "1": "Very high involvement",
+                                "2": "High involvement",
+                                "3": "Moderate involvement",
+                                "4": "Low involvement",
+                                "5": "No involvement"
+                            }
+                        },
+                        {
+                            "metric": "Track Record",
+                            "description": "Assesses the firm's history of successful investments.",
+                            "weight": 10,
+                            "icon": "fas fa-trophy",
+                            "scoreDescriptors": {
+                                "1": "Very poor track record",
+                                "2": "Poor track record",
+                                "3": "Moderate track record",
+                                "4": "Good track record",
+                                "5": "Excellent track record"
+                            }
+                        },
+                        {
+                            "metric": "Industry Focus",
+                            "description": "Evaluates the firm's expertise in your industry.",
+                            "weight": 10,
+                            "icon": "fas fa-industry",
+                            "scoreDescriptors": {
+                                "1": "No expertise",
+                                "2": "Limited expertise",
+                                "3": "Moderate expertise",
+                                "4": "Considerable expertise",
+                                "5": "Extensive expertise"
+                            }
+                        },
+                        {
+                            "metric": "Portfolio Synergies",
+                            "description": "Considers potential synergies with other companies in their portfolio.",
+                            "weight": 10,
+                            "icon": "fas fa-project-diagram",
+                            "scoreDescriptors": {
+                                "1": "No synergy",
+                                "2": "Limited synergy",
+                                "3": "Moderate synergy",
+                                "4": "High synergy",
+                                "5": "Very high synergy"
+                            }
+                        },
+                        {
+                            "metric": "Financial Engineering",
+                            "description": "Assesses the complexity of the financial structures proposed.",
+                            "weight": 5,
+                            "icon": "fas fa-calculator",
+                            "scoreDescriptors": {
+                                "1": "Very complex",
+                                "2": "Complex",
+                                "3": "Moderate",
+                                "4": "Simple",
+                                "5": "Very simple"
+                            }
+                        }
+                    ]
                 }
             ]
         },
         {
-            "name": "Strategic Investors",
-            "icon": "fas fa-chess",
-            "criteria": [
+            "name": "Health",
+            "slug": "health",
+            "description": "Assess your likelihood of encountering common health issues.",
+            "icon": "fas fa-heartbeat",
+            "weight": 100,
+            "savename": "Person",
+            "profiles": [
                 {
-                    "metric": "Long-Term Alignment",
-                    "description": "Measures the investor's commitment to a long-term partnership.",
-                    "weight": 20,
-                    "icon": "fas fa-infinity",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Limited alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Perfect alignment"
-                    }
+                    "name": "Getting Sick",
+                    "icon": "fas fa-thermometer-half",
+                    "criteria": [
+                        {
+                            "metric": "Exposure to Sick People",
+                            "description": "Measures how often you are in close contact with people who are unwell.",
+                            "weight": 30,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Constantly"
+                            }
+                        },
+                        {
+                            "metric": "Hand Hygiene",
+                            "description": "Frequency of washing or sanitising hands throughout the day.",
+                            "weight": 20,
+                            "icon": "fas fa-hand-sparkles",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Always"
+                            }
+                        },
+                        {
+                            "metric": "Sleep Quality",
+                            "description": "Assess the regularity and quality of your sleep.",
+                            "weight": 20,
+                            "icon": "fas fa-bed",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Diet Quality",
+                            "description": "Evaluates the nutritional value and balance of your diet.",
+                            "weight": 15,
+                            "icon": "fas fa-apple-alt",
+                            "scoreDescriptors": {
+                                "1": "Very unhealthy",
+                                "2": "Unhealthy",
+                                "3": "Moderate",
+                                "4": "Healthy",
+                                "5": "Very healthy"
+                            }
+                        },
+                        {
+                            "metric": "Exercise Regularity",
+                            "description": "Frequency of engaging in physical activities or exercise.",
+                            "weight": 10,
+                            "icon": "fas fa-running",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Always"
+                            }
+                        },
+                        {
+                            "metric": "Stress Levels",
+                            "description": "Measures the average level of stress you experience in daily life.",
+                            "weight": 5,
+                            "icon": "fas fa-heart-pulse",
+                            "scoreDescriptors": {
+                                "1": "Very high",
+                                "2": "High",
+                                "3": "Moderate",
+                                "4": "Low",
+                                "5": "Very low"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Complementary Strengths",
-                    "description": "Assesses how the investor's strengths complement your weaknesses.",
-                    "weight": 15,
-                    "icon": "fas fa-puzzle-piece",
-                    "scoreDescriptors": {
-                        "1": "No complement",
-                        "2": "Limited complement",
-                        "3": "Moderate complement",
-                        "4": "High complement",
-                        "5": "Perfect complement"
-                    }
+                    "name": "Children",
+                    "icon": "fas fa-baby-carriage",
+                    "criteria": [
+                        {
+                            "metric": "School Attendance",
+                            "description": "Frequency of child attending school or daycare, where germs are easily spread.",
+                            "weight": 30,
+                            "icon": "fas fa-school",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Daily"
+                            }
+                        },
+                        {
+                            "metric": "Playdate Frequency",
+                            "description": "How often does your child have playdates or interact with other children outside of school?",
+                            "weight": 25,
+                            "icon": "fas fa-child",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Very often"
+                            }
+                        },
+                        {
+                            "metric": "Vaccine Status",
+                            "description": "Measure of how up-to-date your child is with recommended vaccinations.",
+                            "weight": 20,
+                            "icon": "fas fa-syringe",
+                            "scoreDescriptors": {
+                                "1": "Not vaccinated",
+                                "2": "Partially vaccinated",
+                                "3": "Moderately vaccinated",
+                                "4": "Well vaccinated",
+                                "5": "Fully up-to-date"
+                            }
+                        },
+                        {
+                            "metric": "Home Hygiene",
+                            "description": "Assess the cleanliness standards of your home environment.",
+                            "weight": 15,
+                            "icon": "fas fa-cleaning-services",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Average",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Child's Diet",
+                            "description": "Evaluate the healthiness and balance of your child's diet.",
+                            "weight": 10,
+                            "icon": "fas fa-bread-slice",
+                            "scoreDescriptors": {
+                                "1": "Very unhealthy",
+                                "2": "Unhealthy",
+                                "3": "Moderate",
+                                "4": "Healthy",
+                                "5": "Very healthy"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Market Access",
-                    "description": "Evaluates the investor's ability to open new markets for your startup.",
-                    "weight": 15,
-                    "icon": "fas fa-globe-asia",
-                    "scoreDescriptors": {
-                        "1": "No access",
-                        "2": "Limited access",
-                        "3": "Moderate access",
-                        "4": "High access",
-                        "5": "Excellent access"
-                    }
+                    "name": "Mental Health",
+                    "icon": "fas fa-brain",
+                    "criteria": [
+                        {
+                            "metric": "Social Connections",
+                            "description": "Evaluates the strength and frequency of social interactions and connections.",
+                            "weight": 25,
+                            "icon": "fas fa-users",
+                            "scoreDescriptors": {
+                                "1": "Very weak and infrequent",
+                                "2": "Weak and infrequent",
+                                "3": "Moderate social interactions",
+                                "4": "Strong social connections",
+                                "5": "Very strong and regular"
+                            }
+                        },
+                        {
+                            "metric": "Mental Wellness Activities",
+                            "description": "Frequency of engaging in activities that promote mental well-being.",
+                            "weight": 20,
+                            "icon": "fas fa-lotus-position",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Always"
+                            }
+                        },
+                        {
+                            "metric": "Work-Life Balance",
+                            "description": "Measures your balance between work responsibilities and personal life.",
+                            "weight": 20,
+                            "icon": "fas fa-balance-scale",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Sleep Regularity",
+                            "description": "Assesses the consistency and regularity of your sleep schedule.",
+                            "weight": 15,
+                            "icon": "fas fa-clock",
+                            "scoreDescriptors": {
+                                "1": "Very inconsistent",
+                                "2": "Inconsistent",
+                                "3": "Moderately consistent",
+                                "4": "Consistent",
+                                "5": "Very consistent"
+                            }
+                        },
+                        {
+                            "metric": "Stress Management",
+                            "description": "Evaluates your strategies and effectiveness in managing stress.",
+                            "weight": 10,
+                            "icon": "fas fa-meditate",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Access to Mental Health Support",
+                            "description": "Measures how easily you can access professional mental health support.",
+                            "weight": 10,
+                            "icon": "fas fa-hand-holding-heart",
+                            "scoreDescriptors": {
+                                "1": "Very difficult",
+                                "2": "Difficult",
+                                "3": "Moderately easy",
+                                "4": "Easy",
+                                "5": "Very easy"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Resource Availability",
-                    "description": "Measures the resources the investor is willing to provide beyond capital.",
-                    "weight": 15,
-                    "icon": "fas fa-hands-helping",
-                    "scoreDescriptors": {
-                        "1": "No resources",
-                        "2": "Limited resources",
-                        "3": "Moderate resources",
-                        "4": "Considerable resources",
-                        "5": "Extensive resources"
-                    }
-                },
-                {
-                    "metric": "Exit Strategy Impact",
-                    "description": "Assesses how the partnership affects your potential exit strategies.",
-                    "weight": 10,
-                    "icon": "fas fa-door-open",
-                    "scoreDescriptors": {
-                        "1": "Very negative impact",
-                        "2": "Negative impact",
-                        "3": "Neutral impact",
-                        "4": "Positive impact",
-                        "5": "Very positive impact"
-                    }
-                },
-                {
-                    "metric": "Negotiation Flexibility",
-                    "description": "Evaluates the investor's willingness to negotiate terms.",
-                    "weight": 10,
-                    "icon": "fas fa-exchange-alt",
-                    "scoreDescriptors": {
-                        "1": "No flexibility",
-                        "2": "Limited flexibility",
-                        "3": "Moderate flexibility",
-                        "4": "Considerable flexibility",
-                        "5": "Complete flexibility"
-                    }
-                },
-                {
-                    "metric": "Cultural Fit",
-                    "description": "Measures alignment in company culture and values.",
-                    "weight": 10,
-                    "icon": "fas fa-handshake",
-                    "scoreDescriptors": {
-                        "1": "No alignment",
-                        "2": "Limited alignment",
-                        "3": "Moderate alignment",
-                        "4": "High alignment",
-                        "5": "Perfect alignment"
-                    }
-                },
-                {
-                    "metric": "Due Diligence Process",
-                    "description": "Assesses the thoroughness and reasonableness of their due diligence.",
-                    "weight": 5,
-                    "icon": "fas fa-search",
-                    "scoreDescriptors": {
-                        "1": "Very poor",
-                        "2": "Poor",
-                        "3": "Moderate",
-                        "4": "Good",
-                        "5": "Excellent"
-                    }
+                    "name": "Healthy Ageing",
+                    "icon": "fas fa-blind",
+                    "criteria": [
+                        {
+                            "metric": "Exercise Consistency",
+                            "description": "Frequency and regularity of physical activities tailored for ageing.",
+                            "weight": 25,
+                            "icon": "fas fa-walking",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Always"
+                            }
+                        },
+                        {
+                            "metric": "Nutrition Quality",
+                            "description": "Measures the quality and balance of your diet.",
+                            "weight": 20,
+                            "icon": "fas fa-carrot",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Mental Engagement",
+                            "description": "Evaluates how often you engage in activities that challenge the mind.",
+                            "weight": 20,
+                            "icon": "fas fa-brain",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Always"
+                            }
+                        },
+                        {
+                            "metric": "Independence Level",
+                            "description": "Measures your ability to perform daily activities independently.",
+                            "weight": 15,
+                            "icon": "fas fa-hands-helping",
+                            "scoreDescriptors": {
+                                "1": "Not independent",
+                                "2": "Slightly dependent",
+                                "3": "Moderately independent",
+                                "4": "Mostly independent",
+                                "5": "Fully independent"
+                            }
+                        },
+                        {
+                            "metric": "Healthcare Engagement",
+                            "description": "Assesses how often you visit healthcare professionals for check-ups and screenings.",
+                            "weight": 10,
+                            "icon": "fas fa-stethoscope",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Regularly"
+                            }
+                        },
+                        {
+                            "metric": "Community Involvement",
+                            "description": "Frequency of participation in community or social activities.",
+                            "weight": 10,
+                            "icon": "fas fa-people-arrows",
+                            "scoreDescriptors": {
+                                "1": "Never",
+                                "2": "Rarely",
+                                "3": "Sometimes",
+                                "4": "Often",
+                                "5": "Regularly"
+                            }
+                        }
+                    ]
                 }
             ]
         },
         {
-            "name": "Private Equity Firms",
-            "icon": "fas fa-chart-line",
-            "criteria": [
+            "name": "Travel",
+            "slug": "travel",
+            "description": "Assess your likelihood of having successful travel experiences.",
+            "icon": "fas fa-plane",
+            "weight": 3,
+            "savename": "Trip",
+            "profiles": [
                 {
-                    "metric": "Investment Size Compatibility",
-                    "description": "Measures how well your funding needs match the firm's investment ranges.",
-                    "weight": 20,
-                    "icon": "fas fa-money-bill-wave",
-                    "scoreDescriptors": {
-                        "1": "Not compatible",
-                        "2": "Slightly compatible",
-                        "3": "Moderately compatible",
-                        "4": "Highly compatible",
-                        "5": "Perfectly compatible"
-                    }
+                    "name": "Catching a Flight",
+                    "icon": "fas fa-plane-departure",
+                    "criteria": [
+                        {
+                            "metric": "Booking Confirmation",
+                            "description": "Ensures you have received and confirmed your flight booking.",
+                            "weight": 20,
+                            "icon": "fas fa-ticket-alt",
+                            "scoreDescriptors": {
+                                "1": "No confirmation",
+                                "2": "Uncertain confirmation",
+                                "3": "Confirmed but no details",
+                                "4": "Detailed confirmation",
+                                "5": "Detailed and double-checked"
+                            }
+                        },
+                        {
+                            "metric": "Packing Preparedness",
+                            "description": "Measures how well you have packed and prepared your luggage.",
+                            "weight": 20,
+                            "icon": "fas fa-suitcase",
+                            "scoreDescriptors": {
+                                "1": "Not packed at all",
+                                "2": "Poorly packed",
+                                "3": "Partially packed",
+                                "4": "Mostly packed",
+                                "5": "Fully packed and ready"
+                            }
+                        },
+                        {
+                            "metric": "Time Management",
+                            "description": "Evaluates your time management skills to ensure timely arrival at the airport.",
+                            "weight": 20,
+                            "icon": "fas fa-clock",
+                            "scoreDescriptors": {
+                                "1": "Constantly late",
+                                "2": "Often late",
+                                "3": "Occasionally late",
+                                "4": "Generally on time",
+                                "5": "Always on time"
+                            }
+                        },
+                        {
+                            "metric": "Travel Documents",
+                            "description": "Ensures all necessary travel documents are prepared and valid.",
+                            "weight": 20,
+                            "icon": "fas fa-passport",
+                            "scoreDescriptors": {
+                                "1": "No documents",
+                                "2": "Missing key documents",
+                                "3": "Partially prepared",
+                                "4": "Mostly prepared",
+                                "5": "Fully prepared and checked"
+                            }
+                        },
+                        {
+                            "metric": "Airport Security",
+                            "description": "Experience in navigating airport security smoothly.",
+                            "weight": 10,
+                            "icon": "fas fa-shield-alt",
+                            "scoreDescriptors": {
+                                "1": "No experience",
+                                "2": "Poor experience",
+                                "3": "Moderate experience",
+                                "4": "Good experience",
+                                "5": "Excellent experience"
+                            }
+                        },
+                        {
+                            "metric": "Health Precautions",
+                            "description": "Measures your preparedness for managing health-related issues while travelling.",
+                            "weight": 10,
+                            "icon": "fas fa-syringe",
+                            "scoreDescriptors": {
+                                "1": "No precautions",
+                                "2": "Very few precautions",
+                                "3": "Some precautions",
+                                "4": "Many precautions",
+                                "5": "Fully prepared with all necessary precautions"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Control Preferences",
-                    "description": "Assesses the level of control the firm wants over your company.",
-                    "weight": 15,
-                    "icon": "fas fa-sliders-h",
-                    "scoreDescriptors": {
-                        "1": "Very high control",
-                        "2": "High control",
-                        "3": "Moderate control",
-                        "4": "Low control",
-                        "5": "No control"
-                    }
+                    "name": "Traveling Internationally",
+                    "icon": "fas fa-globe",
+                    "criteria": [
+                        {
+                            "metric": "Passport Validity",
+                            "description": "Measures the validity and preparedness of your passport for international travel.",
+                            "weight": 20,
+                            "icon": "fas fa-passport",
+                            "scoreDescriptors": {
+                                "1": "Passport expired",
+                                "2": "Less than 3 months validity",
+                                "3": "3-6 months validity",
+                                "4": "6-12 months validity",
+                                "5": "More than 12 months validity"
+                            }
+                        },
+                        {
+                            "metric": "Visa Requirements",
+                            "description": "Ensures you have obtained the necessary visas for your destination.",
+                            "weight": 20,
+                            "icon": "fas fa-file-alt",
+                            "scoreDescriptors": {
+                                "1": "No visa",
+                                "2": "Applied but not received",
+                                "3": "Received but needs verification",
+                                "4": "Verified but not documented",
+                                "5": "Verified and fully documented"
+                            }
+                        },
+                        {
+                            "metric": "Travel Insurance",
+                            "description": "Measures how comprehensively you have covered yourself with travel insurance.",
+                            "weight": 15,
+                            "icon": "fas fa-shield-alt",
+                            "scoreDescriptors": {
+                                "1": "No insurance",
+                                "2": "Minimal coverage",
+                                "3": "Moderate coverage",
+                                "4": "Good coverage",
+                                "5": "Full comprehensive coverage"
+                            }
+                        },
+                        {
+                            "metric": "Language Skills",
+                            "description": "Assesses your ability to communicate in the local language of your destination.",
+                            "weight": 15,
+                            "icon": "fas fa-language",
+                            "scoreDescriptors": {
+                                "1": "No knowledge",
+                                "2": "Basic phrases",
+                                "3": "Conversational",
+                                "4": "Fluent",
+                                "5": "Fully fluent and proficient"
+                            }
+                        },
+                        {
+                            "metric": "Cultural Awareness",
+                            "description": "Evaluates your understanding and respect for the local customs and cultures.",
+                            "weight": 15,
+                            "icon": "fas fa-book-reader",
+                            "scoreDescriptors": {
+                                "1": "No awareness",
+                                "2": "Minimal awareness",
+                                "3": "Moderate awareness",
+                                "4": "High awareness",
+                                "5": "Extremely high awareness"
+                            }
+                        },
+                        {
+                            "metric": "Health Preparations",
+                            "description": "Measures your readiness in terms of vaccinations and medications for travel.",
+                            "weight": 15,
+                            "icon": "fas fa-prescription-bottle-alt",
+                            "scoreDescriptors": {
+                                "1": "No preparations",
+                                "2": "Minimal preparations",
+                                "3": "Moderate preparations",
+                                "4": "Significant preparations",
+                                "5": "Fully prepared"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Exit Timeline",
-                    "description": "Evaluates the firm's expected timeframe for return on investment.",
-                    "weight": 15,
-                    "icon": "fas fa-hourglass-end",
-                    "scoreDescriptors": {
-                        "1": "Very long",
-                        "2": "Long",
-                        "3": "Moderate",
-                        "4": "Short",
-                        "5": "Very short"
-                    }
-                },
+                    "name": "Going on a Road Trip",
+                    "icon": "fas fa-car",
+                    "criteria": [
+                        {
+                            "metric": "Vehicle Condition",
+                            "description": "Evaluates the condition and readiness of your vehicle for a long trip.",
+                            "weight": 25,
+                            "icon": "fas fa-car-crash",
+                            "scoreDescriptors": {
+                                "1": "Poor condition",
+                                "2": "Fair condition",
+                                "3": "Good condition",
+                                "4": "Very good condition",
+                                "5": "Excellent condition"
+                            }
+                        },
+                        {
+                            "metric": "Route Planning",
+                            "description": "Assesses the thoroughness of planning your trip route, including stops and accommodations.",
+                            "weight": 20,
+                            "icon": "fas fa-map",
+                            "scoreDescriptors": {
+                                "1": "No planning",
+                                "2": "Poor planning",
+                                "3": "Moderate planning",
+                                "4": "Good planning",
+                                "5": "Excellent planning"
+                            }
+                        },
+                        {
+                            "metric": "Supply Preparedness",
+                            "description": "Measures your readiness with essentials like food, water, and emergency kits.",
+                            "weight": 20,
+                            "icon": "fas fa-box",
+                            "scoreDescriptors": {
+                                "1": "No supplies",
+                                "2": "Very few supplies",
+                                "3": "Some supplies",
+                                "4": "Many supplies",
+                                "5": "Fully stocked"
+                            }
+                        },
+                        {
+                            "metric": "Entertainment Arrangements",
+                            "description": "Assesses how well you've prepared entertainment options for the trip.",
+                            "weight": 15,
+                            "icon": "fas fa-music",
+                            "scoreDescriptors": {
+                                "1": "No entertainment",
+                                "2": "Minimal entertainment",
+                                "3": "Moderate entertainment",
+                                "4": "Good entertainment",
+                                "5": "Full range of entertainment options"
+                            }
+                        },
+                        {
+                            "metric": "Travel Companions",
+                            "description": "Evaluates the suitability and readiness of your travel companions.",
+                            "weight": 10,
+                            "icon": "fas fa-user-friends",
+                            "scoreDescriptors": {
+                                "1": "Not suitable",
+                                "2": "Fairly suitable",
+                                "3": "Somewhat suitable",
+                                "4": "Suitable",
+                                "5": "Very suitable"
+                            }
+                        },
+                        {
+                            "metric": "Safety Measures",
+                            "description": "Measures your preparedness for safety and emergency situations.",
+                            "weight": 10,
+                            "icon": "fas fa-safety-helmet",
+                            "scoreDescriptors": {
+                                "1": "No measures",
+                                "2": "Minimal measures",
+                                "3": "Moderate measures",
+                                "4": "Good measures",
+                                "5": "Fully prepared"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "name": "Fitness",
+            "slug": "fitness",
+            "description": "Assess your likelihood of achieving various fitness objectives.",
+            "icon": "fas fa-dumbbell",
+            "weight": 4,
+            "savename": "Person",
+            "profiles": [
                 {
-                    "metric": "Operational Involvement",
-                    "description": "Measures how much the firm wants to be involved in day-to-day operations.",
-                    "weight": 15,
-                    "icon": "fas fa-briefcase",
-                    "scoreDescriptors": {
-                        "1": "Very high involvement",
-                        "2": "High involvement",
-                        "3": "Moderate involvement",
-                        "4": "Low involvement",
-                        "5": "No involvement"
-                    }
-                },
-                {
-                    "metric": "Track Record",
-                    "description": "Assesses the firm's history of successful investments.",
-                    "weight": 10,
+                    "name": "Reaching Fitness Goals",
                     "icon": "fas fa-trophy",
-                    "scoreDescriptors": {
-                        "1": "Very poor track record",
-                        "2": "Poor track record",
-                        "3": "Moderate track record",
-                        "4": "Good track record",
-                        "5": "Excellent track record"
-                    }
+                    "criteria": [
+                        {
+                            "metric": "Goal Setting",
+                            "description": "Measures how well-defined and realistic your fitness goals are.",
+                            "weight": 20,
+                            "icon": "fas fa-bullseye",
+                            "scoreDescriptors": {
+                                "1": "No goals",
+                                "2": "Very vague goals",
+                                "3": "Moderately defined goals",
+                                "4": "Well-defined goals",
+                                "5": "Clearly defined and realistic goals"
+                            }
+                        },
+                        {
+                            "metric": "Consistency",
+                            "description": "Evaluates the regularity of your workout routine.",
+                            "weight": 20,
+                            "icon": "fas fa-calendar-check",
+                            "scoreDescriptors": {
+                                "1": "Never consistent",
+                                "2": "Rarely consistent",
+                                "3": "Sometimes consistent",
+                                "4": "Often consistent",
+                                "5": "Always consistent"
+                            }
+                        },
+                        {
+                            "metric": "Nutrition",
+                            "description": "Measures the alignment of your diet with your fitness goals.",
+                            "weight": 20,
+                            "icon": "fas fa-apple-alt",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Rest and Recovery",
+                            "description": "Evaluates how well you manage rest and recovery as part of your fitness regimen.",
+                            "weight": 20,
+                            "icon": "fas fa-bed",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Exercise Variety",
+                            "description": "Assesses the diversity of exercises in your fitness routine.",
+                            "weight": 10,
+                            "icon": "fas fa-th",
+                            "scoreDescriptors": {
+                                "1": "No variety",
+                                "2": "Minimal variety",
+                                "3": "Moderate variety",
+                                "4": "Good variety",
+                                "5": "Excellent variety"
+                            }
+                        },
+                        {
+                            "metric": "Professional Guidance",
+                            "description": "Measures the extent to which you utilise professional fitness trainers or coaches.",
+                            "weight": 10,
+                            "icon": "fas fa-chalkboard-teacher",
+                            "scoreDescriptors": {
+                                "1": "No guidance",
+                                "2": "Minimal guidance",
+                                "3": "Moderate guidance",
+                                "4": "Frequent guidance",
+                                "5": "Consistent professional guidance"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Industry Focus",
-                    "description": "Evaluates the firm's expertise in your industry.",
-                    "weight": 10,
-                    "icon": "fas fa-industry",
-                    "scoreDescriptors": {
-                        "1": "No expertise",
-                        "2": "Limited expertise",
-                        "3": "Moderate expertise",
-                        "4": "Considerable expertise",
-                        "5": "Extensive expertise"
-                    }
+                    "name": "Running a Marathon",
+                    "icon": "fas fa-running",
+                    "criteria": [
+                        {
+                            "metric": "Training Plan",
+                            "description": "Measures how well-structured and consistent your marathon training plan is.",
+                            "weight": 25,
+                            "icon": "fas fa-list-alt",
+                            "scoreDescriptors": {
+                                "1": "No plan",
+                                "2": "Very poor plan",
+                                "3": "Moderate plan",
+                                "4": "Good plan",
+                                "5": "Excellent plan"
+                            }
+                        },
+                        {
+                            "metric": "Stamina",
+                            "description": "Evaluates your current stamina and endurance levels.",
+                            "weight": 20,
+                            "icon": "fas fa-heartbeat",
+                            "scoreDescriptors": {
+                                "1": "Very low",
+                                "2": "Low",
+                                "3": "Moderate",
+                                "4": "High",
+                                "5": "Very high"
+                            }
+                        },
+                        {
+                            "metric": "Injury Prevention",
+                            "description": "Assesses your efforts and success in preventing running-related injuries.",
+                            "weight": 20,
+                            "icon": "fas fa-notes-medical",
+                            "scoreDescriptors": {
+                                "1": "No prevention",
+                                "2": "Minimal prevention",
+                                "3": "Moderate prevention",
+                                "4": "Good prevention",
+                                "5": "Excellent prevention"
+                            }
+                        },
+                        {
+                            "metric": "Diet and Hydration",
+                            "description": "Measures how well your diet and hydration habits support marathon training.",
+                            "weight": 15,
+                            "icon": "fas fa-utensils",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Mental Preparation",
+                            "description": "Evaluates your mental readiness and resilience for marathon running.",
+                            "weight": 10,
+                            "icon": "fas fa-brain",
+                            "scoreDescriptors": {
+                                "1": "Very poor",
+                                "2": "Poor",
+                                "3": "Moderate",
+                                "4": "Good",
+                                "5": "Excellent"
+                            }
+                        },
+                        {
+                            "metric": "Race Day Logistics",
+                            "description": "Assesses how well-prepared you are for race day logistics, such as travel and gear.",
+                            "weight": 10,
+                            "icon": "fas fa-map-marked",
+                            "scoreDescriptors": {
+                                "1": "No preparation",
+                                "2": "Minimal preparation",
+                                "3": "Moderate preparation",
+                                "4": "Good preparation",
+                                "5": "Excellent preparation"
+                            }
+                        }
+                    ]
                 },
                 {
-                    "metric": "Portfolio Synergies",
-                    "description": "Considers potential synergies with other companies in their portfolio.",
-                    "weight": 10,
-                    "icon": "fas fa-project-diagram",
-                    "scoreDescriptors": {
-                        "1": "No synergy",
-                        "2": "Limited synergy",
-                        "3": "Moderate synergy",
-                        "4": "High synergy",
-                        "5": "Very high synergy"
-                    }
-                },
-                {
-                    "metric": "Financial Engineering",
-                    "description": "Assesses the complexity of the financial structures proposed.",
-                    "weight": 5,
-                    "icon": "fas fa-calculator",
-                    "scoreDescriptors": {
-                        "1": "Very complex",
-                        "2": "Complex",
-                        "3": "Moderate",
-                        "4": "Simple",
-                        "5": "Very simple"
-                    }
+                    "name": "Building Muscle Mass",
+                    "icon": "fas fa-dumbbell",
+                    "criteria": [
+                        {
+                            "metric": "Strength Training Routine",
+                            "description": "Measures the effectiveness and consistency of your strength training routine.",
+                            "weight": 25,
+                            "icon": "fas fa-weight-hanging",
+                            "scoreDescriptors": {
+                                "1": "No routine",
+                                "2": "Very poor routine",
+                                "3": "Moderate routine",
+                                "4": "Good routine",
+                                "5": "Excellent routine"
+                            }
+                        },
+                        {
+                            "metric": "Protein Intake",
+                            "description": "Evaluates your daily protein intake relative to your muscle-building goals.",
+                            "weight": 20,
+                            "icon": "fas fa-drumstick-bite",
+                            "scoreDescriptors": {
+                                "1": "Very low",
+                                "2": "Low",
+                                "3": "Moderate",
+                                "4": "High",
+                                "5": "Very high"
+                            }
+                        },
+                        {
+                            "metric": "Progress Tracking",
+                            "description": "Measures how well you track your muscle-building progress.",
+                            "weight": 20,
+                            "icon": "fas fa-chart-line",
+                            "scoreDescriptors": {
+                                "1": "No tracking",
+                                "2": "Minimal tracking",
+                                "3": "Moderate tracking",
+                                "4": "Good tracking",
+                                "5": "Excellent tracking"
+                            }
+                        },
+                        {
+                            "metric": "Recovery Time",
+                            "description": "Assesses how well you manage rest and recovery periods.",
+                            "weight": 15,
+                            "icon": "fas fa-bed",
+                            "scoreDescriptors": {
+                                "1": "Very poor management",
+                                "2": "Poor management",
+                                "3": "Moderate management",
+                                "4": "Good management",
+                                "5": "Excellent management"
+                            }
+                        },
+                        {
+                            "metric": "Supplement Usage",
+                            "description": "Evaluates the appropriateness and effectiveness of supplements in your diet.",
+                            "weight": 10,
+                            "icon": "fas fa-pills",
+                            "scoreDescriptors": {
+                                "1": "No supplements",
+                                "2": "Inappropriate supplements",
+                                "3": "Moderate effectiveness",
+                                "4": "Good effectiveness",
+                                "5": "Highly appropriate and effective"
+                            }
+                        },
+                        {
+                            "metric": "Professional Guidance",
+                            "description": "Measures the extent to which you utilise professional fitness trainers or coaches.",
+                            "weight": 10,
+                            "icon": "fas fa-chalkboard-teacher",
+                            "scoreDescriptors": {
+                                "1": "No guidance",
+                                "2": "Minimal guidance",
+                                "3": "Moderate guidance",
+                                "4": "Frequent guidance",
+                                "5": "Consistent professional guidance"
+                            }
+                        }
+                    ]
                 }
             ]
         }
