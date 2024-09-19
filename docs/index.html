@@ -11,6 +11,7 @@ Code history:
 - Added fixes and improvements: 18 September 2024
 - User experience enhancements: 18 September 2024
 - UI changes: 19 September 2024
+- Added collapsible explainer: 19 September 2024
 -->
 
 <!DOCTYPE html>
@@ -21,6 +22,9 @@ Code history:
     <title>Investment Likelihood Calculator</title>
     <!-- Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <!-- SEO Meta Tags -->
+    <meta name="description"
+        content="Investment Likelihood Calculator - Assess and enhance your investment prospects using this comprehensive tool designed for integration with CRMs like Odoo and Pipedrive." />
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
         integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
@@ -109,12 +113,35 @@ Code history:
     <div class="container">
         <h1 class="text-center">Investment Likelihood Calculator</h1>
 
-        <!-- Scoring Guide Button -->
-        <div class="text-center mb-4">
-            <button id="scoringGuideButton" class="btn btn-info btn-lg" data-bs-toggle="modal"
-                data-bs-target="#scoringGuideModal">
-                <i class="fas fa-info-circle"></i> Scoring Guide
-            </button>
+        <!-- Collapsible Explainer -->
+        <div id="explainer" class="mb-4">
+            <div class="card">
+                <div class="card-header">
+                    <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
+                        data-bs-target="#explainerContent" aria-expanded="true" aria-controls="explainerContent">
+                        <h2 class="mb-0">About This Calculator</h2>
+                    </button>
+                </div>
+                <div id="explainerContent" class="collapse show">
+                    <div class="card-body">
+                        <p>Welcome to the Investment Likelihood Calculator, a comprehensive tool designed to help you
+                            assess and enhance your investment prospects. By evaluating various metrics, you can
+                            understand where you stand and identify areas for improvement.</p>
+                        <p>This calculator is ideal for use with Customer Relationship Management (CRM) systems like
+                            <strong>Odoo</strong> and <strong>Pipedrive</strong>. After assessing an investor, you can
+                            easily <strong>copy</strong> the report and paste it into your CRM for broader visibility
+                            among your team members, ensuring everyone is informed and aligned.
+                        </p>
+                        <p>To share the report, simply click the "Copy Results to Clipboard" button after completing
+                            your assessment, and paste the content into your CRM notes or communication channels.</p>
+                        <p>This tool was created by Troy Kelly on the land of the Gadigal and Wangal peoples of the
+                            Eora nation.</p>
+                        <p>Contribute changes or make your own investment likelihood calculator - <a
+                                href="https://github.com/troykelly/investment-likelihood" target="_blank">source
+                                code</a>.</p>
+                    </div>
+                </div>
+            </div>
         </div>
 
         <div id="app">
@@ -177,31 +204,6 @@ Code history:
                 <ul id="investorList" class="list-group">
                     <!-- Investor items will be populated here -->
                 </ul>
-            </div>
-        </div>
-    </div>
-
-    <!-- Scoring Guide Modal -->
-    <div class="modal fade" id="scoringGuideModal" tabindex="-1" aria-labelledby="scoringGuideModalLabel"
-        aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 id="scoringGuideModalLabel" class="modal-title">Scoring Guide</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <p>Please score each criterion based on the following scale:</p>
-                    <ul>
-                        <li><strong>1 - Poor:</strong> Fails to meet expectations in this area.</li>
-                        <li><strong>2 - Fair:</strong> Below average performance; improvements needed.</li>
-                        <li><strong>3 - Good:</strong> Meets basic expectations; satisfactory performance.</li>
-                        <li><strong>4 - Very Good:</strong> Exceeds expectations; strong performance.</li>
-                        <li><strong>5 - Excellent:</strong> Far exceeds expectations; outstanding performance.</li>
-                    </ul>
-                    <p>Use this guide to objectively assess each criterion for the investment likelihood calculation.
-                    </p>
-                </div>
             </div>
         </div>
     </div>
