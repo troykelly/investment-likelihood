@@ -12,6 +12,7 @@
  * - User experience enhancements: 18 September 2024
  * - UI changes: 19 September 2024
  * - Added pie chart and UI enhancements: 19 September 2024
+ * - Further UI improvements: 20 September 2024
  */
 
 'use strict';
@@ -192,6 +193,8 @@ class InvestmentLikelihoodCalculator {
         this.displayCriteria(selectedProfile);
         // Load saved inputs if available
         this.loadSavedInputs();
+        // Calculate and display results
+        this.calculateAndDisplayResults();
     }
 
     /**
@@ -328,6 +331,9 @@ class InvestmentLikelihoodCalculator {
             // Display results
             this.percentageLikelihoodElement.textContent = percentageLikelihood.toFixed(2) + '%';
 
+            // Update the breakdown table
+            this.updateBreakdownTable(scores);
+
             // Update the chart
             this.updateChart(percentageLikelihood, scores);
 
@@ -349,7 +355,7 @@ class InvestmentLikelihoodCalculator {
         scoreInputs.forEach((input, index) => {
             const score = parseFloat(input.value);
             const weight = parseFloat(this.adjustedCriteria[index].adjustedWeight);
-            scores.push({ score: score, weight: weight });
+            scores.push({ score: score, weight: weight, index: index });
         });
         return scores;
     }
@@ -377,6 +383,30 @@ class InvestmentLikelihoodCalculator {
             return accumulator + currentValue;
         }, 0);
         return totalScore;
+    }
+
+    /**
+     * Update the breakdown table with current scores.
+     * @param {!Array<!Object>} scores The current scores.
+     */
+    updateBreakdownTable(scores) {
+        const breakdownTableBody = document.querySelector('#breakdownTable tbody');
+        // Clear existing rows
+        while (breakdownTableBody.firstChild) {
+            breakdownTableBody.removeChild(breakdownTableBody.firstChild);
+        }
+        // Populate with new scores
+        scores.forEach((item) => {
+            const criterion = this.adjustedCriteria[item.index];
+            const row = document.createElement('tr');
+            const metricCell = document.createElement('td');
+            metricCell.textContent = criterion.metric;
+            row.appendChild(metricCell);
+            const scoreCell = document.createElement('td');
+            scoreCell.textContent = item.score.toString();
+            row.appendChild(scoreCell);
+            breakdownTableBody.appendChild(row);
+        });
     }
 
     /**
@@ -501,7 +531,7 @@ class InvestmentLikelihoodCalculator {
         const investorName = this.investorSelect.value;
         const profileName = this.profiles[this.selectedProfileIndex].name;
 
-        let html = '<div>';
+        let html = '<div style="font-family: Arial, sans-serif;">';
 
         // Investor details
         html += `<h2>Investor Name: ${investorName}</h2>`;
@@ -515,13 +545,46 @@ class InvestmentLikelihoodCalculator {
         // Profile Name
         html += `<h3>Profile: ${profileName}</h3>`;
 
+        // Main Content Wrapper
+        html += '<div style="display: flex; flex-wrap: wrap;">';
+
+        // Pie Chart Column
+        html += '<div style="flex: 2;">';
+        // Pie Chart as Image
+        if (this.likelihoodChart) {
+            const chartDataURL = this.likelihoodChart.toBase64Image();
+            html += `<img src="${chartDataURL}" alt="Likelihood Chart" style="max-width: 100%; height: auto;" />`;
+        }
+        html += '</div>';
+
+        // Report Column
+        html += '<div style="flex: 1; padding-left: 20px;">';
+        // Percentage Likelihood
+        html += `<h3>Percentage Likelihood</h3><h1>${this.percentageLikelihoodElement.textContent}</h1>`;
+
+        // Breakdown Table
+        html += '<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">';
+        html += '<tr><th>Metric</th><th>Score</th></tr>';
+        const breakdownTableBody = document.querySelector('#breakdownTable tbody');
+        const rows = breakdownTableBody.querySelectorAll('tr');
+        rows.forEach((row) => {
+            const cells = row.cells;
+            const metric = cells[0].textContent || '';
+            const score = cells[1].textContent || '';
+            html += `<tr><td>${metric.trim()}</td><td>${score.trim()}</td></tr>`;
+        });
+        html += '</table>';
+        html += '</div>'; // Close Report Column
+        html += '</div>'; // Close Main Content Wrapper
+
         // Criteria Table
-        html += '<table border="1" cellpadding="5" cellspacing="0">';
+        html += '<h3>Criteria Details</h3>';
+        html += '<table border="1" cellpadding="5" cellspacing="0" style="border-collapse: collapse; width: 100%;">';
         html += '<tr><th>Metric</th><th>Description</th><th>Score</th><th>Descriptor</th></tr>';
 
-        const rows = this.criteriaTableBody.querySelectorAll('tr');
-        rows.forEach((row) => {
-            const cells = row.querySelectorAll('td');
+        const criteriaRows = this.criteriaTableBody.querySelectorAll('tr');
+        criteriaRows.forEach((row) => {
+            const cells = row.cells;
             const metricCell = cells[0].textContent || '';
             const descriptionCell = cells[1].textContent || '';
             const inputElement = cells[2].querySelector('input[type="range"]');
@@ -531,15 +594,6 @@ class InvestmentLikelihoodCalculator {
             html += `<tr><td>${metricCell.trim()}</td><td>${descriptionCell.trim()}</td><td>${scoreValue}</td><td>${descriptorCell.trim()}</td></tr>`;
         });
         html += '</table>';
-
-        // Results
-        html += `<p>Percentage Likelihood: ${this.percentageLikelihoodElement.textContent}</p>`;
-
-        // Pie Chart as Image
-        if (this.likelihoodChart) {
-            const chartDataURL = this.likelihoodChart.toBase64Image();
-            html += `<img src="${chartDataURL}" alt="Likelihood Chart" />`;
-        }
 
         html += '</div>';
 
