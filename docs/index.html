@@ -1,6 +1,6 @@
 <!--
 Filename: index.html
-Purpose: A single-page application that allows users to calculate likelihood based on specified criteria. Includes category and profile selection via URL slugs, a navigation bar for category change, and handles random selection.
+Purpose: A single-page application that allows users to calculate likelihood based on specified criteria. Includes category and profile selection via URL slugs, a navigation bar for category change, and handles random selection. Now includes a super elegant footer with essential links and an acknowledgment of country popup.
 Description: This app displays categories of calculation profiles, allows users to select a category and profile via URL slugs (e.g., /investment/general-investor-engagement), incorporates a navigation bar for category selection, and includes a random selection feature via /random.
 Author: Troy Kelly
 Contact: troy@aperim.com
@@ -10,6 +10,7 @@ Code history:
 - Converted to SPA with category selection: 19 September 2024
 - URL slug and navigation updates: 19 September 2024
 - Updated savename handling and dynamic labels: 19 September 2024
+- Added super elegant footer: 19 September 2024
 -->
 
 <!DOCTYPE html>
@@ -94,9 +95,8 @@ Code history:
                 "url": "https://aperim.com/"
             }
         }
-        </script>
+    </script>
 
-    <title>Likelihood Calculator</title>
     <!-- Responsive Meta Tag -->
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <!-- Bootstrap CSS -->
@@ -180,6 +180,21 @@ Code history:
         .navbar-nav .nav-link.active {
             font-weight: bold;
             color: #007bff;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #f8f9fa;
+            padding: 40px 0;
+        }
+
+        footer .footer-links a {
+            color: #2c3e50;
+            text-decoration: none;
+        }
+
+        footer .footer-links a:hover {
+            text-decoration: underline;
         }
     </style>
     <!-- Favicons and manifest files -->
@@ -487,6 +502,74 @@ Code history:
             </div>
         </div>
     </div>
+
+    <!-- Acknowledgment of Country Modal -->
+    <div class="modal fade" id="ackModal" tabindex="-1" aria-labelledby="ackModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <!-- Modal Header -->
+                <div class="modal-header">
+                    <h5 class="modal-title" id="ackModalLabel">Acknowledgment of Country</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <!-- Modal Body -->
+                <div class="modal-body">
+                    <p>
+                        We acknowledge and pay respect to the past, present and future Traditional Custodians and Elders
+                        of this nation
+                        and the continuation of cultural, spiritual, and educational practices of Aboriginal and Torres
+                        Strait Islander peoples.
+                    </p>
+                    <p>
+                        Created by Troy Kelly on the land of the Gadigal and Wangal peoples of the Eora nation.
+                    </p>
+                </div>
+                <!-- Modal Footer -->
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-light text-center text-lg-start">
+        <div class="container p-4">
+            <div class="row">
+                <!-- GitHub Repo Link -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5>Repository</h5>
+                    <ul class="list-unstyled mb-0 footer-links">
+                        <li>
+                            <a href="https://github.com/troykelly/investment-likelihood" target="_blank">GitHub Repo</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Acknowledgment of Country Link -->
+                <div class="col-lg-4 col-md-6 mb-4 mb-md-0">
+                    <h5>Acknowledgment of Country</h5>
+                    <ul class="list-unstyled mb-0 footer-links">
+                        <li>
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#ackModal">Gadigal and Wangal peoples of
+                                the Eora nation</a>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Links to Aperim and Production City -->
+                <div class="col-lg-4 col-md-12 mb-4 mb-md-0">
+                    <h5>Our (real?) Projects</h5>
+                    <ul class="list-unstyled mb-0 footer-links">
+                        <li>
+                            <a href="https://aperim.com/" target="_blank">Aperim</a>
+                        </li>
+                        <li>
+                            <a href="https://production.city/" target="_blank">Production City</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <!-- Bootstrap Bundle JS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
