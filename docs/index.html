@@ -380,6 +380,10 @@ Code history:
         </section>
 
         <!-- Category Selection -->
+        <section id="categoryDetails" class="mb-5" style="display: none;">
+        </section>
+
+        <!-- Category Selection -->
         <section id="categorySelection" class="mb-5" style="display: none;">
             <h2 class="text-center">Select a Category</h2>
             <div id="categoryCards" class="row row-cols-1 row-cols-md-3 g-3">
@@ -389,10 +393,17 @@ Code history:
 
         <!-- Main App Content -->
         <section id="app" style="display: none;">
-            <!-- Warning message -->
-            <div class="alert alert-warning" role="alert">
-                <strong>Note:</strong> All data is stored locally in your browser. This data is not portable and is
-                not seen by our servers.
+            <!-- Profile Selection -->
+            <div class="mb-4">
+                <label class="form-label">Select Calculation Profile:</label>
+                <div id="profileCards" class="row row-cols-1 row-cols-md-2 g-3">
+                    <!-- Profile cards will be populated here -->
+                </div>
+            </div>
+            <!-- Category and Profile Details -->
+            <div id="categoryProfileDetails" class="mb-4">
+                <!-- Category longdescription and disclaimer will be displayed here -->
+                <!-- Profile longdescription will be displayed here -->
             </div>
             <!-- Entity management -->
             <div class="mb-4">
@@ -409,18 +420,6 @@ Code history:
                     <img id="investorImage" src="" alt="" class="img-thumbnail"
                         style="max-width: 200px; display: none;" />
                 </div>
-            </div>
-            <!-- Profile Selection -->
-            <div class="mb-4">
-                <label class="form-label">Select Calculation Profile:</label>
-                <div id="profileCards" class="row row-cols-1 row-cols-md-2 g-3">
-                    <!-- Profile cards will be populated here -->
-                </div>
-            </div>
-            <!-- Category and Profile Details -->
-            <div id="categoryProfileDetails" class="mb-4">
-                <!-- Category longdescription and disclaimer will be displayed here -->
-                <!-- Profile longdescription will be displayed here -->
             </div>
             <!-- Criteria table -->
             <div class="table-responsive">
@@ -495,6 +494,11 @@ Code history:
             <!-- Copy Button -->
             <div class="d-grid gap-2 mb-4">
                 <button id="copyButton" class="btn btn-primary btn-lg">Copy Results to Clipboard</button>
+            </div>
+            <!-- Warning message -->
+            <div class="alert alert-warning" role="alert">
+                <strong>Note:</strong> All data is stored locally in your browser. This data is not portable and is
+                not seen by our servers.
             </div>
             <!-- Entities List -->
             <div class="mb-5">
