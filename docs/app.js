@@ -10,68 +10,70 @@
  * - Converted to SPA with category selection: 19 September 2024
  * - URL slug and navigation updates: 19 September 2024
  * - Updated savename handling and dynamic labels: 19 September 2024
+ * - Refactored with JSDoc annotations and exception handling: 20 September 2024
  */
 
 'use strict';
 
 /**
- * @class InvestmentLikelihoodCalculator
+ * @class LikelihoodCalculator
  * @classdesc Provides the functionality to load categories and profiles,
  * manage entities, support URL path slugs for navigation, handle 404 errors,
  * and compute likelihood.
  */
-class InvestmentLikelihoodCalculator {
+class LikelihoodCalculator {
+
     /**
-     * Create the calculator.
+     * Creates an instance of LikelihoodCalculator.
      */
     constructor() {
-        /** @type {!Array<!Object>} */
+        /** @type {Array<Object>} */
         this.categories = [];
-        /** @type {?HTMLDivElement} */
-        this.categoryCardsContainer = /** @type {?HTMLDivElement} */ (document.getElementById('categoryCards'));
-        /** @type {?HTMLUListElement} */
-        this.categoryMenu = /** @type {?HTMLUListElement} */ (document.getElementById('categoryMenu'));
-        /** @type {?HTMLDivElement} */
-        this.profileCardsContainer = /** @type {?HTMLDivElement} */ (document.getElementById('profileCards'));
-        /** @type {?HTMLElement} */
-        this.criteriaTableBody = /** @type {?HTMLElement} */ (document.querySelector('#criteriaTable tbody'));
-        /** @type {?HTMLElement} */
-        this.percentageLikelihoodElement = /** @type {?HTMLElement} */ (document.getElementById('percentageLikelihood'));
-        /** @type {?HTMLButtonElement} */
-        this.copyButton = /** @type {?HTMLButtonElement} */ (document.getElementById('copyButton'));
-        /** @type {?HTMLSelectElement} */
-        this.investorSelect = /** @type {?HTMLSelectElement} */ (document.getElementById('investorSelect'));
-        /** @type {?HTMLButtonElement} */
-        this.newInvestorButton = /** @type {?HTMLButtonElement} */ (document.getElementById('newInvestorButton'));
-        /** @type {?HTMLButtonElement} */
-        this.deleteInvestorButton = /** @type {?HTMLButtonElement} */ (document.getElementById('deleteInvestorButton'));
-        /** @type {?HTMLElement} */
-        this.investorListElement = /** @type {?HTMLElement} */ (document.getElementById('investorList'));
-        /** @type {?HTMLImageElement} */
-        this.investorImage = /** @type {?HTMLImageElement} */ (document.getElementById('investorImage'));
-        /** @type {?HTMLDivElement} */
-        this.appContainer = /** @type {?HTMLDivElement} */ (document.getElementById('app'));
-        /** @type {?HTMLDivElement} */
-        this.categorySelectionContainer = /** @type {?HTMLDivElement} */ (document.getElementById('categorySelection'));
+        /** @type {HTMLElement} */
+        this.categoryCardsContainer = document.getElementById('categoryCards');
+        /** @type {HTMLElement} */
+        this.categoryMenu = document.getElementById('categoryMenu');
+        /** @type {HTMLElement} */
+        this.profileCardsContainer = document.getElementById('profileCards');
+        /** @type {HTMLElement} */
+        this.criteriaTableBody = document.querySelector('#criteriaTable tbody');
+        /** @type {HTMLElement} */
+        this.percentageLikelihoodElement = document.getElementById('percentageLikelihood');
+        /** @type {HTMLElement} */
+        this.copyButton = document.getElementById('copyButton');
+        /** @type {HTMLSelectElement} */
+        this.investorSelect = document.getElementById('investorSelect');
+        /** @type {HTMLElement} */
+        this.newInvestorButton = document.getElementById('newInvestorButton');
+        /** @type {HTMLElement} */
+        this.deleteInvestorButton = document.getElementById('deleteInvestorButton');
+        /** @type {HTMLElement} */
+        this.investorListElement = document.getElementById('investorList');
+        /** @type {HTMLImageElement} */
+        this.investorImage = document.getElementById('investorImage');
+        /** @type {HTMLElement} */
+        this.appContainer = document.getElementById('app');
+        /** @type {HTMLElement} */
+        this.categorySelectionContainer = document.getElementById('categorySelection');
         /** @type {number} */
         this.selectedCategoryIndex = 0;
         /** @type {number} */
         this.selectedProfileIndex = 0;
-        /** @type {!Array<!Object>} */
+        /** @type {Array<Object>} */
         this.adjustedCriteria = [];
-        /** @type {?Chart} */
+        /** @type {Chart|null} */
         this.likelihoodChart = null;
 
         // Modal elements
-        /** @type {?HTMLElement} */
-        this.investorEditModal = /** @type {?HTMLElement} */ (document.getElementById('investorEditModal'));
-        /** @type {?HTMLInputElement} */
-        this.modalInvestorImageInput = /** @type {?HTMLInputElement} */ (document.getElementById('modalInvestorImageInput'));
-        /** @type {?HTMLImageElement} */
-        this.modalInvestorImagePreview = /** @type {?HTMLImageElement} */ (document.getElementById('modalInvestorImagePreview'));
-        /** @type {?HTMLFormElement} */
-        this.investorEditForm = /** @type {?HTMLFormElement} */ (document.getElementById('investorEditForm'));
-        /** @type {?bootstrap.Modal} */
+        /** @type {HTMLElement} */
+        this.investorEditModal = document.getElementById('investorEditModal');
+        /** @type {HTMLInputElement} */
+        this.modalInvestorImageInput = document.getElementById('modalInvestorImageInput');
+        /** @type {HTMLImageElement} */
+        this.modalInvestorImagePreview = document.getElementById('modalInvestorImagePreview');
+        /** @type {HTMLFormElement} */
+        this.investorEditForm = document.getElementById('investorEditForm');
+        /** @type {bootstrap.Modal} */
         this.investorEditModalInstance = null;
         /** @type {string} */
         this.currentEditingInvestorName = '';
@@ -79,12 +81,13 @@ class InvestmentLikelihoodCalculator {
         /** @type {string} */
         this.savename = 'Entity'; // Default savename
 
-        // Initialize the app
+        // Initialize the application
         this.init();
     }
 
     /**
      * Initialise the application.
+     * @private
      */
     init() {
         this.loadCategories()
@@ -110,7 +113,8 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Load categories from the JSON file.
-     * @return {!Promise<void>}
+     * @return {Promise<void>}
+     * @private
      */
     async loadCategories() {
         try {
@@ -129,26 +133,57 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Display category cards for selection, sorted by weight and name.
+     * @private
      */
     displayCategoryCards() {
-        // Sort categories by weight (ascending, i.e., 1 is highest) and then by name
+        // Sort categories by weight (ascending) and name
         this.categories.sort((a, b) => {
             if (a.weight !== b.weight) {
-                return a.weight - b.weight; // Lower weight comes first
+                return a.weight - b.weight;
             } else {
-                return a.name.localeCompare(b.name); // Alphabetical order
+                return a.name.localeCompare(b.name);
             }
+        });
+
+        // Generate category cards
+        this.categories.forEach((category, index) => {
+            const colDiv = document.createElement('div');
+            colDiv.className = 'col';
+            const cardDiv = document.createElement('div');
+            cardDiv.className = 'card category-card h-100';
+            cardDiv.dataset.index = index.toString();
+
+            const cardBody = document.createElement('div');
+            cardBody.className = 'card-body text-center';
+
+            // Icon
+            if (category.icon) {
+                const iconElement = document.createElement('i');
+                category.icon.split(' ').forEach((cls) => iconElement.classList.add(cls));
+                iconElement.classList.add('fa-2x');
+                cardBody.appendChild(iconElement);
+            }
+
+            // Category Name
+            const cardTitle = document.createElement('h5');
+            cardTitle.className = 'card-title mt-2';
+            cardTitle.textContent = category.name;
+            cardBody.appendChild(cardTitle);
+
+            cardDiv.appendChild(cardBody);
+            colDiv.appendChild(cardDiv);
+            this.categoryCardsContainer.appendChild(colDiv);
+
+            // Add event listener for selection
+            cardDiv.addEventListener('click', () => this.handleCategoryCardClick(index));
         });
     }
 
     /**
      * Display category menu bar for navigation.
+     * @private
      */
     displayCategoryMenu() {
-        if (!this.categoryMenu) {
-            return;
-        }
-
         this.categories.forEach((category, index) => {
             const menuItem = document.createElement('li');
             menuItem.classList.add('nav-item');
@@ -173,6 +208,7 @@ class InvestmentLikelihoodCalculator {
     /**
      * Handle category menu bar click event.
      * @param {number} index The index of the selected category.
+     * @private
      */
     handleCategoryMenuClick(index) {
         this.handleCategoryCardClick(index);
@@ -181,6 +217,7 @@ class InvestmentLikelihoodCalculator {
     /**
      * Handle category card click event.
      * @param {number} index Index of the selected category.
+     * @private
      */
     handleCategoryCardClick(index) {
         this.selectedCategoryIndex = index;
@@ -202,10 +239,8 @@ class InvestmentLikelihoodCalculator {
         this.displayProfiles(selectedCategory);
 
         // Show the app container and hide category selection
-        if (this.appContainer && this.categorySelectionContainer) {
-            this.appContainer.style.display = 'block';
-            this.categorySelectionContainer.style.display = 'none';
-        }
+        this.appContainer.style.display = 'block';
+        this.categorySelectionContainer.style.display = 'none';
 
         // Initialize entity management
         this.initInvestorManagement();
@@ -216,6 +251,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Update the savename labels throughout the application.
+     * @private
      */
     updateSavenameLabels() {
         const savenameElements = {
@@ -234,21 +270,15 @@ class InvestmentLikelihoodCalculator {
         }
 
         // Update alt attributes
-        if (this.investorImage) {
-            this.investorImage.alt = `${this.savename} Image`;
-        }
-        if (this.modalInvestorImagePreview) {
-            this.modalInvestorImagePreview.alt = `${this.savename} Image`;
-        }
+        this.investorImage.alt = `${this.savename} Image`;
+        this.modalInvestorImagePreview.alt = `${this.savename} Image`;
     }
 
     /**
      * Update the menu bar to highlight the selected category.
+     * @private
      */
     updateMenuBar() {
-        if (!this.categoryMenu) {
-            return;
-        }
         const menuLinks = this.categoryMenu.querySelectorAll('.nav-link');
         menuLinks.forEach((link) => {
             link.classList.remove('active');
@@ -261,13 +291,12 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Display profiles for the selected category.
-     * @param {!Object} category The selected category.
+     * @param {Object} category The selected category.
+     * @private
      */
     displayProfiles(category) {
         // Clear existing profiles
-        while (this.profileCardsContainer.firstChild) {
-            this.profileCardsContainer.removeChild(this.profileCardsContainer.firstChild);
-        }
+        this.profileCardsContainer.innerHTML = '';
 
         category.profiles.forEach((profile, index) => {
             const colDiv = document.createElement('div');
@@ -295,9 +324,7 @@ class InvestmentLikelihoodCalculator {
 
             cardDiv.appendChild(cardBody);
             colDiv.appendChild(cardDiv);
-            if (this.profileCardsContainer) {
-                this.profileCardsContainer.appendChild(colDiv);
-            }
+            this.profileCardsContainer.appendChild(colDiv);
 
             // Add event listener for selection
             cardDiv.addEventListener('click', () => this.handleProfileCardClick(index));
@@ -307,6 +334,7 @@ class InvestmentLikelihoodCalculator {
     /**
      * Handle profile card click event.
      * @param {number} index Index of the selected profile.
+     * @private
      */
     handleProfileCardClick(index) {
         const previousSelected = this.profileCardsContainer.querySelector('.selected-profile');
@@ -331,46 +359,41 @@ class InvestmentLikelihoodCalculator {
 
         // Load saved inputs if available
         this.loadSavedInputs();
+
         // Calculate and display results
         this.calculateAndDisplayResults();
     }
 
     /**
      * Display criteria for the selected profile.
-     * @param {!Object} profile The selected calculation profile.
+     * @param {Object} profile The selected calculation profile.
+     * @private
      */
     displayCriteria(profile) {
         // Clear existing criteria
-        while (this.criteriaTableBody.firstChild) {
-            this.criteriaTableBody.removeChild(this.criteriaTableBody.firstChild);
-        }
+        this.criteriaTableBody.innerHTML = '';
 
         // Calculate total weights
-        let totalWeights = 0;
-        profile.criteria.forEach(criterion => {
-            totalWeights += criterion.weight;
-        });
+        let totalWeights = profile.criteria.reduce((sum, criterion) => sum + criterion.weight, 0);
 
         // Display a warning if totalWeights != 100
         const weightWarningElement = document.getElementById('weightWarning');
-        if (weightWarningElement) {
-            if (totalWeights !== 100) {
-                weightWarningElement.style.display = 'block';
-            } else {
-                weightWarningElement.style.display = 'none';
-            }
+        if (totalWeights !== 100) {
+            weightWarningElement.style.display = 'block';
+        } else {
+            weightWarningElement.style.display = 'none';
         }
 
         // Adjust the weights proportionally
         if (totalWeights !== 100) {
             this.adjustedCriteria = profile.criteria.map(criterion => {
                 const adjustedWeight = (criterion.weight / totalWeights) * 100;
-                return Object.assign({}, criterion, { adjustedWeight: adjustedWeight });
+                return { ...criterion, adjustedWeight: adjustedWeight };
             });
         } else {
             // No adjustment needed
             this.adjustedCriteria = profile.criteria.map(criterion => {
-                return Object.assign({}, criterion, { adjustedWeight: criterion.weight });
+                return { ...criterion, adjustedWeight: criterion.weight };
             });
         }
 
@@ -406,6 +429,7 @@ class InvestmentLikelihoodCalculator {
             sliderInput.name = 'score_' + index;
             sliderInput.dataset.weight = criterion.adjustedWeight.toString();
             sliderInput.classList.add('form-range');
+            sliderInput.setAttribute('aria-label', `Score for ${criterion.metric}`);
             scoreCell.appendChild(sliderInput);
             row.appendChild(scoreCell);
 
@@ -427,9 +451,7 @@ class InvestmentLikelihoodCalculator {
         });
 
         // Reset results
-        if (this.percentageLikelihoodElement) {
-            this.percentageLikelihoodElement.textContent = '0%';
-        }
+        this.percentageLikelihoodElement.textContent = '0%';
 
         // Load saved inputs if available
         this.loadSavedInputs();
@@ -437,9 +459,10 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Get the closest score descriptor based on the score.
-     * @param {!Object} criterion The criterion object.
+     * @param {Object} criterion The criterion object.
      * @param {number} score The current score value.
      * @return {string}
+     * @private
      */
     getScoreDescriptor(criterion, score) {
         const descriptors = criterion.scoreDescriptors;
@@ -462,6 +485,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Calculate and display results.
+     * @private
      */
     calculateAndDisplayResults() {
         try {
@@ -471,9 +495,7 @@ class InvestmentLikelihoodCalculator {
             const percentageLikelihood = (totalScore / 100) * 100;
 
             // Display results
-            if (this.percentageLikelihoodElement) {
-                this.percentageLikelihoodElement.textContent = percentageLikelihood.toFixed(2) + '%';
-            }
+            this.percentageLikelihoodElement.textContent = percentageLikelihood.toFixed(2) + '%';
 
             // Update the breakdown table
             this.updateBreakdownTable(scores);
@@ -491,7 +513,8 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Get scores input by the user.
-     * @return {!Array<!Object>}
+     * @return {Array<Object>}
+     * @private
      */
     getScores() {
         const scoreInputs = this.criteriaTableBody.querySelectorAll('input[type="range"]');
@@ -506,8 +529,9 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Calculate weighted scores for each criterion.
-     * @param {!Array<!Object>} scores The scores and weights for each criterion.
-     * @return {!Array<number>}
+     * @param {Array<Object>} scores The scores and weights for each criterion.
+     * @return {Array<number>}
+     * @private
      */
     calculateWeightedScores(scores) {
         return scores.map((item) => {
@@ -519,8 +543,9 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Calculate the total score by summing weighted scores.
-     * @param {!Array<number>} weightedScores The weighted scores for each criterion.
+     * @param {Array<number>} weightedScores The weighted scores for each criterion.
      * @return {number}
+     * @private
      */
     calculateTotalScore(weightedScores) {
         const totalScore = weightedScores.reduce((accumulator, currentValue) => {
@@ -531,17 +556,13 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Update the breakdown table with current scores.
-     * @param {!Array<!Object>} scores The current scores.
+     * @param {Array<Object>} scores The current scores.
+     * @private
      */
     updateBreakdownTable(scores) {
         const breakdownTableBody = document.querySelector('#breakdownTable tbody');
-        if (!breakdownTableBody) {
-            return;
-        }
         // Clear existing rows
-        while (breakdownTableBody.firstChild) {
-            breakdownTableBody.removeChild(breakdownTableBody.firstChild);
-        }
+        breakdownTableBody.innerHTML = '';
         // Populate with new scores
         scores.forEach((item) => {
             const criterion = this.adjustedCriteria[item.index];
@@ -559,13 +580,11 @@ class InvestmentLikelihoodCalculator {
     /**
      * Update the pie chart based on the current scores and options.
      * @param {number} percentageLikelihood The percentage likelihood.
-     * @param {!Array<!Object>} scores The scores and weights.
+     * @param {Array<Object>} scores The scores and weights.
+     * @private
      */
     updateChart(percentageLikelihood, scores) {
         const pieChartOptionElement = document.querySelector('input[name="pieChartOption"]:checked');
-        if (!pieChartOptionElement) {
-            return;
-        }
         const pieChartOption = pieChartOptionElement.value;
 
         const labels = [];
@@ -616,9 +635,6 @@ class InvestmentLikelihoodCalculator {
             this.likelihoodChart.update();
         } else {
             const ctxElement = document.getElementById('likelihoodChart');
-            if (!ctxElement) {
-                return;
-            }
             const ctx = ctxElement.getContext('2d');
             this.likelihoodChart = new Chart(ctx, {
                 type: 'pie',
@@ -626,8 +642,8 @@ class InvestmentLikelihoodCalculator {
                     labels: labels,
                     datasets: [{
                         data: data,
-                        backgroundColor: backgroundColors
-                    }]
+                        backgroundColor: backgroundColors,
+                    }],
                 },
                 options: {
                     plugins: {
@@ -640,14 +656,14 @@ class InvestmentLikelihoodCalculator {
                                         return {
                                             text: label,
                                             fillStyle: datasets[0].backgroundColor[i],
-                                            index: i
+                                            index: i,
                                         };
                                     });
-                                }
-                            }
-                        }
-                    }
-                }
+                                },
+                            },
+                        },
+                    },
+                },
             });
         }
     }
@@ -656,19 +672,21 @@ class InvestmentLikelihoodCalculator {
      * Generate a colour based on the index.
      * @param {number} index The index of the data point.
      * @return {string} The hexadecimal colour code.
+     * @private
      */
     getColor(index) {
         const colors = [
             '#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0',
             '#9966FF', '#FF9F40', '#C9CBCF', '#FF6384',
             '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF',
-            '#FF9F40', '#C9CBCF'
+            '#FF9F40', '#C9CBCF',
         ];
         return colors[index % colors.length];
     }
 
     /**
      * Handle copy button click event.
+     * @private
      */
     handleCopy() {
         try {
@@ -696,6 +714,7 @@ class InvestmentLikelihoodCalculator {
     /**
      * Generate HTML for the results to copy.
      * @return {string}
+     * @private
      */
     generateResultsHTML() {
         const entityName = this.investorSelect.value;
@@ -773,6 +792,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Handle new entity creation.
+     * @private
      */
     handleNewInvestor() {
         const entityName = prompt(`Enter new ${this.savename} name:`);
@@ -791,14 +811,13 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Populate the entity select dropdown.
-     * @param {string=} selectEntityName Entity name to select after populating.
+     * @param {string} [selectEntityName] Entity name to select after populating.
+     * @private
      */
     populateInvestorSelect(selectEntityName = '') {
         const entities = this.getEntitiesFromLocalStorage();
         // Clear existing options
-        while (this.investorSelect.firstChild) {
-            this.investorSelect.removeChild(this.investorSelect.firstChild);
-        }
+        this.investorSelect.innerHTML = '';
         // Populate entity select
         Object.keys(entities).forEach((name) => {
             const option = document.createElement('option');
@@ -814,6 +833,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Load entities from local storage.
+     * @private
      */
     loadEntities() {
         this.populateInvestorSelect();
@@ -822,7 +842,8 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Get entities from local storage for the current category.
-     * @return {!Object}
+     * @return {Object}
+     * @private
      */
     getEntitiesFromLocalStorage() {
         const entitiesJson = localStorage.getItem('entities');
@@ -836,7 +857,8 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Save entities to local storage for the current category.
-     * @param {!Object} entities Entities data to save.
+     * @param {Object} entities Entities data to save.
+     * @private
      */
     saveEntitiesToLocalStorage(entities) {
         const entitiesJson = localStorage.getItem('entities');
@@ -848,6 +870,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Handle entity selection change event.
+     * @private
      */
     handleInvestorChange() {
         // Load saved inputs if available
@@ -868,6 +891,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Save user inputs and results to local storage.
+     * @private
      */
     saveInputsAndResults() {
         const entityName = this.investorSelect.value;
@@ -886,12 +910,9 @@ class InvestmentLikelihoodCalculator {
         if (!entities[entityName][selectedCategory.name]) {
             entities[entityName][selectedCategory.name] = {};
         }
-        if (!entities[entityName][selectedCategory.name][profileName]) {
-            entities[entityName][selectedCategory.name][profileName] = {};
-        }
         entities[entityName][selectedCategory.name][profileName] = {
             scores: scores,
-            percentageLikelihood: percentageLikelihood
+            percentageLikelihood: percentageLikelihood,
         };
         this.saveEntitiesToLocalStorage(entities);
         this.loadInvestorList();
@@ -899,6 +920,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Load saved inputs for the selected entity and profile.
+     * @private
      */
     loadSavedInputs() {
         const entityName = this.investorSelect.value;
@@ -922,9 +944,7 @@ class InvestmentLikelihoodCalculator {
                 const descriptorText = descriptorCell.querySelector('.score-descriptor');
                 descriptorText.textContent = this.getScoreDescriptor(criterion, parseFloat(input.value));
             });
-            if (this.percentageLikelihoodElement) {
-                this.percentageLikelihoodElement.textContent = savedData.percentageLikelihood;
-            }
+            this.percentageLikelihoodElement.textContent = savedData.percentageLikelihood;
         } else {
             // Reset inputs and results
             const scoreInputs = this.criteriaTableBody.querySelectorAll('input[type="range"]');
@@ -934,9 +954,7 @@ class InvestmentLikelihoodCalculator {
                 const descriptorText = descriptorCell.querySelector('.score-descriptor');
                 descriptorText.textContent = this.getScoreDescriptor(this.adjustedCriteria[index], 1);
             });
-            if (this.percentageLikelihoodElement) {
-                this.percentageLikelihoodElement.textContent = '0%';
-            }
+            this.percentageLikelihoodElement.textContent = '0%';
         }
 
         // Load entity image
@@ -951,12 +969,11 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Load entity list with existing calculations.
+     * @private
      */
     loadInvestorList() {
         // Clear existing list
-        while (this.investorListElement.firstChild) {
-            this.investorListElement.removeChild(this.investorListElement.firstChild);
-        }
+        this.investorListElement.innerHTML = '';
         const entities = this.getEntitiesFromLocalStorage();
         Object.keys(entities).forEach((entityName) => {
             const entityData = entities[entityName];
@@ -993,6 +1010,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Handle delete entity button click event.
+     * @private
      */
     handleDeleteInvestor() {
         const entityName = this.investorSelect.value;
@@ -1016,6 +1034,7 @@ class InvestmentLikelihoodCalculator {
     /**
      * Handle entity list item click event to open modal.
      * @param {string} entityName The name of the entity to edit.
+     * @private
      */
     handleInvestorListItemClick(entityName) {
         this.currentEditingInvestorName = entityName;
@@ -1040,14 +1059,15 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Handle modal entity image upload.
-     * @param {!Event} event The change event.
+     * @param {Event} event The change event.
+     * @private
      */
     handleModalInvestorImageUpload(event) {
-        const fileInput = /** @type {!HTMLInputElement} */ (event.target);
+        const fileInput = event.target;
         if (fileInput.files && fileInput.files[0]) {
             const reader = new FileReader();
             reader.onload = (e) => {
-                const dataURL = /** @type {string} */ (e.target.result);
+                const dataURL = e.target.result;
                 this.modalInvestorImagePreview.src = dataURL;
                 this.modalInvestorImagePreview.style.display = 'block';
             };
@@ -1057,7 +1077,8 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Handle entity edit form submission.
-     * @param {!Event} event The submit event.
+     * @param {Event} event The submit event.
+     * @private
      */
     handleInvestorEditFormSubmit(event) {
         event.preventDefault();
@@ -1088,6 +1109,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Handle the display of the explainer section based on visit count.
+     * @private
      */
     handleExplainerDisplay() {
         const explainerElement = document.getElementById('explainer');
@@ -1128,6 +1150,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Handle URL slug navigation and 404 handling.
+     * @private
      */
     handleSlugNavigation() {
         const pathname = window.location.pathname;
@@ -1178,13 +1201,15 @@ class InvestmentLikelihoodCalculator {
      * Convert to lower-case hyphenated format.
      * @param {string} name The string to convert to a slug.
      * @return {string}
+     * @private
      */
     generateSlug(name) {
         return name.toLowerCase().replace(/[\s]+/g, '-').replace(/[^\w\-]+/g, '');
     }
 
     /**
-     * Select the highest ordered category (weight 1 is highest, then alphasort)
+     * Select the highest ordered category (weight 1 is highest, then alphasort).
+     * @private
      */
     selectHighestOrderedCategory() {
         // Categories are already sorted
@@ -1199,6 +1224,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Select a completely random category and profile.
+     * @private
      */
     selectRandomCategoryAndProfile() {
         const randomCategoryIndex = Math.floor(Math.random() * this.categories.length);
@@ -1218,6 +1244,7 @@ class InvestmentLikelihoodCalculator {
 
     /**
      * Initialize entity management event listeners.
+     * @private
      */
     initInvestorManagement() {
         this.copyButton.addEventListener('click', () => this.handleCopy());
@@ -1240,9 +1267,10 @@ class InvestmentLikelihoodCalculator {
             });
         });
     }
+
 }
 
-// Initialise the Investment Likelihood Calculator application
+// Initialise the Likelihood Calculator application
 window.addEventListener('load', () => {
-    new InvestmentLikelihoodCalculator();
+    new LikelihoodCalculator();
 });

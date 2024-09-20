@@ -11,6 +11,7 @@ Code history:
 - URL slug and navigation updates: 19 September 2024
 - Updated savename handling and dynamic labels: 19 September 2024
 - Added super elegant footer: 19 September 2024
+- Refactored for UI best practices: 20 September 2024
 -->
 
 <!DOCTYPE html>
@@ -165,12 +166,6 @@ Code history:
             width: 100%;
         }
 
-        /* Adjust the size of the pie chart */
-        #likelihoodChart {
-            max-width: 100%;
-            height: auto;
-        }
-
         /* Center the category selection */
         #categorySelection {
             margin-top: 50px;
@@ -241,7 +236,7 @@ Code history:
 
 <body>
     <!-- Navigation Bar -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light" aria-label="Primary Navigation">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">Likelihood Calculator</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCategories"
@@ -261,115 +256,130 @@ Code history:
         </div>
     </nav>
 
-    <div class="container">
+    <main class="container">
         <!-- Explainer Section -->
-        <div id="explainer" class="mb-4">
-            <div class="card">
-                <div class="card-header">
-                    <button class="btn btn-link text-decoration-none" data-bs-toggle="collapse"
-                        data-bs-target="#explainerContent" aria-expanded="true" aria-controls="explainerContent">
-                        <h2 class="mb-0">About This Calculator</h2>
-                    </button>
-                </div>
-                <div id="explainerContent" class="collapse show">
-                    <div class="card-body">
-                        <p>We're thrilled to announce that our <strong>Likelihood Calculator</strong> has been massively
-                            expanded! Now
-                            encompassing categories like <strong>Investment</strong>, <strong>Health</strong>,
-                            <strong>Fitness</strong>,
-                            <strong>Travel</strong>, <strong>The Arts</strong>, and more, it's your ultimate tool for
-                            assessing probabilities
-                            across life's many adventures.
-                        </p>
+        <section id="explainer" class="mb-4">
+            <div class="accordion" id="explainerAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="explainerHeading">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
+                            data-bs-target="#explainerContent" aria-expanded="true" aria-controls="explainerContent">
+                            About This Calculator
+                        </button>
+                    </h2>
+                    <div id="explainerContent" class="accordion-collapse collapse show"
+                        aria-labelledby="explainerHeading" data-bs-parent="#explainerAccordion">
+                        <div class="accordion-body">
+                            <p>We're thrilled to announce that our <strong>Likelihood Calculator</strong> has
+                                been massively expanded! Now encompassing categories like <strong>Investment</strong>,
+                                <strong>Health</strong>, <strong>Fitness</strong>, <strong>Travel</strong>, <strong>The
+                                    Arts</strong>, and more, it's your ultimate tool for assessing probabilities across
+                                life's many adventures.
+                            </p>
 
-                        <h3>What Can You Discover?</h3>
-                        <p>Ever wondered about the likelihood of securing that next round of investment? Curious about
-                            your health risks or the
-                            chances of acing your fitness goals? Planning a trip and want to assess travel feasibility?
-                            Or perhaps you're an
-                            artist pondering your breakthrough? Our calculator provides insights into these areas and
-                            more!</p>
+                            <h3>What Can You Discover?</h3>
+                            <p>Ever wondered about the likelihood of securing that next round of investment? Curious
+                                about
+                                your health risks or the
+                                chances of acing your fitness goals? Planning a trip and want to assess travel
+                                feasibility?
+                                Or perhaps you're an
+                                artist pondering your breakthrough? Our calculator provides insights into these areas
+                                and
+                                more!</p>
 
-                        <h3>How Does It Work?</h3>
-                        <p>Simply select a category and choose a profile that suits your needs. You'll be guided through
-                            tailored criteria where
-                            you can input your personal or business information. Our algorithm evaluates your inputs to
-                            generate a customised
-                            <strong>likelihood score</strong>, helping you make informed decisions.
-                        </p>
+                            <h3>How Does It Work?</h3>
+                            <p>Simply select a category and choose a profile that suits your needs. You'll be guided
+                                through
+                                tailored criteria where
+                                you can input your personal or business information. Our algorithm evaluates your inputs
+                                to
+                                generate a customised
+                                <strong>likelihood score</strong>, helping you make informed decisions.
+                            </p>
 
-                        <h3>Key Features</h3>
-                        <ul>
-                            <li><strong>Comprehensive Categories:</strong> From investment opportunities to personal
-                                health, we cover a wide
-                                range of topics.</li>
-                            <li><strong>User-Friendly Interface:</strong> Intuitive design makes it easy and enjoyable
-                                to use.</li>
-                            <li><strong>Personalised Insights:</strong> Receive detailed feedback based on your unique
-                                inputs.</li>
-                            <li><strong>Privacy Assurance:</strong> Your data stays on your device. We respect your
-                                privacy.</li>
-                            <li><strong>Shareable Reports:</strong> Easily copy and share your results with others.</li>
-                        </ul>
+                            <h3>Key Features</h3>
+                            <ul>
+                                <li><strong>Comprehensive Categories:</strong> From investment opportunities to personal
+                                    health, we cover a wide
+                                    range of topics.</li>
+                                <li><strong>User-Friendly Interface:</strong> Intuitive design makes it easy and
+                                    enjoyable
+                                    to use.</li>
+                                <li><strong>Personalised Insights:</strong> Receive detailed feedback based on your
+                                    unique
+                                    inputs.</li>
+                                <li><strong>Privacy Assurance:</strong> Your data stays on your device. We respect your
+                                    privacy.</li>
+                                <li><strong>Shareable Reports:</strong> Easily copy and share your results with others.
+                                </li>
+                            </ul>
 
-                        <h3>Why Use the Likelihood Calculator?</h3>
-                        <p>Our tool helps you:</p>
-                        <ul>
-                            <li><strong>Make Informed Decisions:</strong> Understand the probabilities before taking
-                                action.</li>
-                            <li><strong>Identify Areas of Improvement:</strong> Pinpoint factors that can enhance your
-                                outcomes.</li>
-                            <li><strong>Set Realistic Goals:</strong> Align your expectations with practical insights.
-                            </li>
-                        </ul>
+                            <h3>Why Use the Likelihood Calculator?</h3>
+                            <p>Our tool helps you:</p>
+                            <ul>
+                                <li><strong>Make Informed Decisions:</strong> Understand the probabilities before taking
+                                    action.</li>
+                                <li><strong>Identify Areas of Improvement:</strong> Pinpoint factors that can enhance
+                                    your
+                                    outcomes.</li>
+                                <li><strong>Set Realistic Goals:</strong> Align your expectations with practical
+                                    insights.
+                                </li>
+                            </ul>
 
-                        <h3>Seamless Integration with Your Workflow</h3>
-                        <p>After completing an assessment, click on "Copy Results to Clipboard" to save your report. You
-                            can paste your results
-                            into notes, emails, or your preferred <strong>Customer Relationship Management
-                                (CRM)</strong> systems like
-                            <strong>Odoo</strong> and <strong>Pipedrive</strong>. This facilitates easy sharing with
-                            your team and stakeholders.
-                        </p>
+                            <h3>Seamless Integration with Your Workflow</h3>
+                            <p>After completing an assessment, click on "Copy Results to Clipboard" to save your report.
+                                You
+                                can paste your results
+                                into notes, emails, or your preferred <strong>Customer Relationship Management
+                                    (CRM)</strong> systems like
+                                <strong>Odoo</strong> and <strong>Pipedrive</strong>. This facilitates easy sharing with
+                                your team and stakeholders.
+                            </p>
 
-                        <h3>Join Our Community</h3>
-                        <p>The Likelihood Calculator is an open-source project, and we welcome contributions! Created by
-                            <a href="https://troykelly.com/" target="_blank">Troy Kelly</a> on the land of the Gadigal
-                            and Wangal peoples of
-                            the Eora nation, it's designed to empower users everywhere.
-                        </p>
+                            <h3>Join Our Community</h3>
+                            <p>The Likelihood Calculator is an open-source project, and we welcome contributions!
+                                Created by
+                                <a href="https://troykelly.com/" target="_blank" rel="noopener">Troy Kelly</a> on the
+                                land
+                                of the Gadigal
+                                and Wangal peoples of
+                                the Eora nation, it's designed to empower users everywhere.
+                            </p>
 
-                        <h3>Get Started Now!</h3>
-                        <p>Ready to explore the possibilities? Navigate through our categories and unlock insights
-                            tailored to you. The journey
-                            to informed decision-making begins here.</p>
+                            <h3>Get Started Now!</h3>
+                            <p>Ready to explore the possibilities? Navigate through our categories and unlock insights
+                                tailored to you. The journey
+                                to informed decision-making begins here.</p>
 
-                        <p><em>Together, let's turn uncertainties into opportunities!</em></p>
+                            <p><em>Together, let's turn uncertainties into opportunities!</em></p>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </section>
 
         <!-- Category Selection -->
-        <div id="categorySelection" class="mb-5" style="display: none;">
+        <section id="categorySelection" class="mb-5" style="display: none;">
             <h2 class="text-center">Select a Category</h2>
             <div id="categoryCards" class="row row-cols-1 row-cols-md-3 g-3">
                 <!-- Category cards will be populated here -->
             </div>
-        </div>
+        </section>
 
         <!-- Main App Content -->
-        <div id="app" style="display: none;">
+        <section id="app" style="display: none;">
             <!-- Warning message -->
             <div class="alert alert-warning" role="alert">
-                <strong>Note:</strong> All data is stored locally in your browser. This data is not portable and is not
-                seen by our servers.
+                <strong>Note:</strong> All data is stored locally in your browser. This data is not portable and is
+                not seen by our servers.
             </div>
             <!-- Entity management -->
             <div class="mb-4">
                 <label for="investorSelect" class="form-label">Select <span id="savenameLabel">Entity</span>:</label>
                 <div class="input-group mb-2">
-                    <select id="investorSelect" class="form-select"></select>
+                    <select id="investorSelect" class="form-select" aria-label="Select Entity"></select>
                     <button id="newInvestorButton" class="btn btn-outline-secondary" type="button">New <span
                             id="savenameLabelNew">Entity</span></button>
                     <button id="deleteInvestorButton" class="btn btn-outline-danger" type="button">Delete <span
@@ -390,7 +400,10 @@ Code history:
             </div>
             <!-- Criteria table -->
             <div class="table-responsive">
-                <table id="criteriaTable" class="table table-striped table-bordered">
+                <table id="criteriaTable" class="table table-striped table-bordered"
+                    aria-describedby="criteriaTableCaption">
+                    <caption id="criteriaTableCaption">Adjust the sliders to input your scores for each criterion.
+                    </caption>
                     <thead class="table-light">
                         <tr>
                             <th scope="col">Metric</th>
@@ -415,8 +428,8 @@ Code history:
                 <!-- Pie Chart Column -->
                 <div class="col-md-8">
                     <!-- Pie Chart Options -->
-                    <div class="mb-3">
-                        <label class="form-label">Pie Chart Display Options:</label><br />
+                    <fieldset class="mb-3">
+                        <legend class="form-label">Pie Chart Display Options:</legend>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="pieChartOption" id="pieChartOption100"
                                 value="100" checked>
@@ -428,10 +441,10 @@ Code history:
                             <label class="form-check-label" for="pieChartOptionLikelihood">Show Percentage
                                 Likelihood</label>
                         </div>
-                    </div>
+                    </fieldset>
                     <!-- Pie Chart -->
                     <div class="mb-3">
-                        <canvas id="likelihoodChart"></canvas>
+                        <canvas id="likelihoodChart" aria-label="Likelihood Chart" role="img"></canvas>
                     </div>
                 </div>
                 <!-- Report Column -->
@@ -466,8 +479,8 @@ Code history:
                     <!-- Entity items will be populated here -->
                 </ul>
             </div>
-        </div>
-    </div>
+        </section>
+    </main>
 
     <!-- Entity Edit Modal -->
     <div class="modal fade" id="investorEditModal" tabindex="-1" aria-labelledby="investorEditModalLabel"
@@ -516,9 +529,8 @@ Code history:
                 <div class="modal-body">
                     <p>
                         We acknowledge and pay respect to the past, present and future Traditional Custodians and Elders
-                        of this nation
-                        and the continuation of cultural, spiritual, and educational practices of Aboriginal and Torres
-                        Strait Islander peoples.
+                        of this nation and the continuation of cultural, spiritual, and educational practices of
+                        Aboriginal and Torres Strait Islander peoples.
                     </p>
                     <p>
                         Created by Troy Kelly on the land of the Gadigal and Wangal peoples of the Eora nation.
@@ -541,7 +553,8 @@ Code history:
                     <h5>Repository</h5>
                     <ul class="list-unstyled mb-0 footer-links">
                         <li>
-                            <a href="https://github.com/troykelly/investment-likelihood" target="_blank">GitHub Repo</a>
+                            <a href="https://github.com/troykelly/investment-likelihood" target="_blank"
+                                rel="noopener">GitHub Repo</a>
                         </li>
                     </ul>
                 </div>
@@ -560,10 +573,10 @@ Code history:
                     <h5>Our (real?) Projects</h5>
                     <ul class="list-unstyled mb-0 footer-links">
                         <li>
-                            <a href="https://aperim.com/" target="_blank">Aperim</a>
+                            <a href="https://aperim.com/" target="_blank" rel="noopener">Aperim</a>
                         </li>
                         <li>
-                            <a href="https://production.city/" target="_blank">Production City</a>
+                            <a href="https://production.city/" target="_blank" rel="noopener">Production City</a>
                         </li>
                     </ul>
                 </div>
