@@ -1,7 +1,7 @@
 /**
  * Filename: app.js
  * Purpose: Provides functionality for the Likelihood Calculator with category and profile management, supports URL path slugs (e.g., /investment/general-investor-engagement), includes a navigation bar for category change, and handles random selection.
- * Description: This script loads categories and profiles from a JSON file, displays categories sorted by weight and name, handles slug-based navigation using URL paths, updates the URL when categories and profiles change, includes a beautifully formatted menu bar, and allows users to calculate likelihood based on selected criteria.
+ * Description: This script loads categories and profiles from a JSON file, displays categories sorted by weight and name, handles slug-based navigation using URL paths, updates the URL when categories and profiles change, includes a beautifully formatted menu bar, and allows users to calculate likelihood based on selected criteria. Now supports inverting the scoring influence of specific metrics.
  * Author: Troy Kelly
  * Contact: troy@aperim.com
  * Code history:
@@ -11,6 +11,7 @@
  * - URL slug and navigation updates: 19 September 2024
  * - Updated savename handling and dynamic labels: 19 September 2024
  * - Refactored with JSDoc annotations and exception handling: 20 September 2024
+ * - Added support for inverted scoring: 20 September 2024
  */
 
 'use strict';
@@ -19,7 +20,7 @@
  * @class LikelihoodCalculator
  * @classdesc Provides the functionality to load categories and profiles,
  * manage entities, support URL path slugs for navigation, handle 404 errors,
- * and compute likelihood.
+ * and compute likelihood. Now supports inverted scoring for specific metrics.
  */
 class LikelihoodCalculator {
 
@@ -535,10 +536,31 @@ class LikelihoodCalculator {
      */
     calculateWeightedScores(scores) {
         return scores.map((item) => {
-            // Formula: weighted_score = ((score - 1) * weight) / 4
-            const weightedScore = ((item.score - 1) * item.weight) / 4;
+            const criterion = this.adjustedCriteria[item.index];
+            const weightedScore = this.calculateCriterionWeightedScore(criterion, item.score);
             return weightedScore;
         });
+    }
+
+    /**
+     * Calculate the weighted score for a single criterion.
+     * @param {Object} criterion The criterion object.
+     * @param {number} score The user's score input for this criterion.
+     * @return {number} The weighted score.
+     * @private
+     */
+    calculateCriterionWeightedScore(criterion, score) {
+        let weightedScore = 0;
+        if (criterion.invert) {
+            // Inverted criterion: higher scores reduce likelihood
+            // Formula: weighted_score = ((5 - score) * adjustedWeight) / 4
+            weightedScore = ((5 - score) * criterion.adjustedWeight) / 4;
+        } else {
+            // Regular criterion
+            // Formula: weighted_score = ((score - 1) * adjustedWeight) / 4
+            weightedScore = ((score - 1) * criterion.adjustedWeight) / 4;
+        }
+        return weightedScore;
     }
 
     /**
@@ -597,7 +619,7 @@ class LikelihoodCalculator {
         // Calculate weighted scores and total score
         scores.forEach((item, index) => {
             const criterion = this.adjustedCriteria[index];
-            const weightedScore = ((item.score - 1) * criterion.adjustedWeight) / 4;
+            const weightedScore = this.calculateCriterionWeightedScore(criterion, item.score);
             weightedScores.push(weightedScore);
             totalWeightedScore += weightedScore;
         });

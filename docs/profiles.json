@@ -1418,12 +1418,13 @@
                             "description": "Measure of how up-to-date your child is with recommended vaccinations.",
                             "weight": 20,
                             "icon": "fas fa-syringe",
+                            "invert": true,
                             "scoreDescriptors": {
-                                "1": "Fully up-to-date",
-                                "2": "Well vaccinated",
+                                "1": "Not vaccinated",
+                                "2": "Partially vaccinated",
                                 "3": "Moderately vaccinated",
-                                "4": "Partially vaccinated",
-                                "5": "Not vaccinated"
+                                "4": "Well vaccinated",
+                                "5": "Fully up-to-date"
                             }
                         },
                         {
@@ -1431,12 +1432,13 @@
                             "description": "Assess the cleanliness standards of your home environment.",
                             "weight": 15,
                             "icon": "fas fa-cleaning-services",
+                            "invert": true,
                             "scoreDescriptors": {
-                                "1": "Excellent",
-                                "2": "Good",
+                                "1": "Very poor",
+                                "2": "Poor",
                                 "3": "Average",
-                                "4": "Poor",
-                                "5": "Very poor"
+                                "4": "Good",
+                                "5": "Excellent"
                             }
                         },
                         {
@@ -1444,12 +1446,13 @@
                             "description": "Evaluate the healthiness and balance of your child's diet.",
                             "weight": 10,
                             "icon": "fas fa-bread-slice",
+                            "invert": true,
                             "scoreDescriptors": {
-                                "1": "Very healthy",
-                                "2": "Healthy",
+                                "1": "Very unhealthy",
+                                "2": "Unhealthy",
                                 "3": "Moderate",
-                                "4": "Unhealthy",
-                                "5": "Very unhealthy"
+                                "4": "Healthy",
+                                "5": "Very healthy"
                             }
                         }
                     ]
