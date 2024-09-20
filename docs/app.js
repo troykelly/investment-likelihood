@@ -62,6 +62,8 @@ class LikelihoodCalculator {
         this.categorySelectionContainer = document.getElementById('categorySelection');
         /** @type {HTMLElement} */
         this.categoryProfileDetailsElement = document.getElementById('categoryProfileDetails');
+        /** @type {HTMLElement} */
+        this.categoryDetailsElement = document.getElementById('categoryDetails')
         /** @type {number} */
         this.selectedCategoryIndex = 0;
         /** @type {number} */
@@ -1325,14 +1327,20 @@ class LikelihoodCalculator {
      */
     displayCategoryAndProfileDetails(category, profile) {
         // Clear existing content
+        this.categoryDetailsElement.innerHTML = '';
         this.categoryProfileDetailsElement.innerHTML = '';
+
+        const categoryDetailsHeadingElement = document.createElement('h2');
+        categoryDetailsHeadingElement.innerHTML = category.name;
+        this.categoryDetailsElement.appendChild(categoryDetailsHeadingElement)
+        this.categoryDetailsElement.style.display = 'block';
 
         // Create and append category longdescription
         if (category.longdescription) {
             const longDescriptionElement = document.createElement('div');
             longDescriptionElement.classList.add('mb-3');
             longDescriptionElement.innerHTML = `<p>${category.longdescription}</p>`;
-            this.categoryProfileDetailsElement.appendChild(longDescriptionElement);
+            this.categoryDetailsElement.appendChild(longDescriptionElement);
         }
 
         // Create and append profile longdescription
