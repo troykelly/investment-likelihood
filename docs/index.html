@@ -1,7 +1,7 @@
 <!--
 Filename: index.html
-Purpose: A single-page application that allows users to calculate likelihood based on specified criteria. Includes category and profile selection via URL slugs, a navigation bar for category change, and handles random selection. Now includes a super elegant footer with essential links and an acknowledgment of country popup.
-Description: This app displays categories of calculation profiles, allows users to select a category and profile via URL slugs (e.g., /investment/general-investor-engagement), incorporates a navigation bar for category selection, and includes a random selection feature via /random.
+Purpose: A single-page application that allows users to calculate likelihood based on specified criteria. Includes category and profile selection via URL slugs, a navigation bar for category change, and handles random selection. Now includes a super elegant footer with essential links and an acknowledgment of country popup. Updated to display category and profile descriptions, long descriptions, and disclaimers. The disclaimer is now collapsible per category and profile, uses icon in place of bullets where applicable, and is positioned after the profile list and before the metrics table.
+Description: This app displays categories of calculation profiles, allows users to select a category and profile via URL slugs (e.g., /investment/general-investor-engagement), incorporates a navigation bar for category selection, and includes a random selection feature via /random. Now supports displaying additional information for categories and profiles, with a collapsible disclaimer unique to each category and profile.
 Author: Troy Kelly
 Contact: troy@aperim.com
 Code history:
@@ -12,6 +12,10 @@ Code history:
 - Updated savename handling and dynamic labels: 19 September 2024
 - Added super elegant footer: 19 September 2024
 - Refactored for UI best practices: 20 September 2024
+- Updated to support new fields: 20 September 2024
+- Implemented collapsible disclaimer per profile: 20 September 2024
+- Adjusted dotpoints to use icons in place of bullets: 20 September 2024
+- Moved disclaimer after profile list and before metrics table: 20 September 2024
 -->
 
 <!DOCTYPE html>
@@ -191,6 +195,21 @@ Code history:
         footer .footer-links a:hover {
             text-decoration: underline;
         }
+
+        /* Disclaimer Styles */
+        .list-unstyled .d-flex {
+            align-items: flex-start;
+        }
+
+        .list-unstyled .d-flex i {
+            margin-right: 10px;
+            width: 20px;
+            text-align: center;
+        }
+
+        .list-unstyled .d-flex span {
+            flex-grow: 1;
+        }
     </style>
     <!-- Favicons and manifest files -->
     <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=964">
@@ -290,8 +309,7 @@ Code history:
 
                             <h3>How Does It Work?</h3>
                             <p>Simply select a category and choose a profile that suits your needs. You'll be guided
-                                through
-                                tailored criteria where
+                                through tailored criteria where
                                 you can input your personal or business information. Our algorithm evaluates your inputs
                                 to
                                 generate a customised
@@ -340,7 +358,8 @@ Code history:
 
                             <h3>Join Our Community</h3>
                             <p>The Likelihood Calculator is an open-source project, and we welcome contributions!
-                                Created by
+                                Created
+                                by
                                 <a href="https://troykelly.com/" target="_blank" rel="noopener">Troy Kelly</a> on the
                                 land
                                 of the Gadigal
@@ -398,6 +417,11 @@ Code history:
                     <!-- Profile cards will be populated here -->
                 </div>
             </div>
+            <!-- Category and Profile Details -->
+            <div id="categoryProfileDetails" class="mb-4">
+                <!-- Category longdescription and disclaimer will be displayed here -->
+                <!-- Profile longdescription will be displayed here -->
+            </div>
             <!-- Criteria table -->
             <div class="table-responsive">
                 <table id="criteriaTable" class="table table-striped table-bordered"
@@ -408,7 +432,7 @@ Code history:
                         <tr>
                             <th scope="col">Metric</th>
                             <th scope="col">Description</th>
-                            <th scope="col">Score (1-5)</th>
+                            <th scope="col">Score</th>
                             <th scope="col">Descriptor</th>
                         </tr>
                     </thead>

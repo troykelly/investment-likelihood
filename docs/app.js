@@ -1,7 +1,7 @@
 /**
  * Filename: app.js
- * Purpose: Provides functionality for the Likelihood Calculator with category and profile management, supports URL path slugs (e.g., /investment/general-investor-engagement), includes a navigation bar for category change, and handles random selection.
- * Description: This script loads categories and profiles from a JSON file, displays categories sorted by weight and name, handles slug-based navigation using URL paths, updates the URL when categories and profiles change, includes a beautifully formatted menu bar, and allows users to calculate likelihood based on selected criteria. Now supports inverting the scoring influence of specific metrics.
+ * Purpose: Provides functionality for the Likelihood Calculator with category and profile management, supports URL path slugs (e.g., /investment/general-investor-engagement), includes a navigation bar for category change, and handles random selection. Updated to display category and profile descriptions, long descriptions, and disclaimers inline with the existing UI. The disclaimer is now collapsible per category and profile, uses icon in place of bullets where applicable, and is positioned after the profile list and before the metrics table.
+ * Description: This script loads categories and profiles from a JSON file, displays categories sorted by weight and name, handles slug-based navigation using URL paths, updates the URL when categories and profiles change, includes a beautifully formatted menu bar, and allows users to calculate likelihood based on selected criteria. Now supports inverting the scoring influence of specific metrics, displays additional information for categories and profiles, and implements a collapsible disclaimer that is unique per category and profile.
  * Author: Troy Kelly
  * Contact: troy@aperim.com
  * Code history:
@@ -12,6 +12,10 @@
  * - Updated savename handling and dynamic labels: 19 September 2024
  * - Refactored with JSDoc annotations and exception handling: 20 September 2024
  * - Added support for inverted scoring: 20 September 2024
+ * - Updated to support new fields: 20 September 2024
+ * - Implemented collapsible disclaimer per profile: 20 September 2024
+ * - Adjusted dotpoints to use icons in place of bullets: 20 September 2024
+ * - Moved disclaimer after profile list and before metrics table: 20 September 2024
  */
 
 'use strict';
@@ -20,7 +24,7 @@
  * @class LikelihoodCalculator
  * @classdesc Provides the functionality to load categories and profiles,
  * manage entities, support URL path slugs for navigation, handle 404 errors,
- * and compute likelihood. Now supports inverted scoring for specific metrics.
+ * and compute likelihood. Now supports inverted scoring for specific metrics, displays additional information, and includes a collapsible disclaimer unique per category and profile.
  */
 class LikelihoodCalculator {
 
@@ -56,6 +60,8 @@ class LikelihoodCalculator {
         this.appContainer = document.getElementById('app');
         /** @type {HTMLElement} */
         this.categorySelectionContainer = document.getElementById('categorySelection');
+        /** @type {HTMLElement} */
+        this.categoryProfileDetailsElement = document.getElementById('categoryProfileDetails');
         /** @type {number} */
         this.selectedCategoryIndex = 0;
         /** @type {number} */
@@ -170,6 +176,14 @@ class LikelihoodCalculator {
             cardTitle.className = 'card-title mt-2';
             cardTitle.textContent = category.name;
             cardBody.appendChild(cardTitle);
+
+            // Category Description
+            if (category.description) {
+                const cardText = document.createElement('p');
+                cardText.className = 'card-text';
+                cardText.textContent = category.description;
+                cardBody.appendChild(cardText);
+            }
 
             cardDiv.appendChild(cardBody);
             colDiv.appendChild(cardDiv);
@@ -307,7 +321,7 @@ class LikelihoodCalculator {
             cardDiv.dataset.index = index.toString();
 
             const cardBody = document.createElement('div');
-            cardBody.className = 'card-body text-center';
+            cardBody.className = 'card-body';
 
             // Icon
             if (profile.icon) {
@@ -322,6 +336,14 @@ class LikelihoodCalculator {
             cardTitle.className = 'card-title mt-2';
             cardTitle.textContent = profile.name;
             cardBody.appendChild(cardTitle);
+
+            // Profile Description
+            if (profile.description) {
+                const cardText = document.createElement('p');
+                cardText.className = 'card-text';
+                cardText.textContent = profile.description;
+                cardBody.appendChild(cardText);
+            }
 
             cardDiv.appendChild(cardBody);
             colDiv.appendChild(cardDiv);
@@ -349,7 +371,6 @@ class LikelihoodCalculator {
         this.selectedProfileIndex = index;
         const selectedCategory = this.categories[this.selectedCategoryIndex];
         const selectedProfile = selectedCategory.profiles[this.selectedProfileIndex];
-        this.displayCriteria(selectedProfile);
 
         // Update URL with profile slug
         const profileSlug = this.generateSlug(selectedProfile.name);
@@ -357,6 +378,12 @@ class LikelihoodCalculator {
 
         // Update document title
         document.title = `Likelihood Calculator | ${selectedCategory.name} - ${selectedProfile.name}`;
+
+        // Display criteria for the selected profile
+        this.displayCriteria(selectedProfile);
+
+        // Display category and profile details
+        this.displayCategoryAndProfileDetails(selectedCategory, selectedProfile);
 
         // Load saved inputs if available
         this.loadSavedInputs();
@@ -1288,6 +1315,170 @@ class LikelihoodCalculator {
                 this.calculateAndDisplayResults();
             });
         });
+    }
+
+    /**
+     * Display category and profile details, including collapsible disclaimer.
+     * @param {Object} category The selected category.
+     * @param {Object} profile The selected profile.
+     * @private
+     */
+    displayCategoryAndProfileDetails(category, profile) {
+        // Clear existing content
+        this.categoryProfileDetailsElement.innerHTML = '';
+
+        // Create and append category longdescription
+        if (category.longdescription) {
+            const longDescriptionElement = document.createElement('div');
+            longDescriptionElement.classList.add('mb-3');
+            longDescriptionElement.innerHTML = `<p>${category.longdescription}</p>`;
+            this.categoryProfileDetailsElement.appendChild(longDescriptionElement);
+        }
+
+        // Create and append profile longdescription
+        if (profile.longdescription) {
+            const profileDescriptionElement = document.createElement('div');
+            profileDescriptionElement.classList.add('mb-3');
+            profileDescriptionElement.innerHTML = `<p>${profile.longdescription}</p>`;
+            this.categoryProfileDetailsElement.appendChild(profileDescriptionElement);
+        }
+
+        // Create and append collapsible disclaimer
+        if (category.disclaimer) {
+            const disclaimer = category.disclaimer;
+            const categorySlug = category.slug;
+            const profileSlug = this.generateSlug(profile.name);
+            const disclaimerId = `disclaimer-${categorySlug}-${profileSlug}`;
+
+            // Create accordion container
+            const accordionDiv = document.createElement('div');
+            accordionDiv.classList.add('accordion');
+            accordionDiv.id = `disclaimerAccordion-${categorySlug}-${profileSlug}`;
+
+            // Accordion item
+            const accordionItemDiv = document.createElement('div');
+            accordionItemDiv.classList.add('accordion-item');
+
+            // Accordion header
+            const headerId = `disclaimerHeading-${categorySlug}-${profileSlug}`;
+            const collapseId = `disclaimerContent-${categorySlug}-${profileSlug}`;
+
+            const accordionHeader = document.createElement('h2');
+            accordionHeader.classList.add('accordion-header');
+            accordionHeader.id = headerId;
+
+            const accordionButton = document.createElement('button');
+            accordionButton.classList.add('accordion-button');
+            accordionButton.type = 'button';
+            accordionButton.setAttribute('data-bs-toggle', 'collapse');
+            accordionButton.setAttribute('data-bs-target', `#${collapseId}`);
+            accordionButton.setAttribute('aria-expanded', 'false');
+            accordionButton.setAttribute('aria-controls', collapseId);
+            accordionButton.textContent = disclaimer.heading || 'Disclaimer';
+
+            accordionHeader.appendChild(accordionButton);
+
+            // Accordion collapse content
+            const collapseDiv = document.createElement('div');
+            collapseDiv.id = collapseId;
+            collapseDiv.classList.add('accordion-collapse', 'collapse');
+            collapseDiv.setAttribute('aria-labelledby', headerId);
+            collapseDiv.setAttribute('data-bs-parent', `#disclaimerAccordion-${categorySlug}-${profileSlug}`);
+
+            const accordionBody = document.createElement('div');
+            accordionBody.classList.add('accordion-body');
+
+            // Disclaimer content
+            // Text
+            if (disclaimer.text) {
+                const textElement = document.createElement('p');
+                textElement.textContent = disclaimer.text;
+                accordionBody.appendChild(textElement);
+            }
+
+            // Dot points
+            if (disclaimer.dotpoints && Array.isArray(disclaimer.dotpoints)) {
+                const ulElement = document.createElement('ul');
+                ulElement.classList.add('list-unstyled');
+                disclaimer.dotpoints.forEach((point) => {
+                    const liElement = document.createElement('li');
+                    liElement.classList.add('d-flex');
+
+                    const iconSpan = document.createElement('span');
+                    iconSpan.classList.add('me-2');
+
+                    if (point.icon) {
+                        const iconElement = document.createElement('i');
+                        point.icon.split(' ').forEach((cls) => iconElement.classList.add(cls));
+                        iconSpan.appendChild(iconElement);
+                    } else {
+                        iconSpan.textContent = '•';
+                    }
+
+                    const textSpan = document.createElement('span');
+                    textSpan.textContent = point.text;
+
+                    liElement.appendChild(iconSpan);
+                    liElement.appendChild(textSpan);
+
+                    ulElement.appendChild(liElement);
+                });
+                accordionBody.appendChild(ulElement);
+            }
+
+            // Links
+            if (disclaimer.links && Array.isArray(disclaimer.links)) {
+                const linksParagraph = document.createElement('p');
+                disclaimer.links.forEach((link, index) => {
+                    const linkElement = document.createElement('a');
+                    linkElement.href = link.url;
+                    linkElement.target = '_blank';
+                    linkElement.rel = 'noopener';
+                    linkElement.textContent = link.name;
+                    linksParagraph.appendChild(linkElement);
+                    if (index < disclaimer.links.length - 1) {
+                        linksParagraph.appendChild(document.createTextNode(', '));
+                    }
+                });
+                accordionBody.appendChild(linksParagraph);
+            }
+
+            // Footer
+            if (disclaimer.footer) {
+                const footerElement = document.createElement('p');
+                footerElement.classList.add('mb-0');
+                footerElement.textContent = disclaimer.footer;
+                accordionBody.appendChild(footerElement);
+            }
+
+            collapseDiv.appendChild(accordionBody);
+            accordionItemDiv.appendChild(accordionHeader);
+            accordionItemDiv.appendChild(collapseDiv);
+            accordionDiv.appendChild(accordionItemDiv);
+
+            this.categoryProfileDetailsElement.appendChild(accordionDiv);
+
+            // Handle collapsible state per category and profile
+            const lsKey = `disclaimerCollapsed-${categorySlug}-${profileSlug}`;
+            const isCollapsed = localStorage.getItem(lsKey) === 'true';
+
+            if (!isCollapsed) {
+                collapseDiv.classList.add('show');
+                accordionButton.setAttribute('aria-expanded', 'true');
+            } else {
+                accordionButton.setAttribute('aria-expanded', 'false');
+            }
+
+            // Add event listeners to update localStorage
+            collapseDiv.addEventListener('shown.bs.collapse', () => {
+                localStorage.setItem(lsKey, 'false');
+                accordionButton.setAttribute('aria-expanded', 'true');
+            });
+            collapseDiv.addEventListener('hidden.bs.collapse', () => {
+                localStorage.setItem(lsKey, 'true');
+                accordionButton.setAttribute('aria-expanded', 'false');
+            });
+        }
     }
 
 }
