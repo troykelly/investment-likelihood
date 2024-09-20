@@ -3,13 +3,42 @@
         {
             "name": "Investment",
             "slug": "investment",
+            "longdescription": "The Investment category offers comprehensive tools for founders to evaluate their potential for securing investment. It covers various investor types and provides insights into the key factors that influence investment decisions, helping founders tailor their strategies to improve investment probability.",
             "description": "Tools for founders to calculate investment probability",
             "icon": "fas fa-money",
             "weight": 1,
             "savename": "Investor",
+            "disclaimer": {
+                "importance": "high",
+                "heading": "Disclaimer",
+                "footer": "We encourage users to use these assessments as preliminary tools for awareness and to seek professional advice for any investment-related questions or decisions.",
+                "text": "The assessments and calculators provided in the Investment category on this site are designed for educational and entertainment purposes only. They offer general insights into common investment opportunities such as obtaining finance from government, venture capitalists, and other sources. The information provided by these tools should not be construed as investment advice, solicitation, or endorsement.",
+                "dotpoints": [
+                    {
+                        "icon": "fas fa-chart-line",
+                        "text": "These tools are not a substitute for professional investment advice."
+                    },
+                    {
+                        "icon": "fas fa-chart-line",
+                        "text": "Always consult a qualified investment advisor or financial professional for personal investment concerns or before making any investment decisions."
+                    },
+                    {
+                        "icon": "fas fa-chart-line",
+                        "text": "For specific investment inquiries, please contact a certified investment advisor or financial planner."
+                    }
+                ],
+                "links": [
+                    {
+                        "name": "Find An Investment Advisor",
+                        "url": "https://www.investopedia.com/best-financial-advisors-5071614"
+                    }
+                ]
+            },
             "profiles": [
                 {
                     "name": "General Investor Engagement",
+                    "description": "Evaluate your overall engagement and relationship with potential investors.",
+                    "longdescription": "Helps founders assess the general aspects of their interactions with investors. By examining criteria such as responsiveness, interest level, and alignment with your vision, it provides a holistic view of how investors perceive and engage with your startup.",
                     "icon": "fas fa-handshake",
                     "criteria": [
                         {
@@ -131,7 +160,7 @@
                         },
                         {
                             "metric": "Reputation",
-                            "description": "Considers the investor’s standing in the industry and among other founders.",
+                            "description": "Considers the investor's standing in the industry and among other founders.",
                             "weight": 5,
                             "icon": "fas fa-thumbs-up",
                             "scoreDescriptors": {
@@ -146,6 +175,8 @@
                 },
                 {
                     "name": "Angel Investors",
+                    "description": "Assess your prospects with individual angel investors.",
+                    "longdescription": "Focuses on engagements with angel investors who often invest personal funds into startups. It evaluates personal rapport, speed of commitment, and the added value these investors can bring beyond capital, such as mentorship and industry connections.",
                     "icon": "fas fa-user-astronaut",
                     "criteria": [
                         {
@@ -243,6 +274,8 @@
                 },
                 {
                     "name": "Venture Capital Firms",
+                    "description": "Analyse your potential to secure funding from venture capital firms.",
+                    "longdescription": "Designed for startups seeking institutional investment, this profile assesses factors crucial to venture capital firms. It considers reputation, partner engagement, and post-investment support, providing insights into what VCs look for in potential investments.",
                     "icon": "fas fa-building",
                     "criteria": [
                         {
@@ -366,6 +399,8 @@
                 },
                 {
                     "name": "Corporate Investors",
+                    "description": "Evaluate opportunities with corporate venture arms and strategic investors.",
+                    "longdescription": "Examines the potential of securing investment from corporations. It evaluates strategic alignment, integration potential, and the impact on your company's independence, helping you understand the benefits and challenges of partnering with corporate investors.",
                     "icon": "fas fa-city",
                     "criteria": [
                         {
@@ -476,6 +511,8 @@
                 },
                 {
                     "name": "Incubators and Accelerators",
+                    "description": "Assess the fit and potential benefits of joining an incubator or accelerator program.",
+                    "longdescription": "Helps startups evaluate the advantages of participating in incubator or accelerator programs. It considers program benefits, equity terms, and alumni success, providing a framework to determine if such programs align with your growth objectives.",
                     "icon": "fas fa-rocket",
                     "criteria": [
                         {
@@ -573,6 +610,8 @@
                 },
                 {
                     "name": "Crowdfunding Platforms",
+                    "description": "Determine your likelihood of success with crowdfunding campaigns.",
+                    "longdescription": "Focused on crowdfunding as a financing option, this profile assesses platform reputation, audience match, and campaign support tools. It aids in evaluating the suitability of crowdfunding for your startup and how to optimise your campaign for success.",
                     "icon": "fas fa-users",
                     "criteria": [
                         {
@@ -670,6 +709,8 @@
                 },
                 {
                     "name": "Government Grants and Funds",
+                    "description": "Evaluate your eligibility and prospects for obtaining government funding.",
+                    "longdescription": "Examines the potential of securing non-dilutive funding from government sources. It assesses eligibility, application complexity, and the impact of restrictions and obligations, guiding you through the nuances of government grants and funds.",
                     "icon": "fas fa-university",
                     "criteria": [
                         {
@@ -767,6 +808,8 @@
                 },
                 {
                     "name": "Family and Friends",
+                    "description": "Assess the pros and cons of raising funds from personal connections.",
+                    "longdescription": "Helps you consider the implications of accepting investment from family and friends. It evaluates trust levels, financial capacity, and the potential impact on personal relationships, ensuring you make informed decisions in this sensitive area.",
                     "icon": "fas fa-user-friends",
                     "criteria": [
                         {
@@ -851,6 +894,8 @@
                 },
                 {
                     "name": "Y Combinator Engagement",
+                    "description": "Analyse your potential for acceptance into the Y Combinator program.",
+                    "longdescription": "Designed for startups aiming to join Y Combinator, this profile assesses your application's progress, fit with YC's investment thesis, and the quality of your interactions with YC partners. It provides insights into improving your chances of acceptance.",
                     "icon": "fas fa-lightbulb",
                     "criteria": [
                         {
@@ -961,6 +1006,8 @@
                 },
                 {
                     "name": "500 Startups Engagement",
+                    "description": "Evaluate your prospects with 500 Startups programs.",
+                    "longdescription": "Focuses on engagements with 500 Startups. It assesses geographic focus match, program relevance, and mentorship opportunities, helping you understand how well your startup aligns with their criteria and how to enhance your application.",
                     "icon": "fas fa-globe",
                     "criteria": [
                         {
@@ -1071,6 +1118,8 @@
                 },
                 {
                     "name": "Strategic Investors",
+                    "description": "Assess opportunities with investors offering strategic advantages.",
+                    "longdescription": "Evaluates investors who bring more than just capital, offering strategic benefits like market access or complementary strengths. It helps you assess long-term alignment, resource availability, and the potential impact on your exit strategies.",
                     "icon": "fas fa-chess",
                     "criteria": [
                         {
@@ -1181,6 +1230,8 @@
                 },
                 {
                     "name": "Private Equity Firms",
+                    "description": "Analyse your suitability for investment from private equity firms.",
+                    "longdescription": "Is tailored for startups considering private equity investment. It examines investment size compatibility, control preferences, and operational involvement, providing insights into the private equity landscape and expectations.",
                     "icon": "fas fa-chart-line",
                     "criteria": [
                         {
@@ -1294,13 +1345,42 @@
         {
             "name": "Health",
             "slug": "health",
+            "longdescription": "The Health category provides assessments to help individuals gauge their risk levels for common health issues. It covers areas such as susceptibility to illness, mental health, and healthy ageing, offering insights to encourage proactive health management.",
             "description": "Assess your likelihood of encountering common health issues.",
             "icon": "fas fa-heartbeat",
             "weight": 100,
             "savename": "Person",
+            "disclaimer": {
+                "importance": "high",
+                "heading": "Disclaimer",
+                "footer": "We encourage users to use these assessments as preliminary tools for awareness and to seek appropriate medical guidance for any health-related questions or issues.",
+                "text": "The assessments and calculators provided in the Health category on this site are designed for educational and entertainment purposes only. They offer general insights into common health issues such as susceptibility to illness, mental health, and healthy ageing. The information provided by these tools should not be construed as medical advice, diagnosis, or treatment.",
+                "dotpoints": [
+                    {
+                        "icon": "fas fa-staff-snake",
+                        "text": "These tools are not a substitute for professional medical advice."
+                    },
+                    {
+                        "icon": "fas fa-staff-snake",
+                        "text": "Always consult a qualified healthcare provider for personal health concerns or before making any changes to your health management."
+                    },
+                    {
+                        "icon": "fas fa-staff-snake",
+                        "text": "In case of a medical emergency, contact your doctor or emergency services immediately."
+                    }
+                ],
+                "links": [
+                    {
+                        "name": "Find A Doctor",
+                        "url": "https://www.medifind.com/find-a-doctor"
+                    }
+                ]
+            },
             "profiles": [
                 {
                     "name": "Getting Sick",
+                    "description": "Evaluate your likelihood of falling ill due to common factors.",
+                    "longdescription": "Helps you assess your risk of getting sick by examining factors like exposure to germs, hand hygiene, and lifestyle habits. It provides insights into areas where you can improve to boost your immune system and overall health.",
                     "icon": "fas fa-thermometer-half",
                     "criteria": [
                         {
@@ -1385,6 +1465,8 @@
                 },
                 {
                     "name": "Children",
+                    "description": "Assess your child's susceptibility to common illnesses.",
+                    "longdescription": "Designed for parents, this profile evaluates factors that may affect your child's health, such as school attendance and vaccination status. It helps identify areas where you can take action to reduce their risk of falling ill.",
                     "icon": "fas fa-baby-carriage",
                     "criteria": [
                         {
@@ -1459,6 +1541,8 @@
                 },
                 {
                     "name": "Mental Health",
+                    "description": "Evaluate your overall mental well-being and factors that may affect it.",
+                    "longdescription": "Focuses on assessing your mental health by considering social connections, stress management, and access to support. It aims to highlight areas where you might need assistance or could make improvements for better mental wellness.",
                     "icon": "fas fa-brain",
                     "criteria": [
                         {
@@ -1543,6 +1627,8 @@
                 },
                 {
                     "name": "Healthy Ageing",
+                    "description": "Assess factors contributing to healthy ageing and longevity.",
+                    "longdescription": "Focused on ageing well, this profile examines your lifestyle habits, mental engagement, and healthcare practices. It provides insights into how you can maintain independence and quality of life as you age.",
                     "icon": "fas fa-blind",
                     "criteria": [
                         {
@@ -1630,6 +1716,7 @@
         {
             "name": "Travel",
             "slug": "travel",
+            "longdescription": "The Travel category helps you assess and improve the likelihood of successful travel experiences. It covers various travel scenarios, providing insights into planning, preparedness, and risk management.",
             "description": "Assess your likelihood of having successful travel experiences.",
             "icon": "fas fa-plane",
             "weight": 3,
@@ -1637,6 +1724,8 @@
             "profiles": [
                 {
                     "name": "Catching a Flight",
+                    "description": "Evaluate your preparedness for catching flights smoothly.",
+                    "longdescription": "Assesses how prepared you are for air travel by examining factors like booking confirmations, packing, and time management. It aims to help you identify potential issues that could cause delays or missed flights.",
                     "icon": "fas fa-plane-departure",
                     "criteria": [
                         {
@@ -1721,6 +1810,8 @@
                 },
                 {
                     "name": "Traveling Internationally",
+                    "description": "Assess your readiness for international travel.",
+                    "longdescription": "Focused on international trips, this profile evaluates passport validity, visa requirements, and cultural awareness. It helps you ensure that you have all necessary preparations in place for a successful journey abroad.",
                     "icon": "fas fa-globe",
                     "criteria": [
                         {
@@ -1805,6 +1896,8 @@
                 },
                 {
                     "name": "Going on a Road Trip",
+                    "description": "Evaluate your preparedness for a safe and enjoyable road trip.",
+                    "longdescription": "Helps you assess factors critical to a successful road trip, such as vehicle condition, route planning, and safety measures. It provides insights into how to enhance your planning for a smoother journey.",
                     "icon": "fas fa-car",
                     "criteria": [
                         {
@@ -1892,13 +1985,37 @@
         {
             "name": "Fitness",
             "slug": "fitness",
+            "longdescription": "The Fitness category provides tools to assess your progress and potential in achieving various fitness objectives. It focuses on goal setting, consistency, and specific challenges like running a marathon or building muscle mass.",
             "description": "Assess your likelihood of achieving various fitness objectives.",
             "icon": "fas fa-dumbbell",
             "weight": 4,
             "savename": "Person",
+            "disclaimer": {
+                "importance": "high",
+                "heading": "Disclaimer",
+                "footer": "We encourage users to use these assessments as preliminary tools for awareness and to seek professional fitness advice for any fitness-related questions or goals.",
+                "text": "The assessments and calculators provided in the Fitness category on this site are designed for educational and entertainment purposes only. They offer general insights into fitness activities such as building muscle mass and preparing for marathons. The information provided by these tools should not be construed as fitness training, exercise prescription, or nutrition advice.",
+                "dotpoints": [
+                    {
+                        "icon": "fas fa-dumbbell",
+                        "text": "These tools are not a substitute for professional fitness advice."
+                    },
+                    {
+                        "icon": "fas fa-dumbbell",
+                        "text": "Always consult a qualified fitness trainer or healthcare provider for personal fitness concerns or before starting any new exercise program."
+                    },
+                    {
+                        "icon": "fas fa-dumbbell",
+                        "text": "For specific fitness inquiries, please contact a certified personal trainer or fitness professional."
+                    }
+                ],
+                "links": []
+            },
             "profiles": [
                 {
                     "name": "Reaching Fitness Goals",
+                    "description": "Assess your overall potential to achieve your fitness objectives.",
+                    "longdescription": "Evaluates general fitness factors such as goal clarity, workout consistency, and nutrition. It helps you understand how well you are positioned to meet your fitness goals and identifies areas for improvement.",
                     "icon": "fas fa-trophy",
                     "criteria": [
                         {
@@ -1983,6 +2100,8 @@
                 },
                 {
                     "name": "Running a Marathon",
+                    "description": "Evaluate your readiness and training effectiveness for marathon running.",
+                    "longdescription": "Designed for aspiring marathon runners, this profile assesses your training plan, stamina, and injury prevention strategies. It provides insights into your preparedness and areas that may need attention before race day.",
                     "icon": "fas fa-running",
                     "criteria": [
                         {
@@ -2067,6 +2186,8 @@
                 },
                 {
                     "name": "Building Muscle Mass",
+                    "description": "Assess your effectiveness in building muscle mass.",
+                    "longdescription": "Focuses on strength training routines, protein intake, and recovery practices. It helps you evaluate how well your current approach supports muscle growth and what adjustments might enhance your results.",
                     "icon": "fas fa-dumbbell",
                     "criteria": [
                         {
@@ -2154,13 +2275,37 @@
         {
             "name": "Arts Theatre",
             "slug": "arts-theatre",
+            "longdescription": "The Arts Theatre category assists artists and producers in evaluating the feasibility and potential success of theatrical projects. It covers various funding options and operational considerations unique to the performing arts.",
             "description": "Assess your likelihood of successfully financing and executing theatrical arts projects.",
             "icon": "fas fa-theater-masks",
             "weight": 5,
             "savename": "Project",
+            "disclaimer": {
+                "importance": "high",
+                "heading": "Disclaimer",
+                "footer": "We encourage users to use these assessments as preliminary tools for awareness and to seek professional advice for any project funding-related questions or decisions.",
+                "text": "The assessments and calculators provided in the Arts category on this site are designed for educational and entertainment purposes only. They offer general insights into the likelihood of getting arts projects funded. The information provided by these tools should not be construed as financial advice, funding guarantees, or endorsements of any kind.",
+                "dotpoints": [
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "These tools are not a substitute for professional financial or funding advice."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "Always consult a qualified financial advisor or funding expert for personal funding concerns or before making any project funding decisions."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "For specific funding inquiries, please contact a certified financial advisor or funding consultant."
+                    }
+                ],
+                "links": []
+            },
             "profiles": [
                 {
                     "name": "Government Grants",
+                    "description": "Evaluate your eligibility and prospects for securing government funding for theatre projects.",
+                    "longdescription": "Helps you assess your potential to receive government grants by examining eligibility, proposal quality, and budget planning. It guides you in strengthening your application to increase the chances of funding success.",
                     "icon": "fas fa-university",
                     "criteria": [
                         {
@@ -2258,6 +2403,8 @@
                 },
                 {
                     "name": "Private Investors",
+                    "description": "Assess the attractiveness of your theatre project to private investors.",
+                    "longdescription": "Focused on securing private investment, this profile evaluates project appeal, business planning, and ROI potential. It helps you understand investor perspectives and how to tailor your pitch accordingly.",
                     "icon": "fas fa-business-time",
                     "criteria": [
                         {
@@ -2355,6 +2502,8 @@
                 },
                 {
                     "name": "Crowdfunding",
+                    "description": "Determine your likelihood of success with crowdfunding your theatre project.",
+                    "longdescription": "Assesses your readiness to launch a crowdfunding campaign, considering factors like campaign preparation, project story, and community engagement. It offers insights into enhancing your campaign for better results.",
                     "icon": "fas fa-users",
                     "criteria": [
                         {
@@ -2452,6 +2601,8 @@
                 },
                 {
                     "name": "Ticket Sales and Revenue",
+                    "description": "Evaluate your strategies for maximising ticket sales and revenue.",
+                    "longdescription": "Focuses on the commercial aspects of theatre production, including audience research, pricing strategies, and marketing efforts. It helps you optimise your approach to increase attendance and profitability.",
                     "icon": "fas fa-ticket-alt",
                     "criteria": [
                         {
@@ -2539,13 +2690,37 @@
         {
             "name": "Arts Television",
             "slug": "arts-television",
+            "longdescription": "The Arts Television category aids creators in assessing the viability and funding potential of television projects. It covers traditional networks, streaming services, and alternative funding avenues.",
             "description": "Assess your likelihood of successfully financing and executing television projects.",
             "icon": "fas fa-tv",
             "weight": 6,
             "savename": "Project",
+            "disclaimer": {
+                "importance": "high",
+                "heading": "Disclaimer",
+                "footer": "We encourage users to use these assessments as preliminary tools for awareness and to seek professional advice for any project funding-related questions or decisions.",
+                "text": "The assessments and calculators provided in the Arts category on this site are designed for educational and entertainment purposes only. They offer general insights into the likelihood of getting arts projects funded. The information provided by these tools should not be construed as financial advice, funding guarantees, or endorsements of any kind.",
+                "dotpoints": [
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "These tools are not a substitute for professional financial or funding advice."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "Always consult a qualified financial advisor or funding expert for personal funding concerns or before making any project funding decisions."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "For specific funding inquiries, please contact a certified financial advisor or funding consultant."
+                    }
+                ],
+                "links": []
+            },
             "profiles": [
                 {
                     "name": "Network Funding",
+                    "description": "Analyse your potential to secure funding from traditional television networks.",
+                    "longdescription": "Evaluates key factors such as pitch quality, project concept, and network fit. It helps you understand what networks look for and how to enhance your project's appeal.",
                     "icon": "fas fa-broadcast-tower",
                     "criteria": [
                         {
@@ -2589,7 +2764,7 @@
                         },
                         {
                             "metric": "Network Fit",
-                            "description": "Measures how well your project aligns with the network’s brand and programming.",
+                            "description": "Measures how well your project aligns with the network's brand and programming.",
                             "weight": 15,
                             "icon": "fas fa-network-wired",
                             "scoreDescriptors": {
@@ -2630,6 +2805,8 @@
                 },
                 {
                     "name": "Streaming Services",
+                    "description": "Assess your project's suitability for streaming platforms.",
+                    "longdescription": "Focused on streaming services, this profile examines project uniqueness, audience engagement, and content viability. It provides insights into aligning your project with the demands of streaming platforms.",
                     "icon": "fas fa-laptop",
                     "criteria": [
                         {
@@ -2714,6 +2891,8 @@
                 },
                 {
                     "name": "Crowdfunding",
+                    "description": "Evaluate your readiness to crowdfund your television project.",
+                    "longdescription": "Helps you assess the effectiveness of your crowdfunding campaign strategy, including engagement tactics and funding goal realism. It guides you in refining your approach for better success.",
                     "icon": "fas fa-hand-holding-usd",
                     "criteria": [
                         {
@@ -2798,11 +2977,13 @@
                 },
                 {
                     "name": "Corporate Sponsorships",
+                    "description": "Determine your prospects for securing corporate sponsorships.",
+                    "longdescription": "Evaluates sponsor alignment, proposal quality, and the benefits offered. It aids in identifying suitable corporate partners and crafting compelling sponsorship proposals.",
                     "icon": "fas fa-handshake",
                     "criteria": [
                         {
                             "metric": "Sponsor Alignment",
-                            "description": "Measures how well your project aligns with the sponsor’s values and goals.",
+                            "description": "Measures how well your project aligns with the sponsor's values and goals.",
                             "weight": 20,
                             "icon": "fas fa-clipboard-check",
                             "scoreDescriptors": {
@@ -2885,13 +3066,37 @@
         {
             "name": "Arts Film",
             "slug": "arts-film",
+            "longdescription": "The Arts Film category assists filmmakers in evaluating the potential success and funding options for film projects. It considers avenues like studio funding, independent financing, and grants.",
             "description": "Assess your likelihood of successfully financing and executing film projects.",
             "icon": "fas fa-film",
             "weight": 7,
             "savename": "Project",
+            "disclaimer": {
+                "importance": "high",
+                "heading": "Disclaimer",
+                "footer": "We encourage users to use these assessments as preliminary tools for awareness and to seek professional advice for any project funding-related questions or decisions.",
+                "text": "The assessments and calculators provided in the Arts category on this site are designed for educational and entertainment purposes only. They offer general insights into the likelihood of getting arts projects funded. The information provided by these tools should not be construed as financial advice, funding guarantees, or endorsements of any kind.",
+                "dotpoints": [
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "These tools are not a substitute for professional financial or funding advice."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "Always consult a qualified financial advisor or funding expert for personal funding concerns or before making any project funding decisions."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "For specific funding inquiries, please contact a certified financial advisor or funding consultant."
+                    }
+                ],
+                "links": []
+            },
             "profiles": [
                 {
                     "name": "Studio Funding",
+                    "description": "Assess your project's potential for obtaining studio funding.",
+                    "longdescription": "Examines script quality, director and cast, and pitch effectiveness. It helps you understand studio expectations and how to position your project for consideration.",
                     "icon": "fas fa-building",
                     "criteria": [
                         {
@@ -2976,6 +3181,8 @@
                 },
                 {
                     "name": "Independent Financing",
+                    "description": "Evaluate your prospects for independently financing your film.",
+                    "longdescription": "Focused on self-funding and private investors, this profile assesses personal investment, ROI potential, and risk management. It guides you in building a solid plan for independent film production.",
                     "icon": "fas fa-lightbulb",
                     "criteria": [
                         {
@@ -3060,6 +3267,8 @@
                 },
                 {
                     "name": "Crowdfunding",
+                    "description": "Determine your likelihood of successfully crowdfunding your film project.",
+                    "longdescription": "Evaluates your campaign preparation, storytelling, and backer engagement. It provides insights into crafting a compelling crowdfunding campaign that resonates with potential supporters.",
                     "icon": "fas fa-hand-holding-usd",
                     "criteria": [
                         {
@@ -3144,11 +3353,13 @@
                 },
                 {
                     "name": "Film Grants",
+                    "description": "Analyse your eligibility and potential for securing film grants.",
+                    "longdescription": "Helps you assess how well your project aligns with grant criteria, focusing on proposal quality, project impact, and budget realism. It offers guidance on strengthening your grant applications.",
                     "icon": "fas fa-graduation-cap",
                     "criteria": [
                         {
                             "metric": "Eligibility",
-                            "description": "Measures how well your project meets the grant’s eligibility criteria.",
+                            "description": "Measures how well your project meets the grant's eligibility criteria.",
                             "weight": 20,
                             "icon": "fas fa-check-double",
                             "scoreDescriptors": {
@@ -3231,13 +3442,37 @@
         {
             "name": "Arts Commissioned Installations",
             "slug": "arts-commissioned-installations",
+            "longdescription": "The Arts Commissioned Installations category aids artists in assessing the feasibility and funding potential of commissioned installation projects. It covers grants, private commissions, and sponsorships.",
             "description": "Assess your likelihood of successfully financing and executing commissioned art installations.",
             "icon": "fas fa-palette",
             "weight": 8,
             "savename": "Project",
+            "disclaimer": {
+                "importance": "high",
+                "heading": "Disclaimer",
+                "footer": "We encourage users to use these assessments as preliminary tools for awareness and to seek professional advice for any project funding-related questions or decisions.",
+                "text": "The assessments and calculators provided in the Arts category on this site are designed for educational and entertainment purposes only. They offer general insights into the likelihood of getting arts projects funded. The information provided by these tools should not be construed as financial advice, funding guarantees, or endorsements of any kind.",
+                "dotpoints": [
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "These tools are not a substitute for professional financial or funding advice."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "Always consult a qualified financial advisor or funding expert for personal funding concerns or before making any project funding decisions."
+                    },
+                    {
+                        "icon": "fas fa-paint-brush",
+                        "text": "For specific funding inquiries, please contact a certified financial advisor or funding consultant."
+                    }
+                ],
+                "links": []
+            },
             "profiles": [
                 {
                     "name": "Government Grants",
+                    "description": "Evaluate your eligibility and prospects for government funding of art installations.",
+                    "longdescription": "Focuses on securing government grants for installations, assessing eligibility, proposal quality, and community impact. It guides you in preparing strong applications to increase funding chances.",
                     "icon": "fas fa-university",
                     "criteria": [
                         {
@@ -3322,6 +3557,8 @@
                 },
                 {
                     "name": "Private Commissions",
+                    "description": "Assess your potential for obtaining private commissions.",
+                    "longdescription": "Evaluates client relationships, artistic alignment, and proposal effectiveness. It helps you tailor your approach to meet client expectations and secure commissions.",
                     "icon": "fas fa-business-time",
                     "criteria": [
                         {
@@ -3339,7 +3576,7 @@
                         },
                         {
                             "metric": "Artistic Vision Alignment",
-                            "description": "Assesses how well your artistic vision aligns with the client’s expectations.",
+                            "description": "Assesses how well your artistic vision aligns with the client's expectations.",
                             "weight": 20,
                             "icon": "fas fa-eye",
                             "scoreDescriptors": {
@@ -3406,11 +3643,13 @@
                 },
                 {
                     "name": "Corporate Sponsorship",
+                    "description": "Determine your likelihood of securing corporate sponsorships for your installation.",
+                    "longdescription": "Focused on corporate partnerships, this profile assesses sponsor fit, proposal quality, and brand visibility. It aids in identifying suitable sponsors and enhancing your proposals.",
                     "icon": "fas fa-handshake-alt",
                     "criteria": [
                         {
                             "metric": "Sponsor Fit",
-                            "description": "Measures how well your project fits with the sponsor’s brand and values.",
+                            "description": "Measures how well your project fits with the sponsor's brand and values.",
                             "weight": 20,
                             "icon": "fas fa-network-wired",
                             "scoreDescriptors": {
@@ -3490,11 +3729,13 @@
                 },
                 {
                     "name": "Arts Foundations",
+                    "description": "Evaluate your prospects with arts foundations.",
+                    "longdescription": "Examines alignment with foundation missions, project impact, and sustainability. It provides insights into strengthening your proposals to arts foundations for better support.",
                     "icon": "fas fa-cube",
                     "criteria": [
                         {
                             "metric": "Foundation Alignment",
-                            "description": "Measures how well your project aligns with the foundation’s mission and values.",
+                            "description": "Measures how well your project aligns with the foundation's mission and values.",
                             "weight": 20,
                             "icon": "fas fa-building",
                             "scoreDescriptors": {
