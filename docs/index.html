@@ -232,11 +232,15 @@ Code history:
             var canonicalLink = document.getElementById('canonical-link');
             var ogURL = document.getElementById('og-url');
             var twitterURL = document.querySelector('meta[name="twitter:url"]');
+            var dcIdentifier = document.querySelector('meta[name="dcterms.identifier"]');
             var currentURL = window.location.href;
 
             canonicalLink.setAttribute('href', currentURL);
             ogURL.setAttribute('content', currentURL);
             twitterURL.setAttribute('content', currentURL);
+            if (dcIdentifier) {
+                dcIdentifier.setAttribute('content', currentURL);
+            }
         }
 
         // Update canonical URL on initial load
